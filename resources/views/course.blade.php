@@ -36,74 +36,69 @@
 </head>
 
 <body>
-	
-	
 	<div class=container>
 		<h1 class="mainHeader">LITTERATUR OG BIBLIOTEK<br></h1>
 		
 
 		<div class="module">
-		<div class="carousel" href="#biblioteket" data-toggle="collapse">
-		<div class="carousel-item active">
-			<img src="images/discoveredonceagain.jpg" class="img-fluid" >
-			<div class="carousel-caption left-align">
-			<h1 class=moduleHeader>1.0 Biblioteket</h1>
+			<div class="carousel" href="#biblioteket" data-toggle="collapse">
+				<div class="carousel-item active">
+					<img src="images/discoveredonceagain.jpg" class="img-fluid" >
+					<div class="carousel-caption left-align">
+						<h1 class=moduleHeader>1.0 Biblioteket</h1>
+					</div>
+				</div>
 			</div>
-		</div>
-		</div>
-		<div id="biblioteket" class="collapse hide" role="tabpanel" aria-labelledby="headingOne">
+			<div id="biblioteket" class="collapse hide" role="tabpanel" aria-labelledby="headingOne">
 				@include('contents.biblioteket')
 			</div>
 		</div>
 
 
-
 		<div class="module">
-		<div class="carousel" href="#litteratursok" data-toggle="collapse">
-		<div class="carousel-item active">
-			<img src="images/discoveredonceagain.jpg" class="img-fluid" >
-			<div class="carousel-caption">
-			<h1 class=moduleHeader>1.1 Litteratursøk</h1>
+			<div class="carousel" href="#litteratursok" data-toggle="collapse">
+				<div class="carousel-item active">
+					<img src="images/discoveredonceagain.jpg" class="img-fluid" >
+					<div class="carousel-caption">
+						<h1 class=moduleHeader>1.1 Litteratursøk</h1>
+					</div>
+				</div>
 			</div>
-		</div>
-		</div>
-		<div id="litteratursok" class="collapse hide" role="tabpanel" aria-labelledby="headingOne">
+			<div id="litteratursok" class="collapse hide" role="tabpanel" aria-labelledby="headingOne">
 				@include('contents.litteratursok')
 			</div>
 		</div>
 
 
-
 		<div class="module">
-		<div class="carousel" href="#referering" data-toggle="collapse">
-		<div class="carousel-item active">
-			<img src="images/discoveredonceagain.jpg" class="img-fluid" >
-			<div class="carousel-caption">
-			<h1 class=moduleHeader>1.2 Referanse&shy;håndtering</h1>
+			<div class="carousel" href="#referering" data-toggle="collapse">
+				<div class="carousel-item active">
+					<img src="images/discoveredonceagain.jpg" class="img-fluid" >
+					<div class="carousel-caption">
+						<h1 class=moduleHeader>1.2 Referanse&shy;håndtering</h1>
+					</div>
+				</div>
 			</div>
-		</div>
-		</div>
-		<div id="referering" class="collapse hide" role="tabpanel" aria-labelledby="headingOne">
+			<div id="referering" class="collapse hide" role="tabpanel" aria-labelledby="headingOne">
 				@include('contents.referering')
 			</div>
 		</div>
 
 
-
 		<div class="module">
-		<div class="carousel" href="#prove" data-toggle="collapse">
-		<div class="carousel-item active">
-			<img src="images/discoveredonceagain.jpg" class="img-fluid" >
-			<div class="carousel-caption">
-			<h1 class=moduleHeader>1.3 Prøve</h1>
+			<div class="carousel" href="#prove" data-toggle="collapse">
+				<div class="carousel-item active">
+					<img src="images/discoveredonceagain.jpg" class="img-fluid" >
+					<div class="carousel-caption">
+						<h1 class=moduleHeader>1.3 Prøve</h1>
+					</div>
+				</div>
 			</div>
-		</div>
-		</div>
-		<div id="prove" class="collapse hide" role="tabpanel" aria-labelledby="headingOne">
+			<div id="prove" class="collapse hide" role="tabpanel" aria-labelledby="headingOne">
 				@include('contents.test')
 			</div>
 		</div>
-	
+		
 
 	</div>
 	
