@@ -8,6 +8,8 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+Vue.use(require('vue-resource'))
+Vue.http.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('content');
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

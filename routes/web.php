@@ -20,3 +20,9 @@ Route::get('course', function () {
     return view('course');
 
 });
+
+Route::post('sjekkSvar', function() {
+
+	return "Hei";
+
+});
