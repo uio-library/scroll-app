@@ -1,4 +1,7 @@
 View: Biblioteket
+
+<simple-question question="Himmelen er…"></simple-question>
+
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum dui quam, sit amet cursus metus suscipit sed. Ut tempor lectus eget arcu ullamcorper tempor. Ut porttitor non nisl sit amet suscipit. Suspendisse vehicula vestibulum risus, eget tempus lectus aliquet id. Nullam ut nulla accumsan, dictum nunc ut, porta diam. Vestibulum lacinia vehicula lacus, at sodales sapien viverra sit amet. Etiam id libero aliquet, elementum tortor sed, ornare sem. Mauris nisl sem, congue a tellus in, feugiat consectetur tortor. Pellentesque venenatis risus sed est tincidunt placerat quis sed ligula. Integer ipsum lorem, mollis ut lectus luctus, porttitor congue ligula. Donec euismod nisi convallis quam feugiat finibus quis vitae est.
 
 Nunc augue metus, posuere in sem sit amet, rutrum condimentum neque. Duis eget ultrices massa, condimentum venenatis metus. Proin consequat turpis et commodo lacinia. Suspendisse quis urna euismod, ultricies leo a, dictum nisl. Vestibulum condimentum viverra ligula et condimentum. Fusce nec consequat ex, ac blandit dui. Curabitur elementum est felis, ac tincidunt nunc molestie et. Suspendisse sollicitudin dapibus sagittis. Proin tristique nibh nec lectus facilisis, sed tincidunt lectus aliquam.
