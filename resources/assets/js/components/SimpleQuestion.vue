@@ -21,9 +21,16 @@
 
 <script>
     export default {
+        data : function() {
+            return {
+                answer : 'test'
+            }
+        },
         methods: {
             onSubmit: function(event) {
-                console.log("Hei!!");
+                this.$http.post('/sjekkSvar').then(response =>  {
+                    console.log(response);
+                });
             }
         },
         props: {
