@@ -21,8 +21,6 @@ Route::get('course', function () {
 
 });
 
-Route::post('sjekkSvar', function() {
+Route::post('checkAnswer', 'ExerciseController@checkAnswer');
 
-	return "Hei";
-
-});
+Route::get('getExercise', 'ExerciseController@getExercise');

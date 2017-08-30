@@ -19,7 +19,7 @@ Vue.http.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('con
 
 Vue.component('example', require('./components/Example.vue'));
 
-Vue.component('simple-question', require('./components/SimpleQuestion.vue'));
+Vue.component('text-field-question-regex', require('./components/TextFieldQuestionRegex.vue'));
 
 const app = new Vue({
     el: '#app'
