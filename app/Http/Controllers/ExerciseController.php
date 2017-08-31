@@ -16,12 +16,14 @@ class ExerciseController extends Controller
 
     public function getExercise(Request $request)
     {
+        if (!isset($request->name)) {
+            return response()->json(['error' => 'Missing query string parameter: name'], 400);
+        }
 
-    	
     	$exercise = Exercise::where('name', '=', $request->name)->first();
-    	
+
     	if (is_null($exercise)) {
-    		return response()->json(['error' => 'name not defined'], 400);
+    		return response()->json(['error' => 'Exercise not found'], 400);
     	}
 
     	return response()->json(['content' => $exercise->content, 'id' => $exercise->id]);
