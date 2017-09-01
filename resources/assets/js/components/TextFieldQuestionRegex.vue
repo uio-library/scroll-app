@@ -1,40 +1,25 @@
-<style>
-    .correct button {
-        background-color: green
-    }
-    .incorrect button {
-        background-color: red
-    }
-    .padded-card {
-        margin-bottom: 1em
-    }
+<style lang="sass">
 </style>
 
-<template>
-    <div class="card padded-card" :class="{'text-white bg-danger': error }">
-        <div class=card-header v-if="!error">{{ question }}</div>
-
-        <div class="card-body" v-if="error" >
-            Error: {{ error }}
+<template lang="pug">
+    extends ExerciseBase.pug
+    block content
+        <p>{{question}}</p>
+        <div class="input-group">
+            <input type="text" class="form-control" v-model="answer" v-on:input="isCorrect = undefined" placeholder="Svar..." aria-label="Search for...">
+            <span class="input-group-btn">
+                <button class="btn btn-primary" type="submit" v-html="buttonText"></button>
+            </span>
         </div>
-
-        <form class="card-body" v-if="!error" v-on:submit.prevent="onSubmit">
-            <div class="input-group">
-                <input type="text" class="form-control" v-model="answer" placeholder="Svar..." aria-label="Search for...">
-                <span class="input-group-btn">
-                    <button class="btn btn-primary" style="width:30vw" :class="{ 'btn-success' : isCorrect, 'btn-danger' : isCorrect === false}" id="submitButton" type="submit">{{buttonText}}</button>
-                </span>
-            </div>
-        </form>
-    </div>
-</div>
 </template>
 
 <script>
+    import ExerciseBase from './ExerciseBase.vue';
     export default {
+        extends: ExerciseBase,
         data : function() {
             return {
-                answer : 'test',
+                answer : '',
                 question : '',
                 id : '',
                 isCorrect : undefined,
@@ -51,21 +36,18 @@
         props: {
             name: {
                 type: String,
-            },
-
+            }
         },
 
         computed: {
             buttonText: function() {
-                if (this.isCorrect === true) {
-                    return "Riktig";
-                }
-                else if (this.isCorrect === false) {
-                    return "Galt";
-                }
-                else {
-                    return "Sjekk svar";
-                }
+                // if (this.isCorrect === true) {
+                //     return '<i class="fa fa-check-circle" aria-hidden="true"></i> <span style="display:inline-block;">Riktig</span>';
+                // }
+                // else if (this.isCorrect === false) {
+                //     return '<i class="fa fa-times-circle" aria-hidden="true"></i> <span style="display:inline-block;">Galt</span>';
+                // }
+                return 'Sjekk svar';
             }
         },
 

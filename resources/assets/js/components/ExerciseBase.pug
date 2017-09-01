@@ -1,0 +1,15 @@
+div(class="exercise" :class="{'text-white bg-danger': error, 'answer-correct' : isCorrect === true, 'answer-wrong' : isCorrect === false }")
+    div(class="header")
+        div(class="title") Oppgave {{ number }}
+        div(class="result")
+            transition(name="bounce")
+                div(v-if="isCorrect === true" key="true")
+                    <i class="fa fa-check-circle" aria-hidden="true"></i> <span>Riktig</span>
+                div(v-if="isCorrect === false" key="false")
+                    <i class="fa fa-times-circle" aria-hidden="true"></i> <span>Galt</span>
+
+    div(class="card-body" v-if="error") Error: {{error}}
+
+    div(class="card-body" v-if="!error")
+        form(v-if="!error" v-on:submit.prevent="onSubmit")
+            block content
