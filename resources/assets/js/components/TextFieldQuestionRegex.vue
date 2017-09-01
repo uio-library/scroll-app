@@ -4,7 +4,7 @@
 <template lang="pug">
     extends ExerciseBase.pug
     block content
-        <p>{{question}}</p>
+        <div v-bind-html="question"></div>
         <div class="input-group">
             <input type="text" class="form-control" v-model="answer" v-on:input="isCorrect = undefined" placeholder="Svar..." aria-label="Search for...">
             <span class="input-group-btn">
