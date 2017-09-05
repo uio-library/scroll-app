@@ -16,6 +16,7 @@ class Exercise extends Model
 
     protected $helperMap = [
     	"TextFieldQuestionRegex" => TextFieldQuestionRegex::class,
+        "MultipleChoiceQuestion" => MultipleChoiceQuestion::class,
     	"DummyExercise" => DummyExercise::class,
     ];
 

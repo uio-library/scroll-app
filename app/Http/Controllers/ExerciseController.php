@@ -15,9 +15,7 @@ class ExerciseController extends Controller
     }
 
     public function getExercise(Request $request)
-    {
-
-    	
+    {    	
     	$exercise = Exercise::where('name', '=', $request->name)->first();
     	
     	if (is_null($exercise)) {
