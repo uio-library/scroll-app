@@ -53,16 +53,15 @@
 </head>
 
 <body>
-	<div class="container" id="app">
+	<div id="app">
 		<h1 class="mainHeader">LITTERATUR OG BIBLIOTEK<br></h1>
 		
-
 		<div class = "module">
 			<div class="thumbnail text-left" data-toggle="collapse" data-target="#biblioteket">
-				<img src="images/discoveredonceagain.jpg" class="img-fluid" >
+				<img src="images/biblioteket.jpg" class="img-fluid" >
 				<div class="caption"><h1 class="moduleHeader">1.0 Biblioteket<h1></div>
 			</div>
-			<div id="biblioteket" class="collapse">
+			<div id="biblioteket" class="collapse container-fluid">
 				@include('contents.biblioteket')
 			</div>
 		</div>
@@ -72,7 +71,7 @@
 				<img src="images/discoveredonceagain.jpg" class="img-fluid" >
 				<div class="caption"><h1 class="moduleHeader">1.1 Litteratursøk<h1></div>
 			</div>
-			<div id="litteratursok" class="collapse">
+			<div id="litteratursok" class="collapse container-fluid">
 				@include('contents.litteratursok')
 			</div>
 		</div>
@@ -82,7 +81,7 @@
 				<img src="images/discoveredonceagain.jpg" class="img-fluid" >
 				<div class="caption"><h1 class="moduleHeader">1.2 Referanse&shy;håndtering<h1></div>
 			</div>
-			<div id="referering" class="collapse">
+			<div id="referering" class="collapse container-fluid">
 				@include('contents.referering')
 			</div>
 		</div>
@@ -92,7 +91,7 @@
 				<img src="images/discoveredonceagain.jpg" class="img-fluid" >
 				<div class="caption"><h1 class="moduleHeader">1.3 Prøve<h1></div>
 			</div>
-			<div id="prove" class="collapse">
+			<div id="prove" class="collapse container-fluid">
 				@include('contents.test')
 			</div>
 		</div>
