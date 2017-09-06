@@ -36,6 +36,10 @@
 		position: relative;
 	}
 
+	.container-fluid {
+		max-width: 960px;
+	}
+
 </style> 
 
 <html>
@@ -55,7 +59,6 @@
 <body>
 	<div id="app">
 		<h1 class="mainHeader">LITTERATUR OG BIBLIOTEK<br></h1>
-		
 		<div class = "module">
 			<div class="thumbnail text-left" data-toggle="collapse" data-target="#biblioteket">
 				<img src="images/biblioteket.jpg" class="img-fluid" >
