@@ -1,0 +1,43 @@
+
+// Fonts
+// @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+
+// Variables
+// @import "variables";
+
+// Bootstrap
+// @import "~bootstrap/dist/css/bootstrap.css";
+
+body
+	padding-bottom: 6cm
+
+.container-fluid
+	max-width: 960px
+
+.module
+	> .header
+		background-size: 100%
+		background-repeat: no-repeat
+		height: 26vw
+		transition: filter 0.3s, opacity 0.3s
+		opacity: 1
+		cursor: pointer
+
+		&:hover
+			opacity: 0.8
+			filter: grayscale(50%)
+			transition: filter 0.3s, opacity 0.3s
+
+		> div
+			max-width: 960px
+			height: 100%
+			position: relative
+
+		h2
+			position: absolute
+			color: white
+			text-shadow: 0 0 1vw #666
+			bottom: 4vw
+			font-size: 8vw
+			margin: 0 auto
+			cursor: pointer

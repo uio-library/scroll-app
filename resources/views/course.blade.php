@@ -1,47 +1,4 @@
 <!DOCTYPE html>
-
-<style>
-	.mainHeader {
-		font-size: 10vw;
-	}
-
-	.moduleHeader {
-		font-size: 8vw;
-		color : white;
-	}
-
-
-	.module .carousel:hover {
-		opacity : 0.6;
-		transition: opacity 0.3s;
-	}
-
-	.module .carousel {
-		opacity : 1;
-		transition: opacity 0.3s;
-	} 
-
-	body {
-		padding-bottom: 6cm;
-	}     
-	.caption {
-	    position: absolute;
-	    top : 50%;
-	    left: 10%;
-	    width: 60%;
-	    height: 100%;
-	}
-
-	.thumbnail {
-		position: relative;
-	}
-
-	.container-fluid {
-		max-width: 960px;
-	}
-
-</style> 
-
 <html>
 
 <head>
@@ -51,7 +8,7 @@
 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
 
-	<!--<link rel="stylesheet" href="{{ elixir('css/app.css') }}">-->
+	<link rel="stylesheet" href="{{ elixir('css/app.css') }}">
 	<title>Litteratur og bibliotek</title>
 
 </head>
@@ -59,10 +16,12 @@
 <body>
 	<div id="app">
 		<h1 class="mainHeader">LITTERATUR OG BIBLIOTEK<br></h1>
-		<div class = "module">
-			<div class="thumbnail text-left" data-toggle="collapse" data-target="#biblioteket">
-				<img src="images/biblioteket.jpg" class="img-fluid" >
-				<div class="caption"><h1 class="moduleHeader">1.0 Biblioteket<h1></div>
+
+		<div class="module">
+			<div class="header" data-toggle="collapse" data-target="#biblioteket" style="background-image:url(images/biblioteket.jpg);">
+				<div class="container-fluid">
+					<h2>1.0 Biblioteket</h2>
+				</div>
 			</div>
 			<div id="biblioteket" class="collapse container-fluid">
 				@include('contents.biblioteket')
