@@ -31,10 +31,10 @@
 <template lang="pug">
     extends ExerciseBase.pug
     block content
-        <div v-html="question"></div>
+        <div v-html="content.question"></div>
 
         <div class="alternatives row">
-            <div class="form-check alternative" :class="colStyle" v-for="alternative in alternatives" @change="resetIsCorrect()">
+            <div class="form-check alternative" :class="colStyle" v-for="alternative in content.alternatives" @change="resetIsCorrect()">
                 <label class="form-check-label" :class="{'selected': answer == alternative}">
                     <input class="form-check-input" type="radio" v-model="answer" :value="alternative" name="blankRadio" aria-label="..."> <span v-html="alternative"></span>
                 </label>
@@ -48,12 +48,6 @@
     import ExerciseBase from './ExerciseBase.vue';
     export default {
         extends: ExerciseBase,
-        data: function() {
-            return {
-                question : '',
-                alternatives : [],
-            }
-        },
         computed: {
             colStyle: function() {
                 return 'col-lg-' + (12 / this.columns);
@@ -67,10 +61,7 @@
             },
         },
         mounted() {
-            this.getExercise().then(response => {
-                this.question = response.body.content.question;
-                this.alternatives = response.body.content.alternatives;
-            })
+            this.getExercise()
         }
     }
 </script>

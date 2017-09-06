@@ -5,7 +5,7 @@
     extends ExerciseBase.pug
     block content
 
-        <div v-html="question"></div>
+        <div v-html="content.question"></div>
 
         <div class="input-group">
             <input type="text" class="form-control" v-model="answer" @input="resetIsCorrect()" placeholder="Svar..." aria-label="Search for...">
@@ -19,15 +19,8 @@
     import ExerciseBase from './ExerciseBase.vue';
     export default {
         extends: ExerciseBase,
-        data : function() {
-            return {
-                question : '',
-            }
-        },
         mounted() {
-            this.getExercise().then(response => {
-                this.question = response.body.content.question;
-            })
+            this.getExercise()
         }
     }
 </script>

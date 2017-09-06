@@ -71,6 +71,7 @@
         data : function() {
             return {
                 id : '',
+                content: {},
                 answer : '',
                 waiting: false,
                 isCorrect : undefined,
@@ -100,6 +101,7 @@
 
                             // Set generic stuff
                             this.id = response.body.id;
+                            this.content = response.body.content;
                             this.answer = response.body.state.answer;
                             this.isCorrect = response.body.state.isCorrect;
 
