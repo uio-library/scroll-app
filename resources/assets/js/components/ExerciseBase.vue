@@ -72,26 +72,31 @@
             return {
                 id : '',
                 answer : '',
+                waiting: false,
                 isCorrect : undefined,
                 error : undefined,
             }
         },
         methods: {
             handleErrorResponse(response) {
+                this.waiting = false;
                 if (response.body.error) {
                     this.error = response.body.error;
                 } else {
-                    this.error = 'Server error 😭';
+                    this.error = 'Server or network error 😭';
                 }
             },
             resetIsCorrect() {
                 this.isCorrect = undefined;
             },
             getExercise() {
+                this.waiting = true;
+                this.error = undefined; // reset
                 return new Promise((resolve, reject) => {
                     this.$http.get('/getExercise', {params: {name: this.name}}).then(
                         // Success response
                         response => {
+                            this.waiting = false;
 
                             // Set generic stuff
                             this.id = response.body.id;
@@ -107,11 +112,16 @@
                 });
             },
             checkAnswer() {
+                this.error = undefined; // reset
+                this.waiting = true;
                 return new Promise((resolve, reject) => {
                     this.$http.post('/checkAnswer', {id: this.id, answer: this.answer}).then(
                         // Success response
                         response =>  {
+                            this.waiting = false;
+
                             this.isCorrect = response.body.correct;
+
                             resolve(response);
                         },
                         // Error response
