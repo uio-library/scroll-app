@@ -61,6 +61,9 @@
 <script>
     export default {
         props: {
+            name: {
+                type: String,
+            },
             number: {
                 type: String,
             }
@@ -68,9 +71,54 @@
         data : function() {
             return {
                 id : '',
+                answer : '',
                 isCorrect : undefined,
                 error : undefined,
             }
         },
+        methods: {
+            handleErrorResponse(response) {
+                if (response.body.error) {
+                    this.error = response.body.error;
+                } else {
+                    this.error = 'Server error 😭';
+                }
+            },
+            resetIsCorrect() {
+                this.isCorrect = undefined;
+            },
+            getExercise() {
+                return new Promise((resolve, reject) => {
+                    this.$http.get('/getExercise', {params: {name: this.name}}).then(
+                        // Success response
+                        response => {
+
+                            // Set generic stuff
+                            this.id = response.body.id;
+                            this.answer = response.body.state.answer;
+                            this.isCorrect = response.body.state.isCorrect;
+
+                            // Allows for chaining
+                            resolve(response);
+                        },
+                        // Error response
+                        this.handleErrorResponse
+                    );
+                });
+            },
+            checkAnswer() {
+                return new Promise((resolve, reject) => {
+                    this.$http.post('/checkAnswer', {id: this.id, answer: this.answer}).then(
+                        // Success response
+                        response =>  {
+                            this.isCorrect = response.body.correct;
+                            resolve(response);
+                        },
+                        // Error response
+                        this.handleErrorResponse
+                    );
+                });
+            },
+        }
     }
 </script>

@@ -11,5 +11,5 @@ div(class="exercise" :class="{'text-white bg-danger': error, 'answer-correct' : 
     div(class="card-body" v-if="error") Error: {{error}}
 
     div(class="card-body" v-if="!error")
-        form(v-if="!error" v-on:submit.prevent="onSubmit")
+        form(v-if="!error" v-on:submit.prevent="checkAnswer")
             block content
