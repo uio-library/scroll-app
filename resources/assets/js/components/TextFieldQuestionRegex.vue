@@ -56,6 +56,8 @@
             this.$http.get('/getExercise', {params: {name : this.name}}).then(response =>  {
                 this.question = response.body.content.question;
                 this.id = response.body.id;
+                this.answer = response.body.state.answer;
+                this.isCorrect = response.body.state.isCorrect;
             }, response => {
                 if (response.body.error) {
                     this.error = response.body.error;

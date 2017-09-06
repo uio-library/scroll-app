@@ -11,7 +11,9 @@ class ExerciseController extends Controller
     {
     	$exercise = Exercise::find($request->id);
     	$answer = $request->answer;
-    	return response()->json(['correct' => $exercise->checkAnswer($answer)]);
+        $isCorrect = $exercise->checkAnswer($answer);
+        $request->session()->put("exercise:$exercise->id", ['answer' => $answer, 'isCorrect' => $isCorrect]);
+    	return response()->json(['correct' => $isCorrect]);
     }
 
     public function getExercise(Request $request)
@@ -26,6 +28,10 @@ class ExerciseController extends Controller
     		return response()->json(['error' => 'Exercise not found'], 400);
     	}
 
-    	return response()->json(['content' => $exercise->content, 'id' => $exercise->id]);
+    	return response()->json([
+            'content' => $exercise->content, 
+            'id' => $exercise->id,
+            'state' => $request->session()->get("exercise:$exercise->id", ['answer'=>'', 'isCorrect'=>null]), 
+        ]);
     }
 }
