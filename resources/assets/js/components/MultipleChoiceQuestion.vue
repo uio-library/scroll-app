@@ -33,8 +33,8 @@
     block content
         <div v-html="question"></div>
 
-        <div class="alternatives">
-            <div class="form-check alternative" v-for="alternative in alternatives" @change="resetIsCorrect()">
+        <div class="alternatives row">
+            <div class="form-check alternative" :class="colStyle" v-for="alternative in alternatives" @change="resetIsCorrect()">
                 <label class="form-check-label" :class="{'selected': answer == alternative}">
                     <input class="form-check-input" type="radio" v-model="answer" :value="alternative" name="blankRadio" aria-label="..."> <span v-html="alternative"></span>
                 </label>
@@ -54,7 +54,17 @@
                 alternatives : [],
             }
         },
+        computed: {
+            colStyle: function() {
+                return 'col-lg-' + (12 / this.columns);
+            }
+        },
         props: {
+            // Number of columns (must be a fraction of 12)
+            columns: {
+                default: 1,
+                type: Number,
+            },
         },
         mounted() {
             this.getExercise().then(response => {
