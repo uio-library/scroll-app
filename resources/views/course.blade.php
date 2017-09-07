@@ -1,47 +1,4 @@
 <!DOCTYPE html>
-
-<style>
-	.mainHeader {
-		font-size: 10vw;
-	}
-
-	.moduleHeader {
-		font-size: 8vw;
-		color : white;
-	}
-
-
-	.module .carousel:hover {
-		opacity : 0.6;
-		transition: opacity 0.3s;
-	}
-
-	.module .carousel {
-		opacity : 1;
-		transition: opacity 0.3s;
-	} 
-
-	body {
-		padding-bottom: 6cm;
-	}     
-	.caption {
-	    position: absolute;
-	    top : 50%;
-	    left: 10%;
-	    width: 60%;
-	    height: 100%;
-	}
-
-	.thumbnail {
-		position: relative;
-	}
-
-	.container-fluid {
-		max-width: 960px;
-	}
-
-</style> 
-
 <html>
 
 <head>
@@ -51,29 +8,29 @@
 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
 
-	<!--<link rel="stylesheet" href="{{ elixir('css/app.css') }}">-->
+	<link rel="stylesheet" href="{{ elixir('css/app.css') }}">
 	<title>Litteratur og bibliotek</title>
 
 </head>
 
 <body>
 	<div id="app">
-		<h1 class="mainHeader">LITTERATUR OG BIBLIOTEK<br></h1>
-		
+		<h1 class="mainHeader">LITTERATUR OG BIBLIOTEK<br></h1>	
 		@foreach ($modules as $id => $module)
-			<div class = "module">
-				<div class="thumbnail text-left" data-toggle="collapse" data-target="#{{ $id }}">
-					<img src="{{$module['image']}}" class="img-fluid" >
-					<div class="caption"><h1 class="moduleHeader">{{ $module['name'] }}<h1></div>
-				</div>
-				<div id="{{ $id }}" class="collapse container-fluid">
-					@include('contents.'.$courseName.'.'.$id)
-				</div>
+		<div class = "module">
+			<div class="thumbnail text-left" data-toggle="collapse" data-target="#{{ $id }}">
+				<img src="{{$module['image']}}" class="img-fluid" >
+				<div class="caption"><h1 class="moduleHeader">{{ $module['name'] }}</h1></div>
 			</div>
+			<div id="{{ $id }}" class="collapse container-fluid">
+				@include('contents.'.$courseName.'.'.$id)
+			</div>
+		</div>
 		@endforeach
-
 	</div>
-	
+
+
+
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
 	<script src="{{ elixir('js/app.js') }}"></script>

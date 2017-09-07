@@ -1,15 +1,19 @@
-div(class="exercise" :class="{'text-white bg-danger': error, 'answer-correct' : isCorrect === true, 'answer-wrong' : isCorrect === false }")
+div(class="exercise" :class="{'text-white bg-danger': error, 'answer-correct' : isCorrect === true, 'answer-wrong' : isCorrect === false, 'spinner' : waiting }")
     div(class="header")
         div(class="title") Oppgave {{ number }}
         div(class="result")
-            transition(name="bounce")
-                div(v-if="isCorrect === true" key="true")
+            transition(name="bounce" mode="out-in")
+                div(v-if="waiting" key="waiting")
+                    <i class="fa fa-cog fa-spin fa-fw"></i>
+                div(v-else-if="isCorrect === true" key="true")
                     <i class="fa fa-check-circle" aria-hidden="true"></i> <span>Riktig</span>
-                div(v-if="isCorrect === false" key="false")
+                div(v-else-if="isCorrect === false" key="false")
                     <i class="fa fa-times-circle" aria-hidden="true"></i> <span>Galt</span>
+                div(v-else key="rest")
+                    <span> </span>
 
     div(class="card-body" v-if="error") Error: {{error}}
 
-    div(class="card-body" v-if="!error")
-        form(v-if="!error" v-on:submit.prevent="onSubmit")
+    div(class="card-body" v-if="id")
+        form(v-on:submit.prevent="checkAnswer")
             block content

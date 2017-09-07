@@ -61,6 +61,9 @@
 <script>
     export default {
         props: {
+            name: {
+                type: String,
+            },
             number: {
                 type: String,
             }
@@ -68,9 +71,64 @@
         data : function() {
             return {
                 id : '',
+                answer : '',
+                waiting: false,
                 isCorrect : undefined,
                 error : undefined,
             }
         },
+        methods: {
+            handleErrorResponse(response) {
+                this.waiting = false;
+                if (response.body.error) {
+                    this.error = response.body.error;
+                } else {
+                    this.error = 'Server or network error 😭';
+                }
+            },
+            resetIsCorrect() {
+                this.isCorrect = undefined;
+            },
+            getExercise() {
+                this.waiting = true;
+                this.error = undefined; // reset
+                return new Promise((resolve, reject) => {
+                    this.$http.get('/getExercise', {params: {name: this.name}}).then(
+                        // Success response
+                        response => {
+                            this.waiting = false;
+
+                            // Set generic stuff
+                            this.id = response.body.id;
+                            this.answer = response.body.state.answer;
+                            this.isCorrect = response.body.state.isCorrect;
+
+                            // Allows for chaining
+                            resolve(response);
+                        },
+                        // Error response
+                        this.handleErrorResponse
+                    );
+                });
+            },
+            checkAnswer() {
+                this.error = undefined; // reset
+                this.waiting = true;
+                return new Promise((resolve, reject) => {
+                    this.$http.post('/checkAnswer', {id: this.id, answer: this.answer}).then(
+                        // Success response
+                        response =>  {
+                            this.waiting = false;
+
+                            this.isCorrect = response.body.correct;
+
+                            resolve(response);
+                        },
+                        // Error response
+                        this.handleErrorResponse
+                    );
+                });
+            },
+        }
     }
 </script>

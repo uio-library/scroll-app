@@ -1,15 +1,46 @@
 <style lang="sass">
+@import '~bootstrap/scss/bootstrap.scss';
+
+.exercise
+    .alternatives
+        margin-top: 0.5rem
+        margin-bottom: 0.5rem
+
+    .alternative
+        margin: 0
+        label
+            display: block
+            border: 1px solid transparent
+            padding: 0.5rem 0.5rem 0.5rem 30px
+            height: 100%
+            border-radius: 3px
+
+            &:hover
+                border-color: #ececec
+
+            &.selected
+                border-color: map-get($theme-colors, "primary")
+
+        // By default, scale any image contained in the alternative to fill its width
+        img
+            display: block
+            width: 100%
+
 </style>
 
 <template lang="pug">
     extends ExerciseBase.pug
     block content
         <div v-html="question"></div>
-        <div class="form-check" v-for="alternative in alternatives" @change="changeSelectVal(alternative)">
-            <label class="form-check-label">
-                <input class="form-check-input" type="radio" v-model="answer" v-bind:value="alternative" name="blankRadio" aria-label="..."> {{alternative}}
-            </label>
+
+        <div class="alternatives row">
+            <div class="form-check alternative" :class="colStyle" v-for="alternative in alternatives" @change="resetIsCorrect()">
+                <label class="form-check-label" :class="{'selected': answer == alternative}">
+                    <input class="form-check-input" type="radio" v-model="answer" :value="alternative" name="blankRadio" aria-label="..."> <span v-html="alternative"></span>
+                </label>
+            </div>
         </div>
+
         <button class="btn btn-primary" type="submit">Sjekk svar</button>
 </template>
 
@@ -17,48 +48,29 @@
     import ExerciseBase from './ExerciseBase.vue';
     export default {
         extends: ExerciseBase,
-        data : function() {
+        data: function() {
             return {
                 question : '',
-                id : '',
-                isCorrect : undefined,
-                error : undefined,
                 alternatives : [],
-                answer : "",
             }
         },
-        methods: {
-            onSubmit: function(event) {
-                this.$http.post('/checkAnswer', {answer : this.answer, id : this.id}).then(response =>  {
-                    this.isCorrect = response.body.correct;
-                });
-            },
-            changeSelectVal: function(val) {
-                this.isCorrect = undefined;
+        computed: {
+            colStyle: function() {
+                return 'col-lg-' + (12 / this.columns);
             }
         },
-
         props: {
-            name: {
-                type: String,
-            }
+            // Number of columns (must be a fraction of 12)
+            columns: {
+                default: 1,
+                type: Number,
+            },
         },
-
         mounted() {
-            this.$http.get('/getExercise', {params: {name : this.name}}).then(response =>  {
+            this.getExercise().then(response => {
                 this.question = response.body.content.question;
-                this.id = response.body.id;
                 this.alternatives = response.body.content.alternatives;
-                this.answer = response.body.state.answer;
-                this.isCorrect = response.body.state.isCorrect;
-                console.log(this.answer, this.isCorrect);
-            }, response => {
-                if (response.body.error) {
-                    this.error = response.body.error;
-                } else {
-                    this.error = 'Failed to fetch exercise.';
-                }
-            });
+            })
         }
     }
 </script>
