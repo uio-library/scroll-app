@@ -21,6 +21,7 @@ Vue.component('example', require('./components/Example.vue'));
 
 Vue.component('text-field-question-regex', require('./components/TextFieldQuestionRegex.vue'));
 Vue.component('multiple-choice-question', require('./components/MultipleChoiceQuestion.vue'));
+Vue.component('module', require('./components/Module.vue'));
 
 const app = new Vue({
     el: '#app'

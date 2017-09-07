@@ -15,12 +15,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('course', function () {
-
-    return view('course');
-
-});
-
 Route::post('checkAnswer', 'ExerciseController@checkAnswer');
 
+Route::post('resetCourse', 'CourseController@resetCourse');
+
 Route::get('getExercise', 'ExerciseController@getExercise');
+
+Route::get('course', 'CourseController@listCourses');
+
+Route::get('course/{id}', 'CourseController@getCourse');

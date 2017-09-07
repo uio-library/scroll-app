@@ -59,45 +59,18 @@
 <body>
 	<div id="app">
 		<h1 class="mainHeader">LITTERATUR OG BIBLIOTEK<br></h1>
-		<div class = "module">
-			<div class="thumbnail text-left" data-toggle="collapse" data-target="#biblioteket">
-				<img src="images/biblioteket.jpg" class="img-fluid" >
-				<div class="caption"><h1 class="moduleHeader">1.0 Biblioteket<h1></div>
+		
+		@foreach ($modules as $id => $module)
+			<div class = "module">
+				<div class="thumbnail text-left" data-toggle="collapse" data-target="#{{ $id }}">
+					<img src="{{$module['image']}}" class="img-fluid" >
+					<div class="caption"><h1 class="moduleHeader">{{ $module['name'] }}<h1></div>
+				</div>
+				<div id="{{ $id }}" class="collapse container-fluid">
+					@include('contents.'.$courseName.'.'.$id)
+				</div>
 			</div>
-			<div id="biblioteket" class="collapse container-fluid">
-				@include('contents.biblioteket')
-			</div>
-		</div>
-
-		<div class = "module">
-			<div class="thumbnail text-left" data-toggle="collapse" data-target="#litteratursok">
-				<img src="images/discoveredonceagain.jpg" class="img-fluid" >
-				<div class="caption"><h1 class="moduleHeader">1.1 Litteratursøk<h1></div>
-			</div>
-			<div id="litteratursok" class="collapse container-fluid">
-				@include('contents.litteratursok')
-			</div>
-		</div>
-
-		<div class = "module">
-			<div class="thumbnail text-left" data-toggle="collapse" data-target="#referering">
-				<img src="images/discoveredonceagain.jpg" class="img-fluid" >
-				<div class="caption"><h1 class="moduleHeader">1.2 Referanse&shy;håndtering<h1></div>
-			</div>
-			<div id="referering" class="collapse container-fluid">
-				@include('contents.referering')
-			</div>
-		</div>
-
-		<div class = "module">
-			<div class="thumbnail text-left" data-toggle="collapse" data-target="#prove">
-				<img src="images/discoveredonceagain.jpg" class="img-fluid" >
-				<div class="caption"><h1 class="moduleHeader">1.3 Prøve<h1></div>
-			</div>
-			<div id="prove" class="collapse container-fluid">
-				@include('contents.test')
-			</div>
-		</div>
+		@endforeach
 
 	</div>
 	
