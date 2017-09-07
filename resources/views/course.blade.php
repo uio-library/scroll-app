@@ -16,11 +16,13 @@
 <body>
 	<div id="app">
 		<h1 class="mainHeader">LITTERATUR OG BIBLIOTEK<br></h1>	
+
 		@foreach ($modules as $id => $module)
 		<div class = "module">
-			<div class="thumbnail text-left" data-toggle="collapse" data-target="#{{ $id }}">
-				<img src="{{$module['image']}}" class="img-fluid" >
-				<div class="caption"><h1 class="moduleHeader">{{ $module['name'] }}</h1></div>
+			<div class="header" data-toggle="collapse" data-target="#{{ $id }}" style="background-image:url({{$module['image']}})">
+				<div class="container-fluid">
+					<h2>{{ $module['name'] }}</h2>
+				</div>
 			</div>
 			<div id="{{ $id }}" class="collapse container-fluid">
 				@include('contents.'.$courseName.'.'.$id)
