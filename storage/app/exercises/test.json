@@ -1,0 +1,14 @@
+{
+    "content": {
+        "question": "Hva er månen?"
+    },
+
+    "answer" : {
+    	"regex" : "/^ost$/"
+    },
+
+    "type": "TextFieldQuestionRegex",
+    "first_import_time": "2017-08-30 12:36:57",
+    "id": "e94022fe-8d7f-11e7-9367-80e650221f10",
+    "name" : "MånenSpørsmål"
+}

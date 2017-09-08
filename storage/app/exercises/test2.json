@@ -1,0 +1,12 @@
+{
+    "content": {
+        "question": "Hva er solen?"
+    },
+    "answer": {
+        "regex": "/^lampe$/"
+    },
+    "type": "TextFieldQuestionRegex",
+    "name": "SolenSpørsmål",
+    "first_import_time": "2017-08-30 14:19:48",
+    "id": "47a48a5c-8d8e-11e7-af8b-80e650221f10"
+}
