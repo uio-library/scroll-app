@@ -19,3 +19,4 @@ div(class="exercise" :class="{'text-white bg-danger': error, 'answer-pending' : 
                         <i class="fa fa-times-circle" aria-hidden="true"></i> <span>Galt</span>
                     div(v-else key="rest")
                         <span> Sjekk svar</span>
+            button(class="btn" type="button" v-if="isCorrect === false") Jeg er uenig
