@@ -9,6 +9,7 @@
         overflow: hidden
         @media only screen and (min-width: 576px)
             width: 20vw
+            margin-right: .75rem
 
     .header
         display: flex
@@ -37,20 +38,35 @@
                 100%
                     transform: translateY(0)
 
-.answer-correct .header
+    .card-footer
+        .checkAnswerBtn
+            transition: background .2s ease-out
+            overflow: hidden
+            span
+                display: inline-block
+
+            .bounce-enter-active
+                animation: bounce-in .5s ease-out
+
+            @keyframes bounce-in
+                0%
+                    transform: translateY(-50px)
+                50%
+                    transform: translateY(5px)
+                100%
+                    transform: translateY(0)
+
+.answer-pending .checkAnswerBtn
+    @extend .bg-primary
+    @extend .text-white
+
+.answer-correct .checkAnswerBtn
     @extend .bg-success
     @extend .text-white
 
-.answer-wrong .header
-    background: red;
+.answer-wrong .checkAnswerBtn
     @extend .bg-danger
     @extend .text-white
-
-.exercise.answer-correct
-    @extend .border-success
-
-.exercise.answer-wrong
-    @extend .border-danger
 
 </style>
 
