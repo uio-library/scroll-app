@@ -24,7 +24,7 @@
 					<h2>{{ $module->name }}</h2>
 				</div>
 			</div>
-			<div id="{{ $id }}" class="collapse container-fluid">
+			<div id="{{ $id }}" class="collapse container-fluid" style="margin-top : 10px">
 				{!! $module->html !!}
 				
 			</div>
