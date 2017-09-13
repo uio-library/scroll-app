@@ -9,7 +9,7 @@
 </head>
 
 <body>
- Dummy welcome page. Go to <a href="course">course page</a>
+ Uklar velkomstside. Gå til <a href="course/fysikk1">lipsum-eksempel</a> eller <a href="course/fysikk2">fysikk-eksempel</a>
 </body>
 
 </html>
