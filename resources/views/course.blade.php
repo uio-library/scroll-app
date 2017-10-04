@@ -15,7 +15,7 @@
 
 <body>
 	<div id="app">
-		<h1 class="mainHeader">LITTERATUR OG BIBLIOTEK<br></h1>	
+		<h1 class="mainHeader">{{$course->header}}<br></h1>	
 
 		@foreach ($course->modules as $id => $module)
 		<div class = "module">

@@ -9,7 +9,7 @@ class CourseController extends Controller
 {
     public function getCourse(Request $request, $name) {
     	$course = Course::where(['name' => $name])->firstOrFail();
-
+    	
     	return view('course', ['course' => $course]);
     }
 

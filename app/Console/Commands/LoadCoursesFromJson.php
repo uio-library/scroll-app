@@ -90,7 +90,7 @@ class LoadCoursesFromJson extends Command
         if (!isset($data->name)) {
             $course = new Course();
         } else {
-            $course = Course::firstOrNew(["name" => $data->name]);
+            $course = Course::firstOrNew(["name" => $data->name, "header" => $data->header]);
         }
         $this->setData($course, $data, $fields);
         $this->loadCourseHtml($course, $folder);
