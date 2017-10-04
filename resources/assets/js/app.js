@@ -8,7 +8,9 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
-Vue.use(require('vue-resource'))
+Vue.use(require('vue-resource'));
+Vue.use(require('vue-observe-visibility'));
+
 Vue.http.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('content');
 
 /**
@@ -18,7 +20,7 @@ Vue.http.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('con
  */
 
 Vue.component('example', require('./components/Example.vue'));
-
+Vue.component('youtube-video', require('./components/YoutubeVideo.vue'));
 Vue.component('text-field-question-regex', require('./components/TextFieldQuestionRegex.vue'));
 Vue.component('multiple-choice-question', require('./components/MultipleChoiceQuestion.vue'));
 
