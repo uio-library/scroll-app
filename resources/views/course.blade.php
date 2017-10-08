@@ -15,7 +15,8 @@
 
 <body>
 	<div id="app">
-		<h1 class="mainHeader">{{$course->header}}<br></h1>	
+		<div class="uio-banner" style="background-image:url(/images/kjemisk_logo.svg)">
+		</div> 
 
 		@foreach ($course->modules as $id => $module)
 		<div class = "module">
