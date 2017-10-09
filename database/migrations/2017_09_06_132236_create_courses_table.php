@@ -18,6 +18,7 @@ class CreateCoursesTable extends Migration
             $table->string('name');
             $table->json('modules');
             $table->string('header');
+            $table->text('headertext');
             $table->timestamps();
         });
     }

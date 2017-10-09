@@ -11,5 +11,5 @@ class Course extends Model
     ];
 
     public $incrementing = true;
-    protected $fillable = ['name', 'modules', 'id', 'header'];
+    protected $fillable = ['name', 'modules', 'id', 'header', 'headertext'];
 }
