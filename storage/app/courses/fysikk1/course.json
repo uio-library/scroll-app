@@ -1,6 +1,7 @@
 {
   "name": "fysikk1",
   "header" : "Fysikktest 1",
+  "headertext" : "Fysikktest 1",
   "modules": [
     {
       "id": "biblioteket",
