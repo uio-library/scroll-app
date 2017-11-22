@@ -29,7 +29,8 @@ class ExerciseController extends Controller
     	}
 
     	return response()->json([
-            'content' => $exercise->content, 
+            'content' => $exercise->content,
+            'type' => $exercise->type,
             'id' => $exercise->id,
             'state' => $request->session()->get("exercise:$exercise->id", ['answer'=>'', 'isCorrect'=>null]), 
         ]);

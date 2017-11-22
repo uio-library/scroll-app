@@ -24,6 +24,7 @@ Vue.component('youtube-video', require('./components/YoutubeVideo.vue'));
 Vue.component('text-field-question-regex', require('./components/TextFieldQuestionRegex.vue'));
 Vue.component('multiple-choice-question', require('./components/MultipleChoiceQuestion.vue'));
 
+Vue.component('question', require('./components/Question.vue'));
 const app = new Vue({
     el: '#app'
 });
