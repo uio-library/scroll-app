@@ -7,32 +7,51 @@ use App\Exercise;
 
 class ExerciseController extends Controller
 {
-    public function checkAnswer(Request $request)
+    /**
+     * Return a list of exercises
+     */
+    public function getQuiz(Request $request)
     {
-    	$exercise = Exercise::find($request->id);
-    	$answer = $request->answer;
-        $isCorrect = $exercise->checkAnswer($answer);
-        $request->session()->put("exercise:$exercise->id", ['answer' => $answer, 'isCorrect' => $isCorrect]);
-    	return response()->json(['correct' => $isCorrect]);
-    }
-
-    public function getExercise(Request $request)
-    {
-        if (!isset($request->name)) {
-            return response()->json(['error' => 'Missing query string parameter: name'], 400);
+        if (!isset($request->questions)) {
+            return response()->json(['error' => 'Missing query string parameter: questions'], 400);
         }
 
-    	$exercise = Exercise::where('name', '=', $request->name)->first();
+        $exercises = [];
+        foreach ($request->questions as $name) {
+            $exercise = Exercise::where('name', '=', $name)->first();
+            if (is_null($exercise)) {
+                return response()->json(['error' => 'Exercise not found: ' . $name], 400);
+            }
+            $exercises[$name] = [
+                'type' => $exercise->type,
+                'id' => $exercise->id,
+                'name' => $exercise->name,
+                'content' => $exercise->content,
+                'state' => $request->session()->get("exercise:$exercise->id", [
+                    'answer' => '',
+                    'isCorrect' => null,
+                ]),
+            ];
+        }
 
-    	if (is_null($exercise)) {
-    		return response()->json(['error' => 'Exercise not found'], 400);
-    	}
+        return response()->json($exercises);
+    }
 
-    	return response()->json([
-            'content' => $exercise->content,
-            'type' => $exercise->type,
-            'id' => $exercise->id,
-            'state' => $request->session()->get("exercise:$exercise->id", ['answer'=>'', 'isCorrect'=>null]), 
-        ]);
+    /**
+     * Check answers for a list of questions
+     */
+    public function checkAnswers(Request $request)
+    {
+        $isCorrect = [];
+        foreach ($request->answers as $id => $answer) {
+            $exercise = Exercise::find($id);
+            $isCorrect[$exercise->id] = $exercise->checkAnswer($answer);
+            $request->session()->put("exercise:$exercise->id", [
+                'answer' => $answer,
+                'isCorrect' => $isCorrect[$exercise->id],
+            ]);
+
+        }
+        return response()->json($isCorrect);
     }
 }
