@@ -70,7 +70,7 @@
 
 <template>
     <b-card class="no-border">
-    <div class=card-header @click="showCollapse = !showCollapse" :class="showCollapse ? 'collapsed' : null">
+    <div class=card-header @click="showCollapse = !showCollapse; !showCollapse && playing ? pauseVideo() : null" :class="showCollapse ? 'collapsed' : null">
           <h5 class="mb-0"><div style="display:inline-block;width:1em">{{showCollapse ? "-":"+"}}</div> Video</h5>
     </div>
 
@@ -81,10 +81,10 @@
                 <div class="youtube" @click="() => playing=true">
                     <div class="play-button" v-show="!playing"></div>
                     <img :src="thumb" alt="YouTube thumbnail">
-                    <iframe v-if="playing"
+                    <iframe ref="youtubevideo" v-if="playing"
                         :width="width"
                         :height="height"
-                        :src="'https://www.youtube-nocookie.com/embed/' + id + '?rel=0&amp;showinfo=0&amp;autoplay=1'"
+                        :src="'https://www.youtube-nocookie.com/embed/' + id + '?rel=0&amp;showinfo=0&amp;autoplay=1&amp;enablejsapi=1'"
                         frameborder="0"
                         allowfullscreen
                     ></iframe>
@@ -126,5 +126,10 @@
                 return "video"+this._uid.toString();
             }
         },
+        methods: {
+            pauseVideo : function() {
+                this.$refs.youtubevideo.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":[]}', '*');
+            } 
+        }
     }
 </script>
