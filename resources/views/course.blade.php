@@ -24,15 +24,16 @@
 
 		@foreach ($course->modules as $id => $module)
 		<div class = "module">
-			<div class="header" data-toggle="collapse" data-target="#{{ $id }}" style="background-image:url({{ $module->image }})">
+			<div class="header" href="#" v-b-toggle.{{ $id }} style="background-image:url({{ $module->image }})">
 				<div class="container-fluid">
 					<h2 style="user-select: none;">{{ $module->name }}</h2>
 				</div>
 			</div>
-			<div id="{{ $id }}" class="collapse container-fluid" style="margin-top : 10px">
+			<b-collapse id="{{ $id }}" style="display:none;" >
+			<b-container fluid style="margin-top : 10px">
 				{!! $module->html !!}
-				
-			</div>
+			</b-container>
+			</b-collapse>
 		</div>
 		@endforeach
 	</div>
@@ -42,6 +43,9 @@
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
 	<script src="{{ elixir('js/app.js') }}"></script>
+	<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
 	<script type="text/javascript" async
 	src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>

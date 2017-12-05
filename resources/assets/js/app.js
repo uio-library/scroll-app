@@ -6,8 +6,11 @@
  */
 
 require('./bootstrap');
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 window.Vue = require('vue');
+Vue.use(require('bootstrap-vue'));
 Vue.use(require('vue-resource'));
 Vue.use(require('vue-observe-visibility'));
 

@@ -1,8 +1,8 @@
 <style>
 .wrapper {
-    max-width: 680px;
-    margin: 60px auto;
-    padding: 0 20px;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0;
 }
 
 .youtube {
@@ -57,25 +57,43 @@
     left: 0;
 }
 
+.no-border {
+    border : none;
+    
+}
+
+.no-border .card-body {
+    padding : 0;
+}
+
 </style>
 
 <template>
-    <div>
-        <div class="wrapper">
-            <div class="youtube" @click="() => playing=true">
-                <div class="play-button" v-show="!playing"></div>
-                <img :src="thumb" alt="YouTube thumbnail">
-                <iframe v-if="playing"
-                    :width="width"
-                    :height="height"
-                    :src="'https://www.youtube-nocookie.com/embed/' + id + '?rel=0&amp;showinfo=0&amp;autoplay=1'"
-                    frameborder="0"
-                    allowfullscreen
-                ></iframe>
+    <b-card class="no-border">
+    <div class=card-header @click="showCollapse = !showCollapse" :class="showCollapse ? 'collapsed' : null">
+          <h5 class="mb-0"><div style="display:inline-block;width:1em">{{showCollapse ? "-":"+"}}</div> Video</h5>
+    </div>
+
+    <b-collapse :id="uid" v-model="showCollapse">
+      <div class="card-body">
+        <div>
+            <div class="wrapper">
+                <div class="youtube" @click="() => playing=true">
+                    <div class="play-button" v-show="!playing"></div>
+                    <img :src="thumb" alt="YouTube thumbnail">
+                    <iframe v-if="playing"
+                        :width="width"
+                        :height="height"
+                        :src="'https://www.youtube-nocookie.com/embed/' + id + '?rel=0&amp;showinfo=0&amp;autoplay=1'"
+                        frameborder="0"
+                        allowfullscreen
+                    ></iframe>
+                </div>
             </div>
         </div>
     </div>
-
+    </b-collapse>
+    </b-card>
 </template>
 
 <script>
@@ -94,6 +112,7 @@
                 playing: false,
                 width : 560,
                 timer: undefined,
+                showCollapse: false,
             }
         },
         computed: {
@@ -103,6 +122,9 @@
             height: function () {
                 return this.width * this.aspectRatio;
             },
+            uid : function () {
+                return "video"+this._uid.toString();
+            }
         },
     }
 </script>
