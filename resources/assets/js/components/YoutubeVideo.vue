@@ -74,7 +74,7 @@
           <h5 class="mb-0"><div style="display:inline-block;width:1em">{{showCollapse ? "-":"+"}}</div> Video</h5>
     </div>
 
-    <b-collapse :id="uid" v-model="showCollapse">
+    <b-collapse :id="uid" v-model="showCollapse" @show="onShow" @hide="onHide">
       <div class="card-body">
         <div>
             <div class="wrapper">
@@ -97,6 +97,7 @@
 </template>
 
 <script>
+    import persistentState from './PersistentState';
     export default {
         props: {
             id: {
@@ -115,21 +116,30 @@
                 showCollapse: false,
             }
         },
+        created() {
+            this.showCollapse = persistentState.get(this.uid, false);
+        },
         computed: {
             thumb: function () {
-                return `https://img.youtube.com/vi/${this.id}/sddefault.jpg`;
+                return `https://img.player.com/vi/${this.id}/sddefault.jpg`;
             },
             height: function () {
                 return this.width * this.aspectRatio;
             },
             uid : function () {
-                return "video"+this._uid.toString();
+                return 'youtube.showCollapse:' + this.id;
             }
         },
         methods: {
             pauseVideo : function() {
                 this.$refs.youtubevideo.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":[]}', '*');
-            } 
+            },
+            onShow: function() {
+                persistentState.put(this.uid, true);
+            },
+            onHide: function() {
+                persistentState.put(this.uid, false);
+            },
         }
     }
 </script>

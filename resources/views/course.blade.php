@@ -17,29 +17,14 @@
 <body>
 	<div id="app">
 		<div class="uio-banner" style="background-image:url({{ $course->header }})">
-		</div> 
-		
-		<!-- <h2 class="header-text">
-			{{ $course->headertext }}
-		</h2> -->
+		</div>
 
 		@foreach ($course->modules as $id => $module)
-		<div class = "module">
-			<div class="header" href="#" v-b-toggle.{{ $id }} style="background-image:url({{ $module->image }})">
-				<div class="container-fluid">
-					<h2 style="user-select: none;">{{ $module->name }}</h2>
-				</div>
-			</div>
-			<b-collapse id="{{ $id }}" style="display:none;" >
-			<b-container fluid style="margin-top : 10px">
-				{!! $module->html !!}
-			</b-container>
-			</b-collapse>
-		</div>
+		<course-module class="module" id="{{ $id }}" image="{{ $module->image }}" name="{{ $module->name }}">
+			{!! $module->html !!}
+		</course-module>
 		@endforeach
 	</div>
-
-
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
