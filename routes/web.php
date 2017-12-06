@@ -11,6 +11,10 @@
 |
 */
 
+Route::domain('{name}.uio.no')->group(function () {
+    Route::get('/', 'CourseController@getCourse');
+});
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -19,7 +23,7 @@ Route::post('resetCourse', 'CourseController@resetCourse');
 
 Route::get('course', 'CourseController@listCourses');
 
-Route::get('course/{id}', 'CourseController@getCourse');
+Route::get('course/{name}', 'CourseController@getCourse');
 
 Route::get('getQuiz', 'ExerciseController@getQuiz');
 
