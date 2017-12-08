@@ -4,13 +4,16 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "type": "project",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
         "php": ">=7.0.0",
         "aacotroneo/laravel-saml2": "dev-remove_mcrypt",
         "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
-        "ramsey/uuid": "^3.7"
+        "ramsey/uuid": "^3.7",
+        "aacotroneo/laravel-saml2": "dev-remove_mcrypt"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -48,5 +51,11 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "optimize-autoloader": true
-    }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/danmichaelo/laravel-saml2"
+        }
+    ]
 }

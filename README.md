@@ -13,6 +13,13 @@
 	npm run prod
 
 
+## Setup
+
+Add some settings to the `.env` file: 
+
+* ACTIVATION_ADMIN_EMAIL: e-mail address that will receive
+  notifications about new users registering.
+
 ## Component documentation
 
 
