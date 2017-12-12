@@ -8,7 +8,6 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap.scss';
 
-
 body
 	padding-bottom: 0cm
 	overflow-y: scroll	
@@ -24,43 +23,89 @@ body
 	background-position: center center;
 	background-margin: 0 auto
 	background-repeat: no-repeat
-	height: 22vw
 	opacity: 1
+	position: relative
 
-	>
-		h2
-				position: absolute
-				color: white
-				text-shadow: 0 0 1vw #666
-				bottom: 4vw
-				font-size: 7vw
-				margin: 0 auto
-				cursor: pointer
+	h1
+		bottom: 0
+		position: absolute
+		font-weight: 200
 
 .uio-footer
-	background-size: 90%
 	background-color: black
-	background-position: center center;
-	background-margin: 10vw
-	background-padding: 20vw
-	background-repeat: no-repeat
-	height: 22vw
-	opacity: 1
+
+	> div
+		background-size: 90%
+		background-position: center center;
+		background-margin: 10vw
+		background-padding: 20vw
+		background-repeat: no-repeat
+		height: 22vw
+		opacity: 1
 
 .header-text
 	background-color: black
 	color: white
 	font-family: helvetica
 
+
+@media (max-width: 1200px)
+	#app
+		margin-left: auto
+
+@media (min-width: 1200px)
+	#app
+		margin-left: 10vw
+
+
+@media (max-width: 900px)
+	.uio-banner
+		height: 22vw
+
+		h1
+			font-size: 8vw
+
+	.module
+		> .header
+			height: 26vw
+		h2
+			font-size: 7vw
+			bottom: 4vw
+
+	.uio-footer
+		margin-top: 0
+
+
+@media (min-width: 900px)
+	.uio-banner
+		height: 198px
+
+		h1
+			font-size: 72px
+
+	.module
+		> .header
+			height: 234px
+		h2
+			font-size: 63px
+			bottom: 36px
+
+	.uio-footer
+		margin-top: 3em
+
+
 .module
 	> .header
+		border-radius: 0 0 3px 3px
 		background-size: 100%
 		background-repeat: no-repeat
 		background-position: center center
-		height: 26vw
 		transition: filter 0.3s, opacity 0.3s
 		opacity: 1
 		cursor: pointer
+
+		&.collapsed
+			border-radius: 0
 
 		&:hover
 			opacity: 0.8
@@ -77,7 +122,5 @@ body
 			position: absolute
 			color: white
 			text-shadow: 0 0 1vw #666
-			bottom: 4vw
-			font-size: 7vw
 			margin: 0 auto
 			cursor: pointer

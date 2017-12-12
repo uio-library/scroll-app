@@ -7,7 +7,7 @@
         </div>
 
         <b-collapse :id="'collapse-' + id" v-model="showCollapse" @show="onShow" @hide="onHide">
-            <b-container fluid style="margin-top : 10px">
+            <b-container fluid style="margin-top : 1em; margin-bottom: 3em;">
                 <slot></slot>
             </b-container>
         </b-collapse>
