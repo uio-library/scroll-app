@@ -91,7 +91,7 @@
                             ref="iframe"
                             :width="width"
                             :height="height"
-                            :src="'https://www.player-nocookie.com/embed/' + id + '?rel=0&amp;showinfo=0&amp;autoplay=1&amp;enablejsapi=1'"
+                            :src="'https://www.youtube-nocookie.com/embed/' + id + '?rel=0&amp;showinfo=0&amp;autoplay=1&amp;enablejsapi=1'"
                             frameborder="0"
                             allowfullscreen
                         ></iframe>
