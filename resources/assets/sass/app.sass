@@ -10,18 +10,41 @@
 
 
 body
-	padding-bottom: 6cm
-	overflow-y: scroll
+	padding-bottom: 0cm
+	overflow-y: scroll	
+	background-color: black
+	padding-color: black
 
 .container-fluid
 	max-width: 960px
 
 .uio-banner
-	background-size: 85%
-	background-color: black
-	background-position: center; 
+	background-size: 100%
+	background-color: white
+	background-position: center center;
+	background-margin: 0 auto
 	background-repeat: no-repeat
-	height: 17vw
+	height: 22vw
+	opacity: 1
+
+	>
+		h2
+				position: absolute
+				color: white
+				text-shadow: 0 0 1vw #666
+				bottom: 4vw
+				font-size: 7vw
+				margin: 0 auto
+				cursor: pointer
+
+.uio-footer
+	background-size: 90%
+	background-color: black
+	background-position: center center;
+	background-margin: 10vw
+	background-padding: 20vw
+	background-repeat: no-repeat
+	height: 22vw
 	opacity: 1
 
 .header-text
@@ -48,12 +71,13 @@ body
 			max-width: 960px
 			height: 100%
 			position: relative
+			margin: 0 auto
 
 		h2
 			position: absolute
 			color: white
 			text-shadow: 0 0 1vw #666
 			bottom: 4vw
-			font-size: 8vw
+			font-size: 7vw
 			margin: 0 auto
 			cursor: pointer
