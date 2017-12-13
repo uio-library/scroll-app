@@ -2,6 +2,7 @@
 ## Local development
 
 	composer install
+	php artisan storage:link
 	npm install
 	npm run watch &
 	php artisan serve
@@ -12,26 +13,35 @@
 	npm install
 	npm run prod
 
+## Course structure
 
-## Setup
+A course consists of
 
-Add some settings to the `.env` file: 
+* `{course-name}` : Course contents
+* `{course-name}/course.json` : Header, footer, list of modules
+* `{course-name}/modules/{module-name}.md` : Course module as Markdown
+* `{course-name}/exercises/{exercise-name}.json` : Exercise as JSON
+* `{course-name}/resources/{resource-name}.(jpg|png|...)` : Images
 
-* ACTIVATION_ADMIN_EMAIL: e-mail address that will receive
-  notifications about new users registering.
 
-## Component documentation
-
-
-## Text field question
-
-TODO
-
-## Multiple choice question
+## The `course.json` file
 
 TODO
 
-## Video
+## Exercise types
+
+
+### Text field question
+
+TODO
+
+### Multiple choice question
+
+TODO
+
+## Other components
+
+### Video
 
 To embed a YouTube video with identifier `AL0ecpu86Gk`:
 
@@ -42,3 +52,5 @@ For other aspect ratios, you can set the `aspect-ratio` argument to the height d
 For instance, for a `4:3` video, set `aspect-ratio` to `3 / 4 = 0.75`:
 
 	<youtube-video id="AL0ecpu86Gk" :aspect-ratio="0.75"></youtube-video>
+
+TODO: Markdown syntax?

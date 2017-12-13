@@ -15,22 +15,23 @@
 </head>
 
 <body>
-	<div id="app" class="container-fluid" style="padding: 0">
-		<div class="uio-banner" style="background-image:url({{ $course->header }})">
+	<div id="app" class="container-fluid" style="padding: 0" data-courseid="{{ $course->id }}">
+
+		<div class="uio-banner" style="background-image:url(resources/{{ $course->header }})">
 			<div class="container-fluid">
 				<h1>{!! $course->headertext !!}</h1>
 			</div>
 		</div>
 
 		@foreach ($course->modules as $id => $module)
-		<course-module class="module" id="{{ $id }}" image="{{ $module->image }}" name="{{ $module->name }}">
+		<course-module class="module" id="{{ $id }}" image="resources/{{ $module->image }}" name="{{ $module->name }}">
 			{!! $module->html !!}
 		</course-module>
 		@endforeach
 	</div>
-	<div class="uio-footer">
-		<div class="container-fluid" style="background-image:url({{ $course->footer }})"></div>
 
+	<div class="uio-footer">
+		<div class="container-fluid" style="background-image:url(resources/{{ $course->footer }})"></div>
 	</div>
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

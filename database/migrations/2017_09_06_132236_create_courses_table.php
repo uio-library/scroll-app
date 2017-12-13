@@ -23,6 +23,12 @@ class CreateCoursesTable extends Migration
             $table->string('repo');
             $table->timestamps();
         });
+
+        Schema::table('exercises', function (Blueprint $table) {
+            $table->integer('course_id')->unsigned();
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
+            $table->unique(['course_id', 'name']);  // course_id + name combo must be unique
+        });
     }
 
     /**
@@ -32,6 +38,12 @@ class CreateCoursesTable extends Migration
      */
     public function down()
     {
+        Schema::table('exercises', function (Blueprint $table) {
+            $table->dropForeign(['course_id']);
+            $table->dropUnique(['course_id', 'name']);
+            $table->dropColumn('course_id');
+        });
+
         Schema::dropIfExists('courses');
     }
 }

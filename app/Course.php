@@ -10,6 +10,14 @@ class Course extends Model
     	'modules' => 'object',
     ];
 
-    public $incrementing = true;
-    protected $fillable = ['name', 'modules', 'id', 'header', 'headertext', 'footer', 'repo'];
+    protected $fillable = ['name', 'modules', 'header', 'headertext', 'footer', 'repo'];
+
+    /**
+     * Get the exercises for this course.
+     */
+    public function exercises()
+    {
+        return $this->hasMany(Exercise::class);
+    }
+
 }

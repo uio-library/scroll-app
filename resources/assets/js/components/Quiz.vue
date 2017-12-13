@@ -33,6 +33,7 @@
     export default {
         data: function() {
             return {
+                course_id: -1,
                 correct : 0,
                 total: 0,
                 error : undefined,
@@ -43,14 +44,17 @@
         computed: {
         },
         props: {
-            questions: Array
+            exercises: Array,
         },
         methods: {
             getExercises() {
                 this.waiting = true;
                 this.error = undefined; // reset
                 return new Promise((resolve, reject) => {
-                    this.$http.get('/getQuiz', {params: {questions: this.questions}}).then(
+                    this.$http.get('/getQuiz', {params: {
+                        course: this.course_id,
+                        exercises: this.exercises,
+                    }}).then(
                         // Success response
                         response => {
                             this.waiting = false;
@@ -140,6 +144,11 @@
             },
         },
         mounted() {
+            this.course_id = document.getElementById('app').getAttribute('data-courseid');
+            if (!this.course_id) {
+                this.error = 'Failed to initialize: could not find course id';
+                return;
+            }
             this.getExercises();
         }
     }

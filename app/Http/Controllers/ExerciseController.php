@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Course;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Exercise;
 
@@ -9,25 +11,33 @@ class ExerciseController extends Controller
 {
     /**
      * Return a list of exercises
+     *
+     * @param Request $request
+     * @return JsonResponse
      */
     public function getQuiz(Request $request)
     {
-        if (!isset($request->questions)) {
-            return response()->json(['error' => 'Missing query string parameter: questions'], 400);
+        if (!isset($request->course)) {
+            return response()->json(['error' => 'Missing query string parameter: course'], 400);
+        }
+
+        if (!isset($request->exercises)) {
+            return response()->json(['error' => 'Missing query string parameter: exercises'], 400);
+        }
+
+        $course = Course::find($request->course);
+        if (is_null($course)) {
+            abort(400, 'Invalid course');
         }
 
         $exercises = [];
-        foreach ($request->questions as $name) {
-            $exercise = Exercise::where('name', '=', $name)->first();
-            if (is_null($exercise)) {
-                return response()->json(['error' => 'Exercise not found: ' . $name], 400);
-            }
-            $exercises[$name] = [
-                'type' => $exercise->type,
-                'id' => $exercise->id,
-                'name' => $exercise->name,
-                'content' => $exercise->content,
-                'state' => $request->session()->get("exercise:$exercise->id", [
+        foreach ($course->exercises()->whereIn('name', $request->exercises)->get() as $ex) {
+            $exercises[$ex->name] = [
+                'type' => $ex->type,
+                'id' => $ex->id,
+                'name' => $ex->name,
+                'content' => $ex->content,
+                'state' => $request->session()->get("exercise:$ex->id", [
                     'answer' => '',
                     'isCorrect' => null,
                 ]),
@@ -39,6 +49,9 @@ class ExerciseController extends Controller
 
     /**
      * Check answers for a list of questions
+     *
+     * @param Request $request
+     * @return JsonResponse
      */
     public function checkAnswers(Request $request)
     {

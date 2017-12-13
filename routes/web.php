@@ -42,7 +42,11 @@ Route::group(['middleware' => ['can:create,App\Course']], function () {
     $this->get('courses/new', 'CourseController@new')->name('courses.new');
     $this->post('courses/new', 'CourseController@saveNew')->name('courses.new.save');
 });
-Route::get('courses/{name}', 'CourseController@show')->name('courses.show');
+
+Route::group(['middleware' => ['trailing_slash']], function () {
+    Route::get('courses/{name}', 'CourseController@show')->name('courses.show');
+});
+Route::get('courses/{name}/resources/{resource}', 'CourseController@resource')->name('courses.resource');
 Route::group(['middleware' => ['can:update,course']], function () {
     $this->get('courses/{name}/settings', 'CourseController@settings')->name('courses.settings');
     $this->post('courses/{name}/settings', 'CourseController@saveSettings')->name('courses.settings.save');

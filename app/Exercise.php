@@ -12,7 +12,7 @@ class Exercise extends Model
     ];
 
     public $incrementing = false;
-    protected $fillable = ['id'];
+    protected $fillable = ['id', 'course_id', 'name', 'type', 'content', 'answer'];
 
     protected $helperMap = [
     	"TextFieldQuestionRegex" => TextFieldQuestionRegex::class,
@@ -27,5 +27,13 @@ class Exercise extends Model
     {
     	$helperClass = new $this->helperMap[$this->type]($this);
     	return $helperClass->checkAnswer($answer);
+    }
+
+    /**
+     * Get the coure that owns the exercise.
+     */
+    public function course()
+    {
+        return $this->belongsTo('App\Course');
     }
 }

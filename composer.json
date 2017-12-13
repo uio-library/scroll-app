@@ -14,9 +14,8 @@
         "laravel/framework": "5.5.*",
         "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
-        "ramsey/uuid": "^3.7",
-        "php-http/guzzle6-adapter": "^1.1",
-        "aacotroneo/laravel-saml2": "dev-remove_mcrypt"
+        "michelf/php-markdown": "^1.7",
+        "php-http/guzzle6-adapter": "^1.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

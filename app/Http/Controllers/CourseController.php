@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use GrahamCampbell\GitHub\GitHubManager;
 use Illuminate\Http\Request;
-use \App\Course;
+use App\Course;
 use Psy\Exception\ErrorException;
 
 class CourseController extends Controller
@@ -17,6 +17,16 @@ class CourseController extends Controller
 		$course = Course::where(['name' => $name])->firstOrFail();
 
 		return view('courses.show', ['course' => $course]);
+	}
+
+    public function resource($courseName, $filename)
+    {
+        $course = Course::where(['name' => $courseName])->firstOrFail();
+
+        $filename = preg_replace('/(?:\.\.|\/)/', '', $filename);
+        $path = storage_path("app/public/{$course->id}/{$filename}");
+
+        return response()->file($path);
 	}
 
     public function settings(Request $request, $name) {
