@@ -128,7 +128,7 @@
         },
         computed: {
             thumb: function () {
-                return `https://img.player.com/vi/${this.id}/sddefault.jpg`;
+                return `https://img.youtube.com/vi/${this.id}/sddefault.jpg`;
             },
             height: function () {
                 return this.width * this.aspectRatio;
