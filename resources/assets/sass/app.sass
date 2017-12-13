@@ -32,17 +32,13 @@ body
 		position: absolute
 		font-weight: 200
 
-.uio-footer
+#footer
 	background-color: black
 
 	> div
 		background-size: 90%
-		background-position: center center;
-		background-margin: 10vw
-		background-padding: 20vw
+		background-position: center center
 		background-repeat: no-repeat
-		height: 22vw
-		opacity: 1
 
 .header-text
 	background-color: black
@@ -51,11 +47,11 @@ body
 
 
 @media (max-width: 1200px)
-	#app
+	#app, #footer > div
 		margin-left: auto
 
 @media (min-width: 1200px)
-	#app
+	#app, #footer > div
 		margin-left: 10vw
 
 
@@ -73,8 +69,12 @@ body
 			font-size: 7vw
 			bottom: 4vw
 
-	.uio-footer
+	#footer
 		margin-top: 0
+
+		> div
+			height: 26vw
+			opacity: 1
 
 
 @media (min-width: 900px)
@@ -91,8 +91,12 @@ body
 			font-size: 63px
 			bottom: 36px
 
-	.uio-footer
+	#footer
 		margin-top: 3em
+
+		> div
+			height: 234px
+			opacity: 1
 
 
 .module

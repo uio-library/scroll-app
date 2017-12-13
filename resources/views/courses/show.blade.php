@@ -30,7 +30,7 @@
 		@endforeach
 	</div>
 
-	<div class="uio-footer">
+	<div id="footer">
 		<div class="container-fluid" style="background-image:url(resources/{{ $course->footer }})"></div>
 	</div>
 
