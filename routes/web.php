@@ -16,7 +16,8 @@ Route::domain('scroll-app.uio.no')->group(function () {
 });
 
 Route::domain('{name}.uio.no')->group(function () {
-    Route::get('/', 'CourseController@getCourse');
+    Route::get('/', 'CourseController@show');
+    Route::get('/resources/{resource}', 'CourseController@resource')->name('courses.resource');
 });
 
 Route::get('/', 'CourseController@index');
