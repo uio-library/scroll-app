@@ -15,6 +15,8 @@
 </head>
 
 <body>
+    <div class="corner-ribbon top-left sticky red shadow">Sniktitt</div>
+
 	<div id="app" class="container-fluid" style="padding: 0" data-courseid="{{ $course->id }}">
 
 		<div class="uio-banner" style="background-image:url(resources/{{ $course->header }})">
