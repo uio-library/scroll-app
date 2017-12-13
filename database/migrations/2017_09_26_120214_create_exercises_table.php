@@ -21,6 +21,10 @@ class CreateExercisesTable extends Migration
             $table->string('type');
             $table->json('content');
             $table->json('answer');
+
+            $table->integer('course_id')->unsigned();
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
+            $table->unique(['course_id', 'name']);  // course_id + name combo must be unique
         });
     }
 

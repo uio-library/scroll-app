@@ -9,6 +9,7 @@
     "require": {
         "php": ">=7.0.0",
         "aacotroneo/laravel-saml2": "dev-remove_mcrypt",
+        "doctrine/dbal": "^2.5",
         "graham-campbell/github": "^6.1",
         "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "5.5.*",
