@@ -20,6 +20,7 @@ class CreateCoursesTable extends Migration
             $table->string('header');
             $table->text('headertext');
             $table->string('footer');
+            $table->string('repo');
             $table->timestamps();
         });
     }

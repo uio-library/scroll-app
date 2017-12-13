@@ -7,7 +7,12 @@
         @foreach($users as $user)
             <li>
                 <a href="{{ action('UsersController@show', $user->id) }}">{{ $user->name }}</a>
-                ({{ $user->activate ? 'aktivert' : 'ikke aktivert enda' }})
+                @if ($user->hasIntegration('github'))
+                    <span class="fa fa-github"></span>
+                @endif
+                @if ($user->hasIntegration('webid'))
+                    <span class="fa fa-university"></span>
+                @endif
             </li>
         @endforeach
     </ul>

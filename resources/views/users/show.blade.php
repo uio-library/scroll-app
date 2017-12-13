@@ -32,8 +32,10 @@
                         <span class="col-4">WebID:</span>
                         <span class="col-8">
                             @if($webid)
+                                <i class="text-success fa fa-check"></i>
                                 {{ $webid->account_id }}
                             @else
+                                <i class="fa fa-times"></i>
                                 Not connected
                             @endif
                         </span>
@@ -42,8 +44,10 @@
                         <span class="col-4">GitHub:</span>
                         <span class="col-8">
                             @if($github)
-                                {{ $github->account_id }}
+                                <i class="text-success fa fa-check"></i>
+                                <a href="https://github.com/{{ $github->account_id }}">{{ $github->account_id }}</a>
                             @else
+                                <i class="fa fa-times"></i>
                                 Not connected
                             @endif
                         </span>

@@ -3,6 +3,7 @@
 @section('content')
 
     <div id="accordion" role="tablist">
+
         <div class="card">
             <div class="card-header" role="tab" id="headingOne">
                 <h5 class="mb-0">
@@ -18,9 +19,32 @@
                         <i class="fa fa-university"></i>
                         Logg inn med UiO-konto
                     </a>
+                    <p>
+                        Hvis dette er første gangen du logger inn blir det automatisk opprettet en Scroll-konto for deg.
+                    </p>
                 </div>
             </div>
         </div>
+
+        <div class="card">
+            <div class="card-header" role="tab" id="loginGithub">
+                <h5 class="mb-0">
+                    <a data-toggle="collapse" href="#collapseGithub" aria-expanded="true" aria-controls="collapseGithub">
+                        Logg inn med GitHub
+                    </a>
+                </h5>
+            </div>
+            <div id="collapseGithub" class="collapse" role="tabpanel" aria-labelledby="loginGithub" data-parent="#accordion">
+                <div class="card-body">
+                    <a href="{{ route('github.connect') }}" class="btn btn-primary">
+                        <i class="fa fa-github"></i>
+                        Logg inn med GitHub
+                    </a>
+                    <p>(Kun hvis du allerede har en Scroll-konto som er koblet til GitHub-kontoen)</p>
+                </div>
+            </div>
+        </div>
+
         <div class="card">
             <div class="card-header" role="tab" id="headingTwo">
                 <h5 class="mb-0">

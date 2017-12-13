@@ -9,10 +9,13 @@
     "require": {
         "php": ">=7.0.0",
         "aacotroneo/laravel-saml2": "dev-remove_mcrypt",
+        "graham-campbell/github": "^6.1",
         "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "5.5.*",
+        "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
         "ramsey/uuid": "^3.7",
+        "php-http/guzzle6-adapter": "^1.1",
         "aacotroneo/laravel-saml2": "dev-remove_mcrypt"
     },
     "require-dev": {

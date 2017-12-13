@@ -15,7 +15,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-dark bg-dark navbar-expand-lg" style="margin-bottom: 2em;>
+<nav class="navbar navbar-dark bg-dark navbar-expand-sm" style="margin-bottom: 2em;>
 
     <a class="navbar-brand" href="/">Scroll</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,7 +36,7 @@
         </ul>
 
         <!-- Right Side Of Navbar -->
-        <ul class="navbar-nav my-2 my-lg-0">
+        <ul class="navbar-nav my-2 my-sm-0">
             <!-- Authentication Links -->
             @if (Auth::guest())
                 <li class="nav-item">
@@ -68,9 +68,7 @@
 @if (Session::has('status'))
     <div class="container">
         <div class="alert alert-success">
-            <p>
-                {{ Session::get('status') }}
-            </p>
+            {{ Session::get('status') }}
         </div>
     </div>
 @endif
@@ -78,9 +76,7 @@
 @if (Session::has('error'))
     <div class="container">
         <div class="alert alert-danger">
-            <p>
-                {{ Session::get('error') }}
-            </p>
+            {{ Session::get('error') }}
         </div>
     </div>
 @endif

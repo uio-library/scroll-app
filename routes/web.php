@@ -38,14 +38,14 @@ Route::post('checkAnswers', 'ExerciseController@checkAnswers');
 */
 
 // Route::get('courses', 'CourseController@index')->name('courses.index');
+Route::group(['middleware' => ['can:create,App\Course']], function () {
+    $this->get('courses/new', 'CourseController@new')->name('courses.new');
+    $this->post('courses/new', 'CourseController@saveNew')->name('courses.new.save');
+});
 Route::get('courses/{name}', 'CourseController@show')->name('courses.show');
 Route::group(['middleware' => ['can:update,course']], function () {
     $this->get('courses/{name}/settings', 'CourseController@settings')->name('courses.settings');
     $this->post('courses/{name}/settings', 'CourseController@saveSettings')->name('courses.settings.save');
-});
-Route::group(['middleware' => ['can:create,course']], function () {
-    $this->get('courses/{name}/new', 'CourseController@new')->name('courses.new');
-    $this->post('courses/{name}/new', 'CourseController@saveNew')->name('courses.new.save');
 });
 
 /*
@@ -87,7 +87,13 @@ Route::group(['middleware' => ['guest']], function () {
 Route::group(['middleware' => ['auth']], function () {
     $this->post('logout', 'Auth\LoginController@samlLogout')->name('logout');
     $this->get('account', 'Auth\LoginController@account')->name('account');
+
+    $this->get('github/repos', 'GithubController@repos')->name('github.repos');
+    Route::get('github/disconnect', 'GithubController@disconnect')->name('github.disconnect');
 });
 
 Route::get('saml2/error', 'Auth\LoginController@error');
 
+// GitHub
+Route::get('github/connect', 'GithubController@connect')->name('github.connect');
+Route::get('github/callback', 'GithubController@handleCallback');

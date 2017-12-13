@@ -5,7 +5,7 @@
 
     @can('create', 'App\Course')
         <p>
-            <a href="{{ route('courses.new', null) }}" class="btn btn-success">Nytt kurs</a>
+            <a href="{{ route('courses.new') }}" class="btn btn-success">Nytt kurs</a>
         </p>
     @endcan
 

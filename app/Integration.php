@@ -21,7 +21,7 @@ class Integration extends Model
      * @var array
      */
     protected $casts = [
-        'service_data' => 'array',
+        'account_data' => 'array',
     ];
 
     /**
