@@ -37,11 +37,14 @@
                 correct : 0,
                 total: 0,
                 error : undefined,
-                quizData: {},
+                quizData: new Map(),
                 waiting: false,
             };
         },
         computed: {
+            quizDataArray: function() {
+                return Array.from(this.quizData.values());
+            },
         },
         props: {
             exercises: Array,
@@ -59,23 +62,26 @@
                         response => {
                             this.waiting = false;
 
-                            let quizData = {};
-                            for (const [key, value] of Object.entries(response.data)) {
-                                quizData[value.id] = {
-                                    tag: camelCaseToSpinalCase(value.type),
-                                    name: value.name,
-                                    id: value.id,
-                                    type: value.type,
-                                    question: value.content,
+                            let quizData = new Map();
+                            for (const name of this.exercises) {
+                                let ex = response.data[name];
+                                if (ex === undefined) {
+                                    this.error = 'Exercise not found: ' + name;
+                                    return;
+                                }
+                                quizData.set(ex.id, {
+                                    tag: camelCaseToSpinalCase(ex.type),
+                                    name: ex.name,
+                                    id: ex.id,
+                                    type: ex.type,
+                                    question: ex.content,
                                     answer: {
-                                        value: value.state.answer,
-                                        isCorrect: value.state.isCorrect,
+                                        value: ex.state.answer,
+                                        isCorrect: ex.state.isCorrect,
                                     }
-
-                                };
+                                });
                             }
                             this.quizData = quizData;
-                            console.log(quizData);
 
                             // Allows for chaining
                             resolve(response);
@@ -86,15 +92,16 @@
                 });
             },
             updateAnswer(data) {
-                console.log('update answer');
-                this.quizData[data.id].answer = {
+                let ex = this.quizData.get(data.id);
+                ex.answer = {
                     value: data.value,
                     isCorrect: undefined,
                 };
+                this.quizData.set(data.id, ex);
             },
             checkAnswers() {
                 let answers = {};
-                for (const [key, q] of Object.entries(this.quizData)) {
+                for (const [key, q] of this.quizData) {
                     answers[key] = q.answer.value;
                 }
 
@@ -106,25 +113,22 @@
                         response =>  {
                             this.waiting = false;
 
-                            let quizData = {};
+                            let quizData = new Map();
                             let correct = 0;
                             let total = 0;
-                            for (const [key, value] of Object.entries(this.quizData)) {
-                                quizData[key] = value;
+                            for (const [key, value] of this.quizData) {
                                 total++;
                                 if (response.data.hasOwnProperty(key)) {
-                                    console.log(key, response.data[key]);
-                                    quizData[key].answer.isCorrect = response.data[key];
+                                    value.answer.isCorrect = response.data[key];
                                     if (response.data[key]) {
                                         correct++;
                                     }
                                 }
+                                quizData.set(key, value);
                             }
                             this.correct = correct;
                             this.total = total;
                             this.quizData = quizData;
-                            console.log(quizData);
-                            console.log('set quizdata');
 
                             // Allows for chaining
                             resolve(response);
@@ -163,7 +167,7 @@ div(class="quiz" :class="{'text-white bg-danger': error, 'answer-pending' : corr
         div(class="card-body" v-if="error") Error: {{error}}
 
         div(class="card-body" v-if="!error")
-            div(v-for="(q, id) in quizData" class="question" :class="{'is-incorrect': q.answer.isCorrect === false, 'is-correct': q.answer.isCorrect === true}")
+            div(v-for="q in quizDataArray" class="question" :class="{'is-incorrect': q.answer.isCorrect === false, 'is-correct': q.answer.isCorrect === true}")
                 span(v-if="q.answer.isCorrect === true" class="badge badge-success") Riktig
                 span(v-if="q.answer.isCorrect === false" class="badge badge-danger") Galt
                 component(:is="q.tag" :id="q.id" :name="q.name" :question="q.question" :answer="q.answer" @update:answer="updateAnswer")
