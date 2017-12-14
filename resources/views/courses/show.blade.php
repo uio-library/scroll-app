@@ -18,7 +18,7 @@
 </head>
 
 <body>
-    <div class="corner-ribbon top-left sticky red shadow">Sniktitt</div>
+	<div class="corner-ribbon top-left sticky red shadow">Sniktitt</div>
 
 	<div id="app" class="container-fluid" style="padding: 0" data-courseid="{{ $course->id }}">
 
@@ -29,7 +29,7 @@
 		</div>
 
 		@foreach ($course->modules as $id => $module)
-		<course-module class="module" id="{{ $id }}" image="resources/{{ $module->image }}" name="{{ $module->name }}">
+		<course-module class="module" course-id="{{ $course->id }}" module-id="{{ $id }}" image="resources/{{ $module->image }}" name="{{ $module->name }}">
 			{!! $module->html !!}
 		</course-module>
 		@endforeach

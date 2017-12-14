@@ -1,13 +1,13 @@
 <template>
     <div>
-        <div class="header" href="#" v-b-toggle="'collapse-' + id" :style="'background-image:url(' + image +')'">
+        <div class="header" href="#" v-b-toggle="'collapse-' + moduleId" :style="'background-image:url(' + image +')'">
             <div class="container-fluid">
                 <h2 style="user-select: none;">{{ name }}</h2>
             </div>
         </div>
 
-        <b-collapse :id="'collapse-' + id" v-model="showCollapse" @show="onShow" @hide="onHide">
-            <b-container fluid style="margin-top : 1em; margin-bottom: 3em;">
+        <b-collapse :id="'collapse-' + moduleId" v-model="showCollapse" @show="onShow" @hide="onHide">
+            <b-container fluid style="padding-top : 1em; padding-bottom: 2em;">
                 <slot></slot>
             </b-container>
         </b-collapse>
@@ -20,7 +20,8 @@
         props: {
             name: String,
             image: String,
-            id: String,
+            courseId: String,
+            moduleId: String,
         },
         data : function () {
             return {
@@ -29,7 +30,7 @@
         },
         computed: {
             uid: function() {
-                return 'course.showCollapse:' + this.id;
+                return 'course:' + this.courseId + '.showCollapse:' + this.moduleId;
             }
         },
         created() {
