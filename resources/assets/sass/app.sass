@@ -1,4 +1,4 @@
-
+// vi:noexpandtab
 // Fonts
 // @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
 
@@ -11,16 +11,16 @@
 body
 	padding-bottom: 0cm
 	overflow-y: scroll	
-	background-color: black
 	padding-color: black
 
+#app
+    margin-top: 2em
+
 .container-fluid
-	margin-top: 2em
 	max-width: 960px
 
 .uio-banner
 	background-size: 100%
-	background-color: white
 	background-position: center center;
 	background-margin: 0 auto
 	background-repeat: no-repeat
@@ -28,9 +28,13 @@ body
 	position: relative
 
 	h1
-		bottom: 0
+		bottom: 6px
 		position: absolute
 		font-weight: 200
+
+		small
+			font-size: 70%
+			font-weight: 200
 
 #footer
 	background-color: black
@@ -101,16 +105,16 @@ body
 
 .module
 	> .header
-		border-radius: 0 0 3px 3px
+		border-radius: 3px 3px 0 0
 		background-size: 100%
 		background-repeat: no-repeat
 		background-position: center center
-		transition: filter 0.3s, opacity 0.3s
+		transition: filter 0.3s, opacity 0.3s, border-radius 0.8s
 		opacity: 1
 		cursor: pointer
 
 		&.collapsed
-			border-radius: 0
+			border-radius: 3px 3px 0 0
 
 		&:hover
 			opacity: 0.8
@@ -143,11 +147,10 @@ body
 
 /* The ribbons */
 
+$ribbonsize: 28vw
+$ribbonsize_f: 252px
 
-$ribbonsize: 20vw;
-$ribbonsize_f: 240px;
-
-@media (max-width: 1200px)
+@media (max-width: 900px)
   .corner-ribbon
     width: $ribbonsize
     background: #e43;
@@ -163,7 +166,7 @@ $ribbonsize_f: 240px;
     transform: rotate(-45deg);
     -webkit-transform: rotate(-45deg);
 
-@media (min-width: 1200px)
+@media (min-width: 900px)
   .corner-ribbon
     width: $ribbonsize_f
     background: #e43;
