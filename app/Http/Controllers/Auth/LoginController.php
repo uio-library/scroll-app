@@ -60,9 +60,9 @@ class LoginController extends Controller
     public function samlLogout(Request $request, Saml2Auth $saml)
     {
         $user = $request->user();
-
-        if (!is_null($user->saml_session)) {
-            $saml->logout('/', $user->saml_id, $user->saml_session);
+        $webid = $user->getIntegration('webid');
+        if (!is_null($webid) && isset($webid->account_data['saml_id']) && isset($webid->account_data['saml_session'])) {
+            $saml->logout('/', $webid->account_data['saml_id'], $webid->account_data['saml_session']);
 
             return response('OK', 200)->header('Content-Type', 'text/plain');
         }

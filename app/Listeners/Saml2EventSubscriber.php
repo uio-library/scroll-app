@@ -28,15 +28,15 @@ class Saml2EventSubscriber
         $uid = $data->getUserId();
         $attrs = $data->getAttributes();
 
-        if (!$attrs['uid'][0]) {
+        $feideId = array_get($attrs, 'eduPersonPrincipalName.0');
+
+        if (!$feideId) {
             \Log::notice('No uid returned in SAML2 login event.');
             \Session::flash('error', 'An unknown error occured during login.');
             return;
         }
 
-        $feideId = $attrs['eduPersonPrincipalName'][0];
-
-        $user = Auth::user();
+        $user = \Auth::user();
 
         if (!is_null($user)) {
             // User was already logged in, check if we should add an integration
@@ -51,7 +51,10 @@ class Saml2EventSubscriber
                     'user_id' => $user->id,
                     'service_name' =>  $this->serviceName,
                     'account_id' => $feideId,
-                    'account_data' => [],
+                    'account_data' => [
+                        'saml_id' => $uid,
+                        'saml_session' => $data->getSessionIndex(),
+                    ],
                 ]);
 
                 \Log::notice('Added WebID integration to existing user.', ['id' => $feideId]);
@@ -72,9 +75,18 @@ class Saml2EventSubscriber
                 $integration = $user->integrations()->create([
                     'service_name' =>  $this->serviceName,
                     'account_id' => $feideId,
-                    'account_data' => [],
+                    'account_data' => [
+                        'saml_id' => $uid,
+                        'saml_session' => $data->getSessionIndex(),
+                    ],
                 ]);
                 \Log::notice('Registered new WebID user.', ['id' => $feideId]);
+            } else {
+                $integration->account_data = [
+                    'saml_id' => $uid,
+                    'saml_session' => $data->getSessionIndex(),
+                ];
+                $integration->save();
             }
 
             \Auth::login($integration->user);
