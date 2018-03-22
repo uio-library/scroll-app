@@ -40,7 +40,7 @@
         <div class="alternatives">
             <div class="form-check alternative" v-for="alternative in question.alternatives" @change="setAnswer">
                 <label class="form-check-label" :class="{'selected': answer.value == alternative}">
-                    <input class="form-check-input" type="radio" v-model="answer.value" :value="alternative" name="blankRadio" aria-label="..."> <span v-html="alternative"></span>
+                    <input class="form-check-input" type="radio" v-model="answer.value" :value="alternative" :name="question.question" aria-label="..."> <span v-html="alternative"></span>
                 </label>
             </div>
         </div>
