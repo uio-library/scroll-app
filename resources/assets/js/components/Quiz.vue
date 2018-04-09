@@ -20,6 +20,7 @@
 <script>
     import MultipleChoiceQuestion from './MultipleChoiceQuestion.vue';
     import TextFieldQuestionRegex from './TextFieldQuestionRegex.vue';
+    import SelfAssessedExerciseWithSolution from './SelfAssessedExerciseWithSolution.vue';
 
     function camelCaseToSpinalCase(txt) {
         return txt.split('').map(function(char) {
