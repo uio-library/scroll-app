@@ -36,7 +36,7 @@
 
 <template>
     <div>
-        <label v-html="question.question" class="title"></label>
+    <b-card class="mb-1" :title="question.question">
         <div class="alternatives">
             <div class="form-check alternative" v-for="alternative in question.alternatives" @change="setAnswer">
                 <label class="form-check-label" :class="{'selected': answer.value == alternative}">
@@ -44,6 +44,7 @@
                 </label>
             </div>
         </div>
+        </b-card>
     </div>
 </template>
 

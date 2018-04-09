@@ -3,7 +3,7 @@
 
 <template>
     <div>
-        <label v-html="question.question" class="title"></label>
+        <b-card class="mb-1" :title="question.question">
         <input type="text"
             class="form-control"
             :class="{'is-invalid': answer.isCorrect === false, 'is-valid': answer.isCorrect === true}"
@@ -11,6 +11,7 @@
             @input="setAnswer"
             placeholder="Svar..."
             aria-label="Svar">
+        </b-card>
     </div>
 </template>
 
