@@ -40,8 +40,8 @@
         <b-card-body>
         {{ question.text }}
         </b-card-body>
-        <b-btn block :v-b-toggle="collapseID" variant="info">Klikk her for å vurdere løsningen din</b-btn>
-        <b-collapse :id="collapseID"  role="tabpanel">
+        <b-btn block @click="showCollapse=!showCollapse">Klikk her for å vurdere løsningen din</b-btn>
+        <b-collapse v-model="showCollapse">
         <b-card-body>
           <p class="card-text">
             {{ question.answertext }}
@@ -67,7 +67,7 @@
         extends: ExerciseBase,
         data()  {
             return {
-                collapseID : 0
+                showCollapse : true
             }
         }
     }
