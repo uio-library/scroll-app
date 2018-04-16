@@ -67,7 +67,7 @@
         extends: ExerciseBase,
         data()  {
             return {
-                showCollapse : true
+                showCollapse : false
             }
         }
     }
