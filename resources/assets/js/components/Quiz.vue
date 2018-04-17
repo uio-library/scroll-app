@@ -1,10 +1,11 @@
 <style lang="sass">
+@import '~bootstrap/scss/bootstrap.scss';
 .quiz
     .question
         .title
             font-weight: bold
-        padding: .5em 1em;
-        margin: .5em 0;
+        padding: 0 0;
+        margin: 0 0;
 
         // border: 1px solid white;
         // border-radius: 4px;
@@ -15,6 +16,11 @@
 
         .badge
             float: right;
+    .card 
+        margin-top: 1em;
+        
+    .card-body
+        padding: .5em .5em;
 </style>
 
 <script>
@@ -160,21 +166,18 @@
 </script>
 
 <template lang="pug">
-div(class="quiz" :class="{'text-white bg-danger': error, 'answer-pending' : correct === undefined, 'answer-correct' : correct === true, 'answer-wrong' : correct === false, 'spinner' : waiting }")
+div(class="quiz card" :class="{'text-white bg-danger': error, 'answer-pending' : correct === undefined, 'answer-correct' : correct === true, 'answer-wrong' : correct === false, 'spinner' : waiting }")
     form(v-on:submit.prevent="checkAnswers")
         div(class="header")
             div(class="title")
 
         div(class="card-body" v-if="error") Error: {{error}}
-
         div(class="card-body" v-if="!error")
             div(v-for="q in quizDataArray" class="question" :class="{'is-incorrect': q.answer.isCorrect === false, 'is-correct': q.answer.isCorrect === true}")
-                span(v-if="q.answer.isCorrect === true" class="badge badge-success") Riktig
-                span(v-if="q.answer.isCorrect === false" class="badge badge-danger") Galt
                 component(:is="q.tag" :id="q.id" :name="q.name" :question="q.question" :answer="q.answer" @update:answer="updateAnswer")
 
         div(class="card-footer" v-if="!error")
-            button(class="btn checkAnswerBtn" type="submit")
+            b-button(class="btn checkAnswerBtn btn-primary" type="submit")
                 transition(name="bounce" mode="out-in")
                     div(v-if="waiting" key="waiting")
                         <i class="fa fa-cog fa-spin fa-fw"></i>
