@@ -5,7 +5,7 @@
 <script>
     export default {
         props: {
-            id: String,
+            id: Number,
             name: String,
             question: Object,
             answer: Object,
