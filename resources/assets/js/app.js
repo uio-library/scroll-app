@@ -30,7 +30,7 @@ Vue.component('course-module', require('./components/CourseModule.vue'));
 Vue.component('self-assessed-exercise-with-solution', require('./components/SelfAssessedExerciseWithSolution.vue'));
 
 Vue.component('quiz', require('./components/Quiz.vue'));
-
+Vue.component('quiz-with-navigation', require('./components/QuizWithNavigation.vue'));
 
 const app = new Vue({
     el: '#app'
