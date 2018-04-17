@@ -36,9 +36,14 @@
     <div>
     <b-card class="mb-1" :title="question.question">
         <div class="alternatives">
-            <div class="form-check alternative" v-for="alternative in question.alternatives" @change="setAnswer">
+            <div class="form-check alternative" v-for="(alternative, key) in question.alternatives" @change="setAnswer">
                 <label class="form-check-label" :class="{'selected': answer.value == alternative}">
-                    <input class="form-check-input" type="radio" v-model="answer.value" :value="alternative" :name="question.question" aria-label="..."> <span v-html="alternative"></span>
+                    <input type="radio"
+                        class="form-check-input"
+                        :key="'q' + id + '_' + key"
+                        :checked="answer.value == alternative"
+                        :value="alternative"
+                        :name="question.question"> <span v-html="alternative"></span>
                 </label>
             </div>
         </div>
