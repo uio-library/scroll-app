@@ -1,17 +1,29 @@
 
-## Local development
+## Setup
 
-	composer install
-	php artisan storage:link
-	npm install
+- Copy `.env.example` to `.env` and add `DB_*` settings.
+- `composer install` to fetch PHP dependencies
+- `npm install` to fetch JS dependencies
+- `php artisan migrate` to populate database tables
+- `php artisan storage:link` to link `public/storage` to `storage/app/public`
+- `php artisan key:generate` to add a key to your `.env` file
+
+### Local development
+
 	npm run watch &
 	php artisan serve
 
-## Production build
+### Production build
 
-	composer install
-	npm install
 	npm run prod
+
+## Importing a course
+
+Add your course folder under `storage/app/courses`, then run
+
+	php artisan courses:load
+
+This will import/update all courses.
 
 ## Course structure
 
