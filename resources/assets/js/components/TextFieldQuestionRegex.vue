@@ -1,4 +1,10 @@
 <style lang="sass">
+@import '~bootstrap/scss/bootstrap.scss';
+.quiz
+    .question.is-correct .form-control
+        border-color: map-get($theme-colors, "success")
+    .question.is-incorrect .form-control
+        border-color: map-get($theme-colors, "danger") 
 </style>
 
 <template>

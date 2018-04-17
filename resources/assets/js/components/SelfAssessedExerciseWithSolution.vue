@@ -41,7 +41,7 @@
         {{ question.text }}
         </b-card-body>
         <b-btn block @click="showCollapse=!showCollapse">Klikk her for å vurdere løsningen din</b-btn>
-        <b-collapse v-model="showCollapse">
+        <b-collapse v-model="showCollapse" id="collapse">
         <b-card-body>
           <p class="card-text">
             {{ question.answertext }}

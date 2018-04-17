@@ -1,36 +1,34 @@
-<style lang="sass">
+<style scoped lang="sass">
 @import '~bootstrap/scss/bootstrap.scss';
+.alternatives
+    margin-top: 0.5rem
+    margin-bottom: 0.5rem
 
-.quiz
-    .alternatives
-        margin-top: 0.5rem
-        margin-bottom: 0.5rem
+.alternative
+    margin: 0
+    label
+        display: block
+        border: 1px solid transparent
+        padding: 0.5rem 0.5rem 0.5rem 30px
+        height: 100%
+        border-radius: 3px
 
-    .alternative
-        margin: 0
-        label
-            display: block
-            border: 1px solid transparent
-            padding: 0.5rem 0.5rem 0.5rem 30px
-            height: 100%
-            border-radius: 3px
+        &:hover
+            border-color: #ececec
 
-            &:hover
-                border-color: #ececec
+        // &.selected
+        //    border-color: map-get($theme-colors, "primary")
 
-            &.selected
-                border-color: map-get($theme-colors, "primary")
+    // By default, scale any image contained in the alternative to fill its width
+    img
+        display: block
+        width: 100%
 
-        // By default, scale any image contained in the alternative to fill its width
-        img
-            display: block
-            width: 100%
+.question.is-correct .alternative label.selected
+    border-color: map-get($theme-colors, "success")
 
-    .question.is-correct .alternative label.selected
-        border-color: map-get($theme-colors, "success")
-
-    .question.is-incorrect .alternative label.selected
-        border-color: map-get($theme-colors, "danger")
+.question.is-incorrect .alternative label.selected
+    border-color: map-get($theme-colors, "danger")
 
 </style>
 
