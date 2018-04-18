@@ -36,28 +36,25 @@
 
 <template>
     <div>
-    <b-card class="mb-1" :title="question.question">
-        <b-card-body>
-        {{ question.text }}
-        </b-card-body>
+        <h4>{{ question.question }}</h4>
+        <p contenteditable="true">
+            {{ question.text }}
+        </p>
+
         <b-btn block @click="showCollapse=!showCollapse">Klikk her for å vurdere løsningen din</b-btn>
         <b-collapse v-model="showCollapse" id="collapse">
-        <b-card-body>
-          <p class="card-text">
-            {{ question.answertext }}
-          </p>
-        </b-card-body>
-        
-        <b-card-body>Synes du dette gikk bra?</b-card-body>
-        <div class="alternatives">
-            <div class="form-check alternative" v-for="alternative in question.alternatives" @change="setAnswer">
-                <label class="form-check-label" :class="{'selected': answer.value == alternative}">
-                    <input class="form-check-input" type="radio" v-model="answer.value" :value="alternative" :name="question.question" aria-label="..."> <span v-html="alternative"></span>
-                </label>
+            <p class="card-text">
+                {{ question.answertext }}
+            </p>
+            <b-card-body>Synes du dette gikk bra?</b-card-body>
+            <div class="alternatives">
+                <div class="form-check alternative" v-for="alternative in question.alternatives" @change="setAnswer">
+                    <label class="form-check-label" :class="{'selected': answer.value == alternative}">
+                        <input class="form-check-input" type="radio" v-model="answer.value" :value="alternative" :name="question.question" aria-label="..."> <span v-html="alternative"></span>
+                    </label>
+                </div>
             </div>
-        </div>
         </b-collapse>
-      </b-card>
     </div>
 </template>
 

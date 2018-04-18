@@ -138,13 +138,17 @@
             },
             nextQuestion() {
                 this.currentQuestionNum = this.currentQuestionNum + 1;
+                if (this.currentQuestionNum > this.quizDataArray.length) {
+                    this.restartQuiz();
+                } else if (this.currentQuestionNum == this.quizDataArray.length) {
+                    this.checkAnswers();
+                }
             },
             previousQuestion() {
                 this.currentQuestionNum = this.currentQuestionNum - 1;
             },
             restartQuiz() {
                 this.currentQuestionNum = 0;
-                
             }
         },
         mounted() {
@@ -160,37 +164,37 @@
 
 <template lang="pug">
 div(class="quiz card" :class="{'text-white bg-danger': error, 'answer-pending' : correct === undefined, 'answer-correct' : correct === true, 'answer-wrong' : correct === false, 'spinner' : waiting }")
-    form(v-on:submit.prevent="checkAnswers")
-        div(class="card-header" v-if="!error")
-            <h4 class="card-title">Oppgaver </h4>
-            span(v-if="currentQuestionNum < quizDataArray.length")
-                    button(class="btn btn-primary" :disabled="currentQuestionNum==0" v-on:click="previousQuestion")
-                        <span>Forrige</span>
-                
+    form(v-on:submit.prevent="nextQuestion")
 
-            span(v-if="currentQuestionNum == quizDataArray.length")
-                    button(class="btn btn-primary" :disabled="currentQuestionNum==0" v-on:click="restartQuiz")
-                        <span>Se igjennom</span>
-
-            span(v-if="currentQuestionNum < quizDataArray.length")
-                    button(class="btn btn-primary" :disabled="currentQuestionNum==quizDataArray.length" v-on:click="nextQuestion")
-                        span(v-if="currentQuestionNum < quizDataArray.length-1") Neste
-                        span(v-if="currentQuestionNum == quizDataArray.length-1") Ferdig
-                    
-            span(v-if="currentQuestionNum == quizDataArray.length" v-on:mounted="checkAnswers")
-                transition(name="bounce" mode="out-in")
-                    div(v-if="waiting" key="waiting")
-                        <i class="fa fa-cog fa-spin fa-fw"></i>
-                    div(v-else-if="correct === true" key="true")
-                        <i class="fa fa-check-circle" aria-hidden="true"></i> <span>Riktig</span>
-                    div(v-else-if="correct === false" key="false")
-                        <i class="fa fa-times-circle" aria-hidden="true"></i> <span>Galt</span>
-                    div(v-else key="rest")
+        div(class="card-header") Oppgaver
 
         div(class="card-body")
-            span(v-if="total && currentQuestionNum == quizDataArray.length" style="padding-left:1em;") {{correct}} av {{total}} riktige
-            span(v-if="currentQuestion" class="question" :class="{'is-incorrect': currentQuestion.answer.isCorrect === false, 'is-correct': currentQuestion.answer.isCorrect === true}")
+
+            div(v-if="quizDataArray.length != 0 && currentQuestionNum == quizDataArray.length")
+                span(v-if="waiting")
+                    <i class="fa fa-cog fa-spin fa-fw"></i> Et øyeblikk...
+                span(v-else-if="correct === total" class="text-success")
+                    <i class="fa fa-check-circle" aria-hidden="true"></i> {{correct}} av {{total}} riktige
+                span(v-else class="text-danger")
+                    <i class="fa fa-times-circle" aria-hidden="true"></i> {{correct}} av {{total}} riktige
+
+            div(v-if="currentQuestion" class="question" :class="{'is-incorrect': currentQuestion.answer.isCorrect === false, 'is-correct': currentQuestion.answer.isCorrect === true}")
                 component(:is="currentQuestion.tag" :id="currentQuestion.id" :name="currentQuestion.name" :question="currentQuestion.question" :answer="currentQuestion.answer" @update:answer="updateAnswer")    
-        
-        
+
+        div(class="card-footer")
+
+            span(v-if="currentQuestionNum < quizDataArray.length")
+                button(type="button" class="btn btn-primary mr-3" :disabled="currentQuestionNum==0" v-on:click="previousQuestion")
+                        <span>Forrige</span>
+
+            span(v-if="currentQuestionNum < quizDataArray.length")
+                span(class="mr-3") {{ currentQuestionNum + 1 }} av {{ quizDataArray.length }}
+
+            button(type="submit" class="btn btn-primary mr-3")
+                span(v-if="currentQuestionNum < quizDataArray.length-1") Neste
+                span(v-if="currentQuestionNum == quizDataArray.length-1") Sjekk svar
+                span(v-if="currentQuestionNum == quizDataArray.length") Se igjennom
+
+            span(v-if="error") {{ error }}
+
 </template>

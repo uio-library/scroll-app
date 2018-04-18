@@ -168,8 +168,9 @@
 <template lang="pug">
 div(class="quiz card" :class="{'text-white bg-danger': error, 'answer-pending' : correct === undefined, 'answer-correct' : correct === true, 'answer-wrong' : correct === false, 'spinner' : waiting }")
     form(v-on:submit.prevent="checkAnswers")
-        div(class="header")
-            div(class="title")
+        div(class="card-header")
+            span(v-if="quizDataArray.length == 1") Oppgave
+            span(v-else) Oppgaver
 
         div(class="card-body" v-if="error") Error: {{error}}
         div(class="card-body" v-if="!error")
@@ -177,15 +178,15 @@ div(class="quiz card" :class="{'text-white bg-danger': error, 'answer-pending' :
                 component(:is="q.tag" :id="q.id" :name="q.name" :question="q.question" :answer="q.answer" @update:answer="updateAnswer")
 
         div(class="card-footer" v-if="!error")
-            b-button(class="btn checkAnswerBtn btn-primary" type="submit")
-                transition(name="bounce" mode="out-in")
-                    div(v-if="waiting" key="waiting")
-                        <i class="fa fa-cog fa-spin fa-fw"></i>
-                    div(v-else-if="correct === true" key="true")
-                        <i class="fa fa-check-circle" aria-hidden="true"></i> <span>Riktig</span>
-                    div(v-else-if="correct === false" key="false")
-                        <i class="fa fa-times-circle" aria-hidden="true"></i> <span>Galt</span>
-                    div(v-else key="rest")
-                        <span> Sjekk svar</span>
-            span(v-if="total" style="padding-left:1em;") {{correct}} av {{total}} riktige
+            b-button(variant="primary" type="submit" class="mr-3" :disabled="waiting") Sjekk svar
+
+            span(v-if="waiting")
+                <i class="fa fa-cog fa-spin fa-fw"></i>
+
+            span(v-if="total")
+                span(v-if="correct === total" class="text-success")
+                    <i class="fa fa-check-circle" aria-hidden="true"></i> {{correct}} av {{total}} riktige
+                span(v-else class="text-danger")
+                    <i class="fa fa-times-circle" aria-hidden="true"></i> {{correct}} av {{total}} riktige
+
 </template>

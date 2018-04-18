@@ -34,7 +34,7 @@
 
 <template>
     <div>
-    <b-card class="mb-1" :title="question.question">
+        <h4>{{ question.question }}</h4>
         <div class="alternatives">
             <div class="form-check alternative" v-for="(alternative, key) in question.alternatives" @change="setAnswer">
                 <label class="form-check-label" :class="{'selected': answer.value == alternative}">
@@ -47,7 +47,6 @@
                 </label>
             </div>
         </div>
-        </b-card>
     </div>
 </template>
 
