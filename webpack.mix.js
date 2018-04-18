@@ -1,4 +1,5 @@
 let mix = require('laravel-mix');
+require('laravel-mix-auto-extract');
 
 /*
  |--------------------------------------------------------------------------
@@ -13,3 +14,16 @@ let mix = require('laravel-mix');
 
 mix.js('resources/assets/js/app.js', 'public/js')
    .sass('resources/assets/sass/app.sass', 'public/css');
+
+mix.autoExtract();
+
+   //.extract(['vue', 'bootstrap', 'bootstrap-vue', 'vue-resource', 'vue-observe-visibility'])
+   // .extract(['vue', 'bootstrap', 'bootstrap-vue', 'vue-resource', 'vue-observe-visibility'])
+   ;
+
+if (mix.inProduction()) {
+    mix.version();
+} else {
+   // mix.sourceMaps()  // While useful, this adds megabytes of overhead!
+}
+

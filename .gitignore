@@ -16,3 +16,5 @@ public/storage
 public/mix-manifest.json
 package-lock.json
 composer.lock
+yarn.lock
+

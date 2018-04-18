@@ -1,5 +1,6 @@
 <style lang="sass">
-@import '~bootstrap/scss/bootstrap.scss';
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
 
 .quiz
     .alternatives

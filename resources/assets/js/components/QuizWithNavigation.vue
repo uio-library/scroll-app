@@ -1,5 +1,4 @@
 <style lang="sass">
-@import '~bootstrap/scss/bootstrap.scss';
 </style>
 
 <script>
@@ -44,41 +43,36 @@
                 this.waiting = true;
                 this.error = undefined; // reset
                 return new Promise((resolve, reject) => {
-                    this.$http.get('/getQuiz', {params: {
+                    axios.get('/getQuiz', {params: {
                         course: this.course_id,
                         exercises: this.exercises,
-                    }}).then(
-                        // Success response
-                        response => {
-                            this.waiting = false;
+                    }}).then(response => {
+                        this.waiting = false;
 
-                            let quizData = new Map();
-                            for (const name of this.exercises) {
-                                let ex = response.data[name];
-                                if (ex === undefined) {
-                                    this.error = 'Exercise not found: ' + name;
-                                    return;
-                                }
-                                quizData.set(ex.id, {
-                                    tag: camelCaseToSpinalCase(ex.type),
-                                    name: ex.name,
-                                    id: ex.id,
-                                    type: ex.type,
-                                    question: ex.content,
-                                    answer: {
-                                        value: ex.state.answer,
-                                        isCorrect: ex.state.isCorrect,
-                                    }
-                                });
+                        let quizData = new Map();
+                        for (const name of this.exercises) {
+                            let ex = response.data[name];
+                            if (ex === undefined) {
+                                this.error = 'Exercise not found: ' + name;
+                                return;
                             }
-                            this.quizData = quizData;
+                            quizData.set(ex.id, {
+                                tag: camelCaseToSpinalCase(ex.type),
+                                name: ex.name,
+                                id: ex.id,
+                                type: ex.type,
+                                question: ex.content,
+                                answer: {
+                                    value: ex.state.answer,
+                                    isCorrect: ex.state.isCorrect,
+                                }
+                            });
+                        }
+                        this.quizData = quizData;
 
-                            // Allows for chaining
-                            resolve(response);
-                        },
-                        // Error response
-                        this.handleErrorResponse
-                    );
+                        // Allows for chaining
+                        resolve(response);
+                    }).catch(this.handleErrorResponse.bind(this));
                 });
             },
             updateAnswer(data) {
@@ -98,42 +92,39 @@
                 this.error = undefined; // reset
                 this.waiting = true;
                 return new Promise((resolve, reject) => {
-                    this.$http.post('/checkAnswers', {answers: answers}).then(
-                        // Success response
-                        response =>  {
-                            this.waiting = false;
+                    axios.post('/checkAnswers', {answers: answers}).then(response =>  {
+                        this.waiting = false;
 
-                            let quizData = new Map();
-                            let correct = 0;
-                            let total = 0;
-                            for (const [key, value] of this.quizData) {
-                                total++;
-                                if (response.data.hasOwnProperty(key)) {
-                                    value.answer.isCorrect = response.data[key];
-                                    if (response.data[key]) {
-                                        correct++;
-                                    }
+                        let quizData = new Map();
+                        let correct = 0;
+                        let total = 0;
+                        for (const [key, value] of this.quizData) {
+                            total++;
+                            if (response.data.hasOwnProperty(key)) {
+                                value.answer.isCorrect = response.data[key];
+                                if (response.data[key]) {
+                                    correct++;
                                 }
-                                quizData.set(key, value);
                             }
-                            this.correct = correct;
-                            this.total = total;
-                            this.quizData = quizData;
+                            quizData.set(key, value);
+                        }
+                        this.correct = correct;
+                        this.total = total;
+                        this.quizData = quizData;
 
-                            // Allows for chaining
-                            resolve(response);
-                        },
-                        // Error response
-                        this.handleErrorResponse
-                    );
+                        // Allows for chaining
+                        resolve(response);
+                    }).catch(this.handleErrorResponse.bind(this));
                 });
             },
             handleErrorResponse(response) {
                 this.waiting = false;
-                if (response.body.error) {
-                    this.error = response.body.error;
+                if (response.message) {
+                    this.error = response.message;
+                } else if (response.error) {
+                    this.error = response.error;
                 } else {
-                    this.error = 'Server or network error 😭';
+                    this.error = response;
                 }
             },
             nextQuestion() {

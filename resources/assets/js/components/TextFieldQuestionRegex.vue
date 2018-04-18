@@ -1,5 +1,7 @@
 <style lang="sass">
-@import '~bootstrap/scss/bootstrap.scss';
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+
 .quiz
     .question.is-correct .form-control
         border-color: map-get($theme-colors, "success")

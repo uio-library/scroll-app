@@ -1,5 +1,7 @@
-<style scoped lang="sass">
-@import '~bootstrap/scss/bootstrap.scss';
+<style lang="sass">
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+
 .alternatives
     margin-top: 0.5rem
     margin-bottom: 0.5rem
