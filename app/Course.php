@@ -6,8 +6,24 @@ use Illuminate\Database\Eloquent\Model;
 
 class Course extends Model
 {
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'last_event_at',
+    ];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
     protected $casts = [
-    	'modules' => 'object',
+        'modules' => 'object',
+        'github_hook' => 'object',
+        'last_event' => 'object',
     ];
 
     protected $fillable = ['name', 'modules', 'header', 'headertext', 'footer', 'repo'];

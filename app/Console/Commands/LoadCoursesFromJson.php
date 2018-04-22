@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Course;
 use App\CourseLoader;
 use App\Exceptions\ImportError;
 use Illuminate\Console\Command;
@@ -13,7 +14,7 @@ class LoadCoursesFromJson extends Command
      *
      * @var string
      */
-    protected $signature = 'courses:load';
+    protected $signature = 'course:load {course?}';
 
     /**
      * Glob pattern for course json
@@ -27,7 +28,7 @@ class LoadCoursesFromJson extends Command
      *
      * @var string
      */
-    protected $description = 'Load courses from json files into database.';
+    protected $description = 'Load a course into the database. If no argument is specified, all courses will be loaded.';
 
     /**
      * The course loader service.
@@ -47,6 +48,24 @@ class LoadCoursesFromJson extends Command
         $this->courseLoader = $courseLoader;
     }
 
+    protected function loadSingleCourse(Course $course)
+    {
+        if (is_null($course)) {
+            $this->error('Course not found!');
+            return;
+        }
+        $jsonFile = storage_path(str_replace('*', $course->name, $this->coursePath));
+        if (!is_file($jsonFile)) {
+            $this->error('Not found: ' . $jsonFile);
+            return;
+        }
+
+        $dir = dirname($jsonFile);
+        $this->comment("Importing course: " . basename($dir));
+        $this->courseLoader->importFromFolder($dir);
+        $this->info('Course imported!');
+    }
+
     /**
      * Execute the console command.
      *
@@ -54,14 +73,19 @@ class LoadCoursesFromJson extends Command
      */
     public function handle()
     {
+        if ($this->argument('course')) {
+            $course = Course::where(['name' => $this->argument('course')])->first();
+            return $this->loadSingleCourse($course);
+        }
+
         $importedCourses = 0;
         $failedCourses = 0;
         foreach (glob(storage_path($this->coursePath)) as $jsonFileName)
         {
             try {
-                $dirName = dirname($jsonFileName);
-                $this->comment("Importing course: " . basename($dirName));
-                $this->courseLoader->importFromFolder($dirName);
+                $dir = dirname($jsonFileName);
+                $this->comment("Importing course: " . basename($dir));
+                $this->courseLoader->importFromFolder($dir);
                 $importedCourses++;
             } catch (ImportError $e) {
                 $this->error("Error: " . $e->getMessage());

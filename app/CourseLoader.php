@@ -4,6 +4,8 @@ namespace App;
 
 use App\Exceptions\ImportError;
 use Michelf\MarkdownExtra;
+use Symfony\Component\Process\Process;
+use Symfony\Component\Process\Exception\ProcessFailedException;
 
 class CourseLoader
 {
@@ -12,6 +14,17 @@ class CourseLoader
     {
         $this->markdown = $markdown;
     }
+
+    /**
+     * Run a command and return the output.
+     */
+    protected function runCommand($cmd, $dir)
+    {
+        $process = new Process($cmd, $dir);
+        $process->mustRun(); // Throws exception if command fails.
+        return $process->getOutput();
+    }
+
     /**
      * @param string $dirname
      * @throws ImportError
@@ -22,6 +35,9 @@ class CourseLoader
         $modulesPath = "$dirname/modules/*.md";
         $resourcesPath = "$dirname/resources/*";
         $exercisesPath = "$dirname/exercises/*.json";
+
+        $commit = trim($this->runCommand('git rev-parse HEAD', $dirname));
+        echo "git HEAD is at $commit\n";
 
         $courseName = basename($dirname);
         $courseData = json_decode(file_get_contents($jsonPath));
@@ -46,6 +62,7 @@ class CourseLoader
         }
 
         $course = $this->courseFromJson($courseName, $courseData);
+        $course->commit = $commit;
         $this->addModuleTexts($course, $moduleBlobs);
         $course->save();
 
@@ -57,7 +74,7 @@ class CourseLoader
             }
             $relPath = basename($srcPath);
             $dstPath = storage_path("app/public/{$course->id}/$relPath");
-            print("$dstPath \n");
+            print("Linked resource: $dstPath \n");
 
             if (!is_dir(dirname($dstPath))) {
                 mkdir(dirname($dstPath), 0775, true);
@@ -65,6 +82,9 @@ class CourseLoader
             copy($srcPath, $dstPath);
         }
 
+        \Log::info("Imported course '{$course->name}'@{$commit}");
+
+        return $course;
     }
 
     /**

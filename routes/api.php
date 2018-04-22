@@ -16,3 +16,5 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+$this->post('courses/{course}/github-hook-callback', 'CourseController@githubHookCallback')->name('courses.ghcallback');
