@@ -15,7 +15,7 @@
 
                 <a href="{{ route('courses.show', $course->name) }}">{{ $course->name }}</a>
 
-                @can('edit', $course)
+                @can('update', $course)
                     <a href="{{ route('courses.settings', $course->name) }}" class="btn">
                         <i class="fa fa-sliders" aria-hidden="true"></i>
                         Settings

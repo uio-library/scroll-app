@@ -13,29 +13,24 @@ class CourseController extends Controller
         return view('courses.index', ['courses' => Course::get()]);
     }
 
-    public function show(Request $request, $name) {
-		$course = Course::where(['name' => $name])->firstOrFail();
-
+    public function show(Course $course) {
 		return view('courses.show', ['course' => $course]);
 	}
 
-    public function resource($courseName, $filename)
+    public function resource(Course $course, $filename)
     {
-        $course = Course::where(['name' => $courseName])->firstOrFail();
-
         $filename = preg_replace('/(?:\.\.|\/)/', '', $filename);
         $path = storage_path("app/public/{$course->id}/{$filename}");
 
         return response()->file($path);
 	}
 
-    public function settings(Request $request, $name) {
-        $course = Course::where(['name' => $name])->firstOrFail();
+    public function settings(Course $course) {
 
         return view('courses.settings', ['course' => $course]);
     }
 
-    public function saveSettings(Request $request) {
+    public function saveSettings(Course $course, Request $request) {
 
     }
 
