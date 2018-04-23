@@ -1,10 +1,8 @@
 <template>
     <div>
-        <div class="header" href="#" v-b-toggle="'collapse-' + moduleId" :style="'background-image:url(' + image +')'">
-            <div class="container-fluid">
+        <button class="header" v-b-toggle="'collapse-' + moduleId" :style="'background-image:url(' + image +');'">
                 <h2 style="user-select: none;">{{ name }}</h2>
-            </div>
-        </div>
+        </button>
 
         <b-collapse :id="'collapse-' + moduleId" v-model="showCollapse" @show="onShow" @hide="onHide">
             <b-container fluid style="padding-top : 1em; padding-bottom: 2em;">

@@ -80,8 +80,8 @@ body
 			font-size: 8vw
 
 	.module
-		> .header
-			height: 43vw
+		.header
+			height: 20vw
 		h2
 			font-size: 7vw
 			bottom: 4vw
@@ -103,7 +103,7 @@ body
 
 	.module
 		> .header
-			height: 387px
+			height: 220px
 		h2
 			font-size: 63px
 			bottom: 36px
@@ -118,13 +118,18 @@ body
 
 .module
 	> .header
+		display: block
+		width: 100%
+		border: none
 		border-radius: 3px 3px 0 0
 		background-size: 100%
+		background-color: transparent
 		background-repeat: no-repeat
 		background-position: center center
 		transition: filter 0.3s, opacity 0.3s, border-radius 0.8s
 		opacity: 1
 		cursor: pointer
+		position: relative
 
 		&.collapsed
 			border-radius: 3px 3px 0 0
@@ -134,18 +139,14 @@ body
 			filter: grayscale(50%)
 			transition: filter 0.3s, opacity 0.3s
 
-		> div
-			max-width: 960px
-			height: 100%
-			position: relative
-			margin: 0 auto
-
 		h2
+			max-width: 960px
 			position: absolute
 			color: white
-			text-shadow: 0 0 0.3vw #666
+			text-shadow: 0 0 0.3vw #222
 			margin: 0 auto
-            cursor: pointer
+			padding: 0 .5em
+			cursor: pointer
 
 
 /*******************************************************************
