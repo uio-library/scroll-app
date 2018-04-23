@@ -11,7 +11,7 @@
 
 <template>
     <div>
-        <h4>{{ question.question }}</h4>
+        <h4 v-html="question.question"></h4>
         <input type="text"
             class="form-control"
             :class="{'is-invalid': answer.isCorrect === false, 'is-valid': answer.isCorrect === true}"

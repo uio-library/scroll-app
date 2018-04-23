@@ -37,7 +37,7 @@
 
 <template>
     <div>
-        <h4>{{ question.question }}</h4>
+        <h4 v-html="question.question"></h4>
         <p contenteditable="true">
             {{ question.text }}
         </p>
