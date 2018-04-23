@@ -23,7 +23,6 @@ class CreateCoursesTable extends Migration
             $table->string('repo');
             $table->timestamps();
         });
-
     }
 
     /**

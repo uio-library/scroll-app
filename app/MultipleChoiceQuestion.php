@@ -4,20 +4,17 @@ namespace App;
 
 class MultipleChoiceQuestion
 {
-    function __construct($exercise)
-	{
-		$this->exercise = $exercise;
-	}
-
-    function checkAnswer($answer) 
+    public function __construct($exercise)
     {
-    	if ($this->exercise->answer->text == $answer)
-    	{
-    		return true;
-    	}
+        $this->exercise = $exercise;
+    }
 
-    	else {
-    		return false;
-    	}
+    public function checkAnswer($answer)
+    {
+        if ($this->exercise->answer->text == $answer) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

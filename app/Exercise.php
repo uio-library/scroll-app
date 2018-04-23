@@ -7,27 +7,27 @@ use Illuminate\Database\Eloquent\Model;
 class Exercise extends Model
 {
     protected $casts = [
-    	'content' => 'object',
-    	'answer' => 'object',
+        'content' => 'object',
+        'answer' => 'object',
     ];
 
     public $incrementing = false;
     protected $fillable = ['id', 'course_id', 'name', 'type', 'content', 'answer'];
 
     protected $helperMap = [
-    	"TextFieldQuestionRegex" => TextFieldQuestionRegex::class,
+        "TextFieldQuestionRegex" => TextFieldQuestionRegex::class,
         "MultipleChoiceQuestion" => MultipleChoiceQuestion::class,
         "SelfAssessedExerciseWithSolution" => SelfAssessedExerciseWithSolution::class,
-    	"DummyExercise" => DummyExercise::class,
+        "DummyExercise" => DummyExercise::class,
     ];
 
     protected $helperClass = null;
 
 
-    function checkAnswer($answer)
+    public function checkAnswer($answer)
     {
-    	$helperClass = new $this->helperMap[$this->type]($this);
-    	return $helperClass->checkAnswer($answer);
+        $helperClass = new $this->helperMap[$this->type]($this);
+        return $helperClass->checkAnswer($answer);
     }
 
     /**

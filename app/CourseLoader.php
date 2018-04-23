@@ -9,7 +9,6 @@ use Symfony\Component\Process\Exception\ProcessFailedException;
 
 class CourseLoader
 {
-
     public function __construct(MarkdownExtra $markdown)
     {
         $this->markdown = $markdown;
@@ -170,7 +169,6 @@ class CourseLoader
     {
         $modules = [];
         foreach ($course->modules as $module) {
-
             if (!isset($blobs[$module->id])) {
                 throw new ImportError("No Markdown data found for the module '{$module->id}'");
             }

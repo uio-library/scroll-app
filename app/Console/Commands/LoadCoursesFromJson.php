@@ -80,8 +80,7 @@ class LoadCoursesFromJson extends Command
 
         $importedCourses = 0;
         $failedCourses = 0;
-        foreach (glob(storage_path($this->coursePath)) as $jsonFileName)
-        {
+        foreach (glob(storage_path($this->coursePath)) as $jsonFileName) {
             try {
                 $dir = dirname($jsonFileName);
                 $this->comment("Importing course: " . basename($dir));

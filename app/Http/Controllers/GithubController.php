@@ -11,7 +11,6 @@ use Laravel\Socialite\Contracts\Factory as Socialite;
 
 class GithubController extends Controller
 {
-
     protected $serviceName = 'github';
 
     /**
@@ -66,7 +65,6 @@ class GithubController extends Controller
                 ->first();
 
             if (is_null($integration)) {
-
                 $user->integrations()->create([
                     'user_id' => $user->id,
                     'service_name' =>  $this->serviceName,
@@ -77,7 +75,6 @@ class GithubController extends Controller
                 \Log::notice('Added Github integration to existing user.', ['id' => $accountId]);
                 \Session::flash('status', 'GitHub account connected');
             }
-
         } else {
             // User was not logged in, check if we should create a new user or just log in
 

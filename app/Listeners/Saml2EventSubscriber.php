@@ -46,7 +46,6 @@ class Saml2EventSubscriber
                 ->first();
 
             if (is_null($integration)) {
-
                 $user->integrations()->create([
                     'user_id' => $user->id,
                     'service_name' =>  $this->serviceName,
@@ -59,7 +58,6 @@ class Saml2EventSubscriber
 
                 \Log::notice('Added WebID integration to existing user.', ['id' => $feideId]);
             }
-
         } else {
             // User was not logged in, check if we should create a new user or just log in
 

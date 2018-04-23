@@ -14,16 +14,18 @@ class CourseController extends Controller
     /**
      * Display a list of courses.
      */
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
         return view('courses.index', ['courses' => Course::get()]);
     }
 
     /**
      * Display the contents of a single course.
      */
-    public function show(Course $course) {
-		return view('courses.show', ['course' => $course]);
-	}
+    public function show(Course $course)
+    {
+        return view('courses.show', ['course' => $course]);
+    }
 
     /**
      * Get an image or other resource file part of a course.
@@ -34,13 +36,13 @@ class CourseController extends Controller
         $path = storage_path("app/public/{$course->id}/{$filename}");
 
         return response()->file($path);
-	}
+    }
 
     /**
      * Show course settings. Not yet used for anything.
      */
-    public function settings(Course $course) {
-
+    public function settings(Course $course)
+    {
         return view('courses.settings', ['course' => $course]);
     }
 
@@ -134,7 +136,7 @@ class CourseController extends Controller
 
         if ($eventType == 'ping') {
             return response('pong');
-        } else if ($eventType != 'push') {
+        } elseif ($eventType != 'push') {
             return response('Unknown event type.', 202);
         }
 
@@ -156,7 +158,8 @@ class CourseController extends Controller
         return response('Thanks', 200);
     }
 
-    public function new(Request $request) {
+    public function new(Request $request)
+    {
         return view('courses.new', []);
     }
 
@@ -168,7 +171,7 @@ class CourseController extends Controller
             if ($obj['type'] == 'blob') {
                 $obj['full_path'] = $path . $obj['path'];
                 $tree[] = $obj;
-            } else if ($obj['type'] == 'tree') {
+            } elseif ($obj['type'] == 'tree') {
                 $tree = $this->getTree($github, $user, $name, $obj['sha'], $tree, $path . $obj['path'] . '/');
             }
         }
@@ -224,7 +227,7 @@ class CourseController extends Controller
 
         $github->repos()->hooks();
 
-       // $hooks = $github->repos()->hooks()->all($user, $name);
+        // $hooks = $github->repos()->hooks()->all($user, $name);
         // TODO: Add hook
 
 //        $refs = $github->git()->references()->all($user, $name);

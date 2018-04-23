@@ -63,7 +63,6 @@ class ExerciseController extends Controller
                 'answer' => $answer,
                 'isCorrect' => $isCorrect[$exercise->id],
             ]);
-
         }
         return response()->json($isCorrect);
     }

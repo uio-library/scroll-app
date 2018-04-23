@@ -48,7 +48,7 @@ Route::group(['middleware' => ['trailing_slash']], function () {
     Route::get('courses/{course}', 'CourseController@show')->name('courses.show');
 });
 Route::get('courses/{course}/resources/{resource}', 'CourseController@resource')->name('courses.resource');
-Route::group(['middleware' => ['can:update,course']], function() {
+Route::group(['middleware' => ['can:update,course']], function () {
     // $this->get('courses/{course}/settings', 'CourseController@settings')->name('courses.settings');
     // $this->post('courses/{course}/settings', 'CourseController@saveSettings')->name('courses.settings.save');
     $this->get('courses/{course}/create-github-hook', 'CourseController@createGithubHook')->name('courses.ghhook');

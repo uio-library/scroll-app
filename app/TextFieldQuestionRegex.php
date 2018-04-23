@@ -2,22 +2,19 @@
 
 namespace App;
 
-class TextFieldQuestionRegex 
+class TextFieldQuestionRegex
 {
-	function __construct($exercise)
-	{
-		$this->exercise = $exercise;
-	}
-
-    function checkAnswer($answer) 
+    public function __construct($exercise)
     {
-    	if (preg_match($this->exercise->answer->regex, $answer))
-    	{
-    		return true;
-    	}
+        $this->exercise = $exercise;
+    }
 
-    	else {
-    		return false;
-    	}
+    public function checkAnswer($answer)
+    {
+        if (preg_match($this->exercise->answer->regex, $answer)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
