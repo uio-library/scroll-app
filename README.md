@@ -10,8 +10,11 @@
 
 ### Local development
 
-	npm run watch &
-	php artisan serve
+	npm run dev
+
+This will start a local server on http://localhost:3000/ .
+It will also start a `php artisan course:watch` process that watches for changes to courses.
+When changes are detected, it runs `php artisan course:load` before notifying browsersync to reload the browser.
 
 ### Production build
 

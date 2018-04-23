@@ -17,6 +17,8 @@ mix.js('resources/assets/js/app.js', 'public/js')
 
 mix.autoExtract();
 
+mix.browserSync('localhost:8000');
+
    //.extract(['vue', 'bootstrap', 'bootstrap-vue', 'vue-resource', 'vue-observe-visibility'])
    // .extract(['vue', 'bootstrap', 'bootstrap-vue', 'vue-resource', 'vue-observe-visibility'])
    ;
