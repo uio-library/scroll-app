@@ -16,7 +16,7 @@
             content: "-"
             width: .7em
 
-    &.collapse .card-header button::before
+    &.video-collapsed .card-header button::before
         content: "+"
 
     .wrapper
@@ -73,7 +73,7 @@
 </style>
 
 <template>
-    <b-card class="youtube" :class="{collapse: !showCollapse}">
+    <b-card class="youtube" :class="{'video-collapsed': !showCollapse}">
 
         <b-card-header>
             <b-button block variant="outline-secondary" @click="showCollapse = !showCollapse">
