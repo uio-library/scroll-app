@@ -9,51 +9,7 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group.
 |
-*/
-
-Route::domain('scroll-app.uio.no')->group(function () {
-    Route::get('/', 'CourseController@index');
-});
-
-Route::domain('{name}.uio.no')->group(function () {
-    Route::get('/', 'CourseController@show');
-    Route::get('/resources/{resource}', 'CourseController@resource')->name('courses.resource');
-});
-
-Route::get('/', 'CourseController@index');
-
-/*
-|--------------------------------------------------------------------------
-| Course consumption
-|--------------------------------------------------------------------------
-*/
-
-Route::post('resetCourse', 'CourseController@resetCourse')->name('courses.reset');
-Route::get('getQuiz', 'ExerciseController@getQuiz');
-Route::post('checkAnswers', 'ExerciseController@checkAnswers');
-
-/*
-|--------------------------------------------------------------------------
-| Course management
-|--------------------------------------------------------------------------
-*/
-
-// Route::get('courses', 'CourseController@index')->name('courses.index');
-Route::group(['middleware' => ['can:create,App\Course']], function () {
-    $this->get('courses/new', 'CourseController@new')->name('courses.new');
-    $this->post('courses/new', 'CourseController@saveNew')->name('courses.new.save');
-});
-
-Route::group(['middleware' => ['trailing_slash']], function () {
-    Route::get('courses/{course}', 'CourseController@show')->name('courses.show');
-});
-Route::get('courses/{course}/resources/{resource}', 'CourseController@resource')->name('courses.resource');
-Route::group(['middleware' => ['can:update,course']], function () {
-    // $this->get('courses/{course}/settings', 'CourseController@settings')->name('courses.settings');
-    // $this->post('courses/{course}/settings', 'CourseController@saveSettings')->name('courses.settings.save');
-    $this->get('courses/{course}/create-github-hook', 'CourseController@createGithubHook')->name('courses.ghhook');
-    $this->get('courses/{course}/test-github-hook', 'CourseController@testGithubHook')->name('courses.ghtest');
-});
+ */
 
 /*
 |--------------------------------------------------------------------------
@@ -65,7 +21,6 @@ Route::group(['middleware' => ['can:show,App\User']], function () {
     $this->get('users', 'UsersController@index')->name('users.index');
     $this->get('users/{user}', 'UsersController@show')->name('users.show');
 });
-
 
 /*
 |--------------------------------------------------------------------------
@@ -104,3 +59,49 @@ Route::get('saml2/error', 'Auth\LoginController@error');
 // GitHub
 Route::get('github/connect', 'GithubController@connect')->name('github.connect');
 Route::get('github/callback', 'GithubController@handleCallback');
+
+/*
+|--------------------------------------------------------------------------
+| Course consumption
+|--------------------------------------------------------------------------
+*/
+
+Route::domain('scroll-app.uio.no')->group(function () {
+    Route::get('/', 'CourseController@index');
+});
+
+Route::domain('{course}.uio.no')->group(function () {
+    Route::get('/', 'CourseController@show');
+    Route::get('/resources/{resource}', 'CourseController@resource')->name('courses.resource');
+});
+
+Route::get('/', 'CourseController@index');
+
+Route::post('resetCourse', 'CourseController@resetCourse')->name('courses.reset');
+Route::get('getQuiz', 'ExerciseController@getQuiz');
+Route::post('checkAnswers', 'ExerciseController@checkAnswers');
+
+Route::group(['middleware' => ['trailing_slash']], function () {
+    Route::get('{course}', 'CourseController@show')->name('courses.show');
+});
+Route::get('{course}/resources/{resource}', 'CourseController@resource')->name('courses.resource');
+
+/*
+|--------------------------------------------------------------------------
+| Course management
+|--------------------------------------------------------------------------
+*/
+
+// Route::get('courses', 'CourseController@index')->name('courses.index');
+Route::group(['middleware' => ['can:create,App\Course']], function () {
+    $this->get('courses/new', 'CourseController@new')->name('courses.new');
+    $this->post('courses/new', 'CourseController@saveNew')->name('courses.new.save');
+});
+
+Route::group(['middleware' => ['can:update,course']], function () {
+    // $this->get('courses/{course}/settings', 'CourseController@settings')->name('courses.settings');
+    // $this->post('courses/{course}/settings', 'CourseController@saveSettings')->name('courses.settings.save');
+    $this->get('{course}/create-github-hook', 'CourseController@createGithubHook')->name('courses.ghhook');
+    $this->get('{course}/test-github-hook', 'CourseController@testGithubHook')->name('courses.ghtest');
+});
+
