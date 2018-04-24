@@ -18,7 +18,7 @@
 </head>
 
 <body>
-	<div class="corner-ribbon top-left sticky red shadow">Sniktitt</div>
+	<!--<div class="corner-ribbon top-left sticky red shadow">Sniktitt</div>-->
 
 	<div id="app" class="container-fluid" style="padding: 0" data-courseid="{{ $course->id }}">
 
