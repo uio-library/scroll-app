@@ -114,7 +114,8 @@ class CourseController extends Controller
 
         $github->repos()->hooks()->test($org, $name, $hook->id);
 
-        return back()->with('status', 'Test sent. Reload the page in a few seconds to check if the event was received.');
+        return back()->with('status', 'Test sent. Reload the page in a few seconds ' .
+            'to check if the event was received.');
     }
 
     /**
@@ -128,7 +129,8 @@ class CourseController extends Controller
         $sig2 = 'sha1=' . hash_hmac('sha1', $request->getContent(), $course->github_secret);
 
         if ($sig !== $sig2) {
-            \Log::warning("Ignoring GitHub '{$eventType}' event for course {$course->name} due to invalid signature. This could be due to duplicate webhooks or just an malicious request.");
+            \Log::warning("Ignoring GitHub '{$eventType}' event for course {$course->name} due to ' .
+                'invalid signature. This could be due to duplicate webhooks or just an malicious request.");
             return response('Signature not recognized. Please delete and re-register webhook.', 202);
         }
 

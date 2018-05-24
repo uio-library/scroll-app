@@ -28,7 +28,8 @@ class LoadCoursesFromJson extends Command
      *
      * @var string
      */
-    protected $description = 'Load a course into the database. If no argument is specified, all courses will be loaded.';
+    protected $description = 'Load a course into the database. ' .
+        'If no argument is specified, all courses will be loaded.';
 
     /**
      * The course loader service.

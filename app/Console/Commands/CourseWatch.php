@@ -50,7 +50,6 @@ class CourseWatch extends Command
         $watcher = new ResourceWatcher();
 
         if (empty($this->argument('course'))) {
-
             $dir = storage_path($this->coursePath);
 
             $watcher->track('courses', $dir);
@@ -68,7 +67,6 @@ class CourseWatch extends Command
                 // Touch some file so that browser-sync updates the browser
                 touch(resource_path('views/layout.blade.php'));
             });
-
         } else {
             $course = Course::where(['name' => $this->argument('course')])->first();
             if (is_null($course)) {

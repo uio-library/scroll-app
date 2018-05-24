@@ -18,7 +18,8 @@ class UserObserver
 
     public function created(User $user)
     {
-        \Session::flash('status', 'En konto har blitt opprettet, men du må få tilgang til å redigere kurs før du kan gjøre noe smart.');
+        \Session::flash('status', 'En konto har blitt opprettet, ' .
+            'men du må få tilgang til å redigere kurs før du kan gjøre noe smart.');
 
         $this->mailer->send(new AdminNoticeNewUser($user));
         $this->mailer->send(new Welcome($user));

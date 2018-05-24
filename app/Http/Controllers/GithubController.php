@@ -83,7 +83,8 @@ class GithubController extends Controller
                 ->first();
 
             if (is_null($integration)) {
-                \Session::flash('error', 'Beklager, du kan kun logge inn med GitHub hvis GitHub-kontoen din er koblet til en Scroll-konto.');
+                \Session::flash('error', 'Beklager, du kan kun logge inn med GitHub hvis ' .
+                    'GitHub-kontoen din er koblet til en Scroll-konto.');
                 return response()->redirectToRoute('login');
             }
 
