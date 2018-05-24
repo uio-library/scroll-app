@@ -36,7 +36,6 @@ class CourseLoader
         $exercisesPath = "$dirname/exercises/*.json";
 
         $commit = trim($this->runCommand('git rev-parse HEAD', $dirname));
-        echo "git HEAD is at $commit\n";
 
         $courseName = basename($dirname);
         $courseData = json_decode(file_get_contents($jsonPath));
@@ -73,7 +72,6 @@ class CourseLoader
             }
             $relPath = basename($srcPath);
             $dstPath = storage_path("app/public/{$course->id}/$relPath");
-            print("Linked resource: $dstPath \n");
 
             if (!is_dir(dirname($dstPath))) {
                 mkdir(dirname($dstPath), 0775, true);
