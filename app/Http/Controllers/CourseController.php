@@ -32,8 +32,14 @@ class CourseController extends Controller
      */
     public function resource(Course $course, $filename)
     {
+        // Remove .. and /
         $filename = preg_replace('/(?:\.\.|\/)/', '', $filename);
+
         $path = storage_path("app/public/{$course->id}/{$filename}");
+
+        if (!is_file($path)) {
+            return response('Not found', 404);
+        }
 
         return response()->file($path);
     }
