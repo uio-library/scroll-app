@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Observers\AnalyticsEventObserver;
 use App\Observers\UserObserver;
+use App\AnalyticsEvent;
 use App\User;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -34,5 +36,6 @@ class EventServiceProvider extends ServiceProvider
         parent::boot();
 
         User::observe($this->app->make(UserObserver::class));
+        AnalyticsEvent::observe($this->app->make(AnalyticsEventObserver::class));
     }
 }

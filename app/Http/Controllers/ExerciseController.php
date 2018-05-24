@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\AnalyticsEvent;
 use App\Course;
+use App\Exercise;
+use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use App\Exercise;
 
 class ExerciseController extends Controller
 {
@@ -62,6 +64,14 @@ class ExerciseController extends Controller
             $request->session()->put("exercise:$exercise->id", [
                 'answer' => $answer,
                 'isCorrect' => $isCorrect[$exercise->id],
+            ]);
+            AnalyticsEvent::create([
+                'event_type' => 'answer',
+                'data' => [
+                    'name' => $exercise->name,
+                    'answer' => $answer,
+                    'isCorrect' => $isCorrect[$exercise->id],
+                ],
             ]);
         }
         return response()->json($isCorrect);

@@ -24,6 +24,7 @@ class Course extends Model
         'modules' => 'object',
         'github_hook' => 'object',
         'last_event' => 'object',
+        'options' => 'object',
     ];
 
     protected $fillable = ['name', 'modules', 'header', 'headertext', 'footer', 'repo'];
@@ -44,5 +45,13 @@ class Course extends Model
     public function exercises()
     {
         return $this->hasMany(Exercise::class);
+    }
+
+    /**
+     * Get a course option value.
+     */
+    public function option($key, $default = null)
+    {
+        return isset($this->options->$key) ? $this->options->$key : $default ;
     }
 }

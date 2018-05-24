@@ -90,15 +90,21 @@ class CourseLoader
      * @param $obj
      * @param $data
      * @param $props
+     * @param $optionalProps
      * @throws ImportError
      */
-    protected function setData($obj, $data, $props)
+    protected function setData($obj, $data, $props, $optionalProps = [])
     {
         foreach ($props as $prop) {
             if (!isset($data->{$prop})) {
                 throw new ImportError("No '$prop' field found in {$obj->name}");
             }
             $obj->{$prop} = $data->{$prop};
+        }
+        foreach ($optionalProps as $prop) {
+            if (isset($data->{$prop})) {
+                $obj->{$prop} = $data->{$prop};
+            }
         }
     }
 
@@ -112,10 +118,20 @@ class CourseLoader
      */
     public function courseFromJson($courseName, $data)
     {
-        $props = ['header', 'headertext', 'footer', 'modules', 'repo'];
+        $props = [
+            'header',
+            'headertext',
+            'footer',
+            'modules',
+            'repo',
+        ];
+
+        $optionalProps = [
+            'options',
+        ];
 
         $course = Course::firstOrNew(['name' => $courseName]);
-        $this->setData($course, $data, $props);
+        $this->setData($course, $data, $props, $optionalProps);
 
         return $course;
     }
@@ -131,7 +147,11 @@ class CourseLoader
      */
     public function exerciseFromJson(Course $course, $exerciseName, $data)
     {
-        $props = ['type', 'content', 'answer'];
+        $props = [
+            'type',
+            'content',
+            'answer',
+        ];
 
         $exercise = Exercise::firstOrNew([
             'course_id' => $course->id,
