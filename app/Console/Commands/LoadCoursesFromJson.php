@@ -73,14 +73,14 @@ class LoadCoursesFromJson extends Command
      */
     public function handle()
     {
+        $globPattern = storage_path($this->coursePath);
         if ($this->argument('course')) {
-            $course = Course::where(['name' => $this->argument('course')])->first();
-            return $this->loadSingleCourse($course);
+            $globPattern = str_replace('*', $this->argument('course'), $globPattern);
         }
 
         $importedCourses = 0;
         $failedCourses = 0;
-        foreach (glob(storage_path($this->coursePath)) as $jsonFileName) {
+        foreach (glob($globPattern) as $jsonFileName) {
             try {
                 $dir = dirname($jsonFileName);
                 $this->comment("Importing course: " . basename($dir));
