@@ -1,6 +1,7 @@
 <template>
     <div>
-        <button class="header" v-b-toggle="'collapse-' + moduleId" :style="'background-image:url(' + image +');'">
+        <button ref="h2button" class="header" v-b-toggle="'collapse-' + moduleId"
+            :style="{ height: headerHeight + 'px', backgroundImage: 'url(' + image +')' }">
                 <h2 style="user-select: none;">{{ name }}</h2>
         </button>
 
@@ -20,10 +21,12 @@
             image: String,
             courseId: String,
             moduleId: String,
+            imageAspectRatio: Number,
         },
         data : function () {
             return {
                 showCollapse: false,
+                headerHeight: 220,
             }
         },
         computed: {
@@ -33,6 +36,12 @@
         },
         created() {
             this.showCollapse = persistentState.get(this.uid, false);
+        },
+        mounted() {
+            this.headerHeight = this.$refs.h2button.offsetWidth / this.imageAspectRatio
+            window.addEventListener('resize', () => {
+                this.headerHeight = this.$refs.h2button.offsetWidth / this.imageAspectRatio
+            });
         },
         methods: {
             onShow: function() {

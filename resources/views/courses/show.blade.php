@@ -29,7 +29,7 @@
 		</div>
 
 		@foreach ($course->modules as $id => $module)
-		<course-module class="module" course-id="{{ $course->id }}" module-id="{{ $id }}" image="resources/{{ $module->image }}" name="{{ $module->name }}">
+		<course-module class="module" course-id="{{ $course->id }}" module-id="{{ $id }}" image="resources/{{ $module->image }}" :image-aspect-ratio="{{ array_get($module, 'imageaspectratio', 4) }}" name="{{ $module->name }}">
 			{!! $module->html !!}
 		</course-module>
 		@endforeach
