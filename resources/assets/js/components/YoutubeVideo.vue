@@ -84,10 +84,10 @@
         <b-card-body>
             <b-collapse :id="uid" v-model="showCollapse" @show="onShow" @hide="onHide">
                 <div class="wrapper">
-                    <div class="player" @click="() => playing=true">
-                        <div class="play-button" v-show="!playing"></div>
+                    <div class="player" @click="() => videoStarted=true">
+                        <div class="play-button" v-show="!videoStarted"></div>
                         <img :src="thumb" alt="YouTube thumbnail">
-                        <iframe v-if="playing"
+                        <iframe v-if="videoStarted"
                             ref="iframe"
                             :width="width"
                             :height="height"
@@ -117,7 +117,7 @@
         },
         data : function () {
             return {
-                playing: false,
+                videoStarted: false,
                 width : 560,
                 timer: undefined,
                 showCollapse: false,
@@ -147,10 +147,11 @@
             },
             onShow: function() {
                 persistentState.put(this.uid, true);
+                this.videoStarted = true;
             },
             onHide: function() {
                 persistentState.put(this.uid, false);
-                if (this.playing) this.pauseVideo();
+                if (this.videoStarted) this.pauseVideo();
             },
         }
     }
