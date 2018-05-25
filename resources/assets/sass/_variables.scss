@@ -1,14 +1,4 @@
 
-// Body
-$body-bg: #f5f8fa;
-
-// Borders
-$laravel-border-color: darken($body-bg, 10%);
-$list-group-border: $laravel-border-color;
-$navbar-default-border: $laravel-border-color;
-$panel-default-border: $laravel-border-color;
-$panel-inner-border: $laravel-border-color;
-
 // Brands
 $brand-primary: #3097D1;
 $brand-info: #8eb4cb;
@@ -17,22 +7,21 @@ $brand-warning: #cbb956;
 $brand-danger: #bf5329;
 
 // Typography
+
+$font-family-sans-serif:      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
+
+// PT Serif er elegant og går bra med MathJax-fonten,
+// men kanskje litt kjedelig.
+$font-family-serif: 'PT Serif', serif;
+
+// Lora er litt mer spennende, men matcher MathJax-fonten dårligere.
+// Brukes av Nature.
+// $font-family-serif: 'Lora', serif;
+
 $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
-$font-family-sans-serif: "Raleway", sans-serif;
-$font-size-base: 14px;
+$font-family-base: $font-family-serif;
+$headings-font-family: $font-family-sans-serif;
+
+$font-size-base: 1.125rem;
 $line-height-base: 1.6;
 $text-color: #636b6f;
-
-// Navbar
-$navbar-default-bg: #fff;
-
-// Buttons
-$btn-default-color: $text-color;
-
-// Inputs
-$input-border: lighten($text-color, 40%);
-$input-border-focus: lighten($brand-primary, 25%);
-$input-color-placeholder: lighten($text-color, 30%);
-
-// Panels
-$panel-default-heading-bg: #fff;

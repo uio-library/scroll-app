@@ -7,7 +7,10 @@
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+	<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />-->
+
+    <link href="https://fonts.googleapis.com/css?family=PT+Serif:400,400i&amp;subset=latin-ext" rel="stylesheet">
+    <!--<link href="https://fonts.googleapis.com/css?family=Lora:400,400i&amp;subset=latin-ext" rel="stylesheet">-->
 
 	<link rel="stylesheet" href="{{ mix('css/app.css') }}">
 	<title>{{ strip_tags($course->headertext) }}</title>
@@ -55,7 +58,14 @@
 	<script src="{{ mix('js/app.js') }}"></script>
 
 	<script type="text/x-mathjax-config">
-		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+		MathJax.Hub.Config({
+			tex2jax: {
+				inlineMath: [['$','$'], ['\\(','\\)']]
+			},
+	        CommonHTML: {
+			    scale: 93
+			},
+		});
 	</script>
 	<script type="text/javascript" async
 	src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
