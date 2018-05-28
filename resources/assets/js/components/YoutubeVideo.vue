@@ -56,7 +56,7 @@
                 border-color: transparent transparent transparent #fff
 
 
-        img, iframe, .play-button, .play-button:before
+        img, .iframe-container, .play-button, .play-button:before
             position: absolute
 
         .play-button, .play-button:before
@@ -64,7 +64,7 @@
             left: 50%
             transform: translate3d( -50%, -50%, 0 )
 
-        iframe
+        .iframe-container
             height: 100%
             width: 100%
             top: 0
@@ -84,17 +84,10 @@
         <b-card-body>
             <b-collapse :id="uid" v-model="showCollapse" @show="onShow" @hide="onHide">
                 <div class="wrapper">
-                    <div class="player" @click="() => videoStarted=true">
-                        <div class="play-button" v-show="!videoStarted"></div>
+                    <div class="player" @click="initVideo">
+                        <div class="play-button" v-show="!videoInitialized"></div>
                         <img :src="thumb" alt="YouTube thumbnail">
-                        <iframe v-if="videoStarted"
-                            ref="iframe"
-                            :width="width"
-                            :height="height"
-                            :src="'https://www.youtube-nocookie.com/embed/' + id + '?rel=0&amp;showinfo=0&amp;autoplay=1&amp;enablejsapi=1'"
-                            frameborder="0"
-                            allowfullscreen
-                        ></iframe>
+                        <div class="iframe-container" ref="iframe-container" style="height:100%"></div>
                     </div>
                 </div>
             </b-collapse>
@@ -105,6 +98,7 @@
 
 <script>
     import persistentState from './PersistentState';
+    import YouTubePlayer from 'youtube-player';
     export default {
         props: {
             id: {
@@ -117,10 +111,11 @@
         },
         data : function () {
             return {
-                videoStarted: false,
+                videoInitialized: false,
                 width : 560,
                 timer: undefined,
                 showCollapse: false,
+                player: null,
             }
         },
         created() {
@@ -138,20 +133,31 @@
             }
         },
         methods: {
-            pauseVideo : function() {
-                this.$refs.iframe.contentWindow.postMessage(JSON.stringify({
-                    event: 'command',
-                    func: 'pauseVideo',
-                    args: [],
-                }), '*');
+            initVideo() {
+                if (!this.videoInitialized) {
+                    this.player = YouTubePlayer(this.$refs['iframe-container'], {
+                        playerVars: {
+                            modestbranding: 1, // Don't show YouTube logo in the controls bar.
+                            rel: 0,            // Don't show related videos when video ends.
+                        },
+                    });
+
+                    // 'loadVideoById' is queued until the player is ready to receive API calls.
+                    this.player.loadVideoById(this.id);
+
+                    // 'playVideo' is queue until the player is ready to received API calls and after 'loadVideoById' has been called.
+                    this.player.playVideo();
+
+                    this.videoInitialized = true;
+                }
             },
             onShow: function() {
                 persistentState.put(this.uid, true);
-                this.videoStarted = true;
+                this.initVideo();
             },
             onHide: function() {
                 persistentState.put(this.uid, false);
-                if (this.videoStarted) this.pauseVideo();
+                if (this.player) this.player.pauseVideo();
             },
         }
     }
