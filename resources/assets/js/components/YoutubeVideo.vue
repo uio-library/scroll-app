@@ -86,7 +86,7 @@
                 <div class="wrapper">
                     <div class="player" @click="initVideo">
                         <div class="play-button" v-show="!videoInitialized"></div>
-                        <img :src="thumb" alt="YouTube thumbnail">
+                        <img v-if="showCollapse" :src="thumb" alt="YouTube thumbnail">
                         <div class="iframe-container" ref="iframe-container" style="height:100%"></div>
                     </div>
                 </div>
