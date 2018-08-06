@@ -10,6 +10,7 @@
         "php": ">=7.0.0",
         "aacotroneo/laravel-saml2": "dev-remove_mcrypt",
         "doctrine/dbal": "^2.5",
+        "fideloper/proxy": "^4.0",
         "graham-campbell/github": "^7.3",
         "guzzlehttp/guzzle": "^6.3",
         "henrikbjorn/lurker": "dev-specific-phpunit-version",
