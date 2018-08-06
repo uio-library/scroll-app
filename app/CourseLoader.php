@@ -3,15 +3,31 @@
 namespace App;
 
 use App\Exceptions\ImportError;
+use Despark\ImagePurify\Interfaces\ImagePurifierInterface;
+use Illuminate\Console\Command;
 use Michelf\MarkdownExtra;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 
 class CourseLoader
 {
-    public function __construct(MarkdownExtra $markdown)
+    public function __construct(MarkdownExtra $markdown, ImagePurifierInterface $purifier)
     {
         $this->markdown = $markdown;
+        $this->purifier = $purifier;
+    }
+
+    public function setOutput(\Illuminate\Console\OutputStyle $out)
+    {
+        $this->out = $out;
+    }
+
+    protected function log($msg)
+    {
+        if (isset($this->out)) {
+            $this->out->writeln($msg);
+        }
+        \Log::info($msg);
     }
 
     /**
@@ -30,6 +46,8 @@ class CourseLoader
      */
     public function importFromFolder($dirname)
     {
+        $this->log("Importing course: {$dirname}");
+
         $jsonPath = "$dirname/course.json";
         $modulesPath = "$dirname/modules/*.md";
         $resourcesPath = "$dirname/resources/*";
@@ -66,6 +84,8 @@ class CourseLoader
 
         $this->loadExercises($course, $exercises);
 
+        $this->log("Copying and compressing resources");
+        $filesizeSum = 0;
         foreach (glob($resourcesPath) as $srcPath) {
             if (!is_file($srcPath)) {
                 continue;
@@ -76,10 +96,20 @@ class CourseLoader
             if (!is_dir(dirname($dstPath))) {
                 mkdir(dirname($dstPath), 0775, true);
             }
+
             copy($srcPath, $dstPath);
+            $this->purifier->purify($dstPath);
+
+            $srcSize = round(filesize($srcPath) / 1024);
+            $dstSize = round(filesize($dstPath) / 1024);
+            $filesizeSum += $dstSize;
+
+            $this->log(" - {$relPath}: filesize reduced from {$srcSize} KB to {$dstSize} KB");
         }
 
-        \Log::info("Imported course '{$course->name}'@{$commit}");
+        $this->log("Total size of resources: {$filesizeSum} kB");
+
+        $this->log("Imported course '{$course->name}'@{$commit}");
 
         return $course;
     }

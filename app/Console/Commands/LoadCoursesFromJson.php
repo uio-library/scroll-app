@@ -62,9 +62,7 @@ class LoadCoursesFromJson extends Command
         }
 
         $dir = dirname($jsonFile);
-        $this->comment("Importing course: " . basename($dir));
         $this->courseLoader->importFromFolder($dir);
-        $this->info('Course imported!');
     }
 
     /**
@@ -74,6 +72,8 @@ class LoadCoursesFromJson extends Command
      */
     public function handle()
     {
+        $this->courseLoader->setOutput($this->getOutput());
+
         $globPattern = storage_path($this->coursePath);
         if ($this->argument('course')) {
             $globPattern = str_replace('*', $this->argument('course'), $globPattern);
@@ -84,7 +84,6 @@ class LoadCoursesFromJson extends Command
         foreach (glob($globPattern) as $jsonFileName) {
             try {
                 $dir = dirname($jsonFileName);
-                $this->comment("Importing course: " . basename($dir));
                 $this->courseLoader->importFromFolder($dir);
                 $importedCourses++;
             } catch (ImportError $e) {
