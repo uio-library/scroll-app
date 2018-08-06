@@ -22,15 +22,26 @@ class CourseController extends Controller
     /**
      * Display the contents of a single course.
      */
-    public function show(Course $course)
+    public function show(Request $request, Course $course)
     {
-        return view('courses.show', ['course' => $course]);
+        $response = response()
+            ->view('courses.show', ['course' => $course])
+            ->setLastModified($course->updated_at)
+            ->setPublic()
+            ->setExpires(Carbon::now()->addDay());
+
+        if ($response->isNotModified($request)) {
+            // Returns 304 Not Modified
+            return $response;
+        }
+
+        return $response;
     }
 
     /**
      * Get an image or other resource file part of a course.
      */
-    public function resource(Course $course, $filename)
+    public function resource(Request $request, Course $course, $filename)
     {
         // Remove .. and /
         $filename = preg_replace('/(?:\.\.|\/)/', '', $filename);
@@ -41,7 +52,18 @@ class CourseController extends Controller
             return response('Not found', 404);
         }
 
-        return response()->file($path);
+        $response = response()
+            ->file($path)
+            ->setLastModified($course->updated_at)
+            ->setPublic()
+            ->setExpires(Carbon::now()->addMonth());
+
+        if ($response->isNotModified($request)) {
+            // Returns 304 Not Modified
+            return $response;
+        }
+
+        return $response;
     }
 
     /**
