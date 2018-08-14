@@ -38,12 +38,13 @@
             this.showCollapse = persistentState.get(this.uid, false);
         },
         mounted() {
-            this.headerHeight = this.$refs.h2button.offsetWidth / this.imageAspectRatio
-            window.addEventListener('resize', () => {
-                this.headerHeight = this.$refs.h2button.offsetWidth / this.imageAspectRatio
-            });
+            this.updateHeaderHeight();
+            window.addEventListener('resize', this.updateHeaderHeight.bind(this));
         },
         methods: {
+            updateHeaderHeight() {
+                this.headerHeight = Math.floor(this.$refs.h2button.offsetWidth / this.imageAspectRatio) - 1;
+            },
             onShow: function() {
                 persistentState.put(this.uid, true);
             },
