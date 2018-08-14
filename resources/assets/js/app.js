@@ -6,6 +6,12 @@ window.Vue = require('vue');
 Vue.use(require('bootstrap-vue'));
 Vue.use(require('vue-observe-visibility'));
 
+var VueScrollTo = require('vue-scrollto');
+
+// You can also pass in the default options
+Vue.use(VueScrollTo);
+
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
