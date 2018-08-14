@@ -1,9 +1,9 @@
 <template>
     <div>
-        <button ref="h2button" class="header" v-b-toggle="'collapse-' + moduleId"
+        <a :href="'#' + moduleId" :id="moduleId" ref="h2button" class="header" v-on:click.prevent v-b-toggle="'collapse-' + moduleId"
             :style="{ height: headerHeight + 'px', backgroundImage: 'url(' + image +')' }">
                 <h2 style="user-select: none;">{{ name }}</h2>
-        </button>
+        </a>
 
         <b-collapse :id="'collapse-' + moduleId" v-model="showCollapse" @show="onShow" @hide="onHide">
             <b-container fluid style="padding-top : 1em; padding-bottom: 2em;">
@@ -20,6 +20,7 @@
             name: String,
             image: String,
             courseId: String,
+            moduleIndex: Number,
             moduleId: String,
             imageAspectRatio: Number,
         },
@@ -35,7 +36,7 @@
             }
         },
         created() {
-            this.showCollapse = persistentState.get(this.uid, false);
+            this.showCollapse = (window.location.hash == '#' + this.moduleId) || persistentState.get(this.uid, false);
         },
         mounted() {
             this.updateHeaderHeight();
@@ -47,6 +48,7 @@
             },
             onShow: function() {
                 persistentState.put(this.uid, true);
+                history.pushState(null, null, '#' + this.moduleId);
             },
             onHide: function() {
                 persistentState.put(this.uid, false);

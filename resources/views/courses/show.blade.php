@@ -27,7 +27,7 @@
 
 		<div class="uio-banner" style="background-image:url(resources/{{ $course->header }})">
 			<div class="container-fluid">
-				<h1>{!! $course->headertext !!}</h1>
+				<h1><a href="./">{!! $course->headertext !!}</a></h1>
 			</div>
 		</div>
 
@@ -42,8 +42,16 @@
 			@endif
 		</div>
 
-		@foreach ($course->modules as $id => $module)
-		<course-module class="module" course-id="{{ $course->id }}" module-id="{{ $id }}" image="resources/{{ $module->image }}" :image-aspect-ratio="{{ isset($module->imageaspectratio) ? $module->imageaspectratio : 4 }}" name="{{ $module->name }}">
+		@foreach ($course->modules as $idx => $module)
+		<course-module
+			class="module"
+			course-id="{{ $course->id }}"
+			:module-index="{{ $idx }}"
+			module-id="{{ $module->id }}"
+			image="resources/{{ $module->image }}"
+			:image-aspect-ratio="{{ isset($module->imageaspectratio) ? $module->imageaspectratio : 4 }}"
+			name="{{ $module->name }}"
+		>
 			{!! $module->html !!}
 		</course-module>
 		@endforeach
