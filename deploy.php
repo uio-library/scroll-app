@@ -31,7 +31,8 @@ set('git_tty', true);
 set('http_user', 'nginx');
 
 // Shared files/dirs between deploys
-add('shared_dirs', ['storage']);
+set('shared_dirs', ['storage']);
+set('shared_files', ['.env', 'database/database.sqlite']);
 
 // [Optional] if deploy fails automatically unlock.
 after('deploy:failed', 'deploy:unlock');
