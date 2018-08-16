@@ -29,20 +29,6 @@
 			<h1><a href="./" id="top">{!! $course->header->text !!}</a></h1>
 		</header>
 
-		@foreach ($course->modules as $idx => $module)
-		<course-module
-			class="module"
-			course-id="{{ $course->id }}"
-			:module-index="{{ $idx }}"
-			module-id="{{ $module->id }}"
-			image="resources/{{ $module->image }}"
-			:image-aspect-ratio="{{ isset($module->imageaspectratio) ? $module->imageaspectratio : 4 }}"
-			name="{{ $module->name }}"
-		>
-			{!! $module->html !!}
-		</course-module>
-		@endforeach
-	</div>
 		@if ($course->option('show_privacy_statement'))
 		<p class="text-small text-muted padded">
 			Personvern: Dette er et anonymt nettkurs.
@@ -52,6 +38,7 @@
 		</p>
 		@endif
 
+    <course-modules :course-id="{{ $course->id }}" :modules="{{ json_encode($course->modules) }}"></course-modules>
 	</div>
 
   <footer class="page-footer font-small blue pt-4 pb-3">
@@ -102,23 +89,14 @@
 
     </div>
   </footer>
+
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
 	<script src="{{ mix('js/manifest.js') }}"></script>
 	<script src="{{ mix('js/vendor.js') }}"></script>
 	<script src="{{ mix('js/app.js') }}"></script>
 
-	<script type="text/x-mathjax-config">
-		MathJax.Hub.Config({
-			tex2jax: {
-				inlineMath: [['$','$'], ['\\(','\\)']]
-			},
-	        CommonHTML: {
-			    scale: 93
-			},
-		});
-	</script>
-	<script type="text/javascript" async
-	src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
 </body>
 
 </html>

@@ -6,9 +6,7 @@
         </a>
 
         <b-collapse :id="'collapse-' + moduleId" v-model="showCollapse" @show="onShow" @hide="onHide">
-            <b-container fluid style="padding-top : 1em; padding-bottom: 2em;">
-                <slot></slot>
-            </b-container>
+            <render-template :template="content" v-once></render-template>
         </b-collapse>
     </div>
 </template>
@@ -19,12 +17,12 @@
         props: {
             name: String,
             image: String,
-            courseId: String,
-            moduleIndex: Number,
+            content: String,
+            courseId: Number,
             moduleId: String,
             imageAspectRatio: Number,
         },
-        data : function () {
+        data: function () {
             return {
                 showCollapse: false,
                 headerHeight: 220,
@@ -48,7 +46,6 @@
             },
             onShow: function() {
                 persistentState.put(this.uid, true);
-                history.pushState(null, null, '#' + this.moduleId);
             },
             onHide: function() {
                 persistentState.put(this.uid, false);
