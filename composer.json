@@ -1,6 +1,6 @@
 {
     "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
+    "description": "Scroll",
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "type": "project",
@@ -9,7 +9,7 @@
     "require": {
         "php": ">=7.0.0",
         "aacotroneo/laravel-saml2": "dev-remove_mcrypt",
-        "despark/image-purify": "dev-up-symf4",
+        "despark/image-purify": "0.1.5",
         "doctrine/dbal": "^2.5",
         "fideloper/proxy": "^4.0",
         "graham-campbell/github": "^7.3",
