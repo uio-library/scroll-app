@@ -1,5 +1,8 @@
 <?php
 
+/* Set locale for date formatting */
+setlocale(LC_TIME, ['nb_NO', 'no_NO']);
+
 /*
 |--------------------------------------------------------------------------
 | Create The Application

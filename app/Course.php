@@ -21,13 +21,16 @@ class Course extends Model
      * @var array
      */
     protected $casts = [
+        'header' => 'object',
+        'footer' => 'object',
         'modules' => 'object',
+        'options' => 'object',
+
         'github_hook' => 'object',
         'last_event' => 'object',
-        'options' => 'object',
     ];
 
-    protected $fillable = ['name', 'modules', 'header', 'headertext', 'footer', 'repo'];
+    protected $fillable = ['name', 'modules', 'header', 'footer', 'repo', 'domain'];
 
     /**
      * Get the route key for the model.

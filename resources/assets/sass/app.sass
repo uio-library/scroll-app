@@ -8,6 +8,10 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+$break-sm: 768px
+$break-md: 992px
+$break-md: 1200px
+
 /*******************************************************************
  * Quiz
  *******************************************************************/
@@ -20,18 +24,30 @@
  * Overall page layout
  *******************************************************************/
 
+.padded
+	padding-right: 15px
+	padding-left: 15px
+
+.module .padded
+	padding-top: 15px
+	padding-bottom: 20px
+
 body
 	padding-bottom: 0cm
 	overflow-y: scroll  // to avoid center-column from jumping when scrollbar appears
+	position: relative  // for scroll-spy
 	padding-color: black
 
 #app
-    margin-top: 2em
+	padding-top: 0.5em
+	@media (min-width: $break-sm)
+	    padding-top: 1.5em
 
 .container-fluid
 	max-width: 960px
 
-.uio-banner
+
+header
 	background-size: 100%
 	background-position: center center;
 	background-margin: 0 auto
@@ -57,6 +73,43 @@ body
 	h3
 		font-size: 1.6rem
 
+footer
+	background-color: black
+	color: white
+	font-size: 80%
+	font-family: arial, sans-serif
+
+	a:link, a:visited
+		color: #bbb
+
+	.container-fluid
+		display: flex
+		align-items: center
+
+		@media (max-width: $break-sm)
+			flex-direction: column
+
+		.logo
+			background-image: url(/images/uio-segl.png)
+			background-repeat: no-repeat
+			background-position: center
+			flex: 0 0 auto
+			width: 130px
+			height: 130px
+			background-size: 110px 110px
+
+			@media (max-width: $break-sm)
+				width: 100px
+				height: 100px
+				background-size: 90px 90px
+
+
+		> div
+			flex: 1 0 auto
+			margin-left: 10px
+			margin-right: 10px
+
+
 #footer
 	background-color: black
 
@@ -72,16 +125,16 @@ body
 
 
 @media (max-width: 1200px)
-	#app, #footer > div
+	.container-fluid
 		margin-left: auto
 
 @media (min-width: 1200px)
-	#app, #footer > div
+	.container-fluid
 		margin-left: 10vw
 
 
 @media (max-width: 900px)
-	.uio-banner
+	header
 		height: 22vw
 
 		h1
@@ -103,7 +156,7 @@ body
 
 
 @media (min-width: 900px)
-	.uio-banner
+	header
 		height: 198px
 
 		h1

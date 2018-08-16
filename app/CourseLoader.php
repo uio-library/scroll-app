@@ -6,15 +6,20 @@ use App\Exceptions\ImportError;
 use Despark\ImagePurify\Interfaces\ImagePurifierInterface;
 use Illuminate\Console\Command;
 use Michelf\MarkdownExtra;
+use Swaggest\JsonSchema\Schema;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 
 class CourseLoader
 {
+    protected $schemaVersion = 2;
+    protected $schema;
+
     public function __construct(MarkdownExtra $markdown, ImagePurifierInterface $purifier)
     {
         $this->markdown = $markdown;
         $this->purifier = $purifier;
+        $this->schema = Schema::import(json_decode(file_get_contents(resource_path('course.schema.json'))));
     }
 
     public function setOutput(\Illuminate\Console\OutputStyle $out)
@@ -148,9 +153,18 @@ class CourseLoader
      */
     public function courseFromJson($courseName, $data)
     {
+        if (($data->version ?? 0) !== $this->schemaVersion) {
+            throw new ImportError(sprintf(
+                'This version of Scroll requires a course.json schema version %d.',
+                $this->schemaVersion
+            ));
+        }
+
+        // Validate
+        $this->schema->in($data);
+
         $props = [
             'header',
-            'headertext',
             'footer',
             'modules',
             'repo',

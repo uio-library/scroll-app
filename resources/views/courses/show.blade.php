@@ -13,7 +13,7 @@
     <!--<link href="https://fonts.googleapis.com/css?family=Lora:400,400i&amp;subset=latin-ext" rel="stylesheet">-->
 
 	<link rel="stylesheet" href="{{ mix('css/app.css') }}">
-	<title>{{ strip_tags($course->headertext) }}</title>
+	<title>{{ strip_tags($course->header->text) }}</title>
 
 	<link rel="shortcut icon" href="/images/favicon.ico">
 	<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon.png">
@@ -25,22 +25,9 @@
 
 	<div id="app" class="container-fluid" style="padding: 0" data-courseid="{{ $course->id }}">
 
-		<div class="uio-banner" style="background-image:url(resources/{{ $course->header }})">
-			<div class="container-fluid">
-				<h1><a href="./">{!! $course->headertext !!}</a></h1>
-			</div>
-		</div>
-
-		<div class="container-fluid">
-			@if ($course->option('show_privacy_statement'))
-			<p class="text-small text-muted">
-				Personvern: Dette er et anonymt nettkurs.
-				Vi lagrer svar på oppgaver for statistikkformål og for å kunne forbedre kurset,
-				men knytter de ikke til brukerkonto, IP-adresse eller noe annet
-				som kan identifisere deg.<!-- For mer informasjon, se <a href="/personvern">personvern</a>.-->
-			</p>
-			@endif
-		</div>
+		<header class="padded" style="background-image:url(resources/{{ $course->header->background }})">
+			<h1><a href="./" id="top">{!! $course->header->text !!}</a></h1>
+		</header>
 
 		@foreach ($course->modules as $idx => $module)
 		<course-module
@@ -56,11 +43,65 @@
 		</course-module>
 		@endforeach
 	</div>
+		@if ($course->option('show_privacy_statement'))
+		<p class="text-small text-muted padded">
+			Personvern: Dette er et anonymt nettkurs.
+			Vi lagrer svar på oppgaver for statistikkformål og for å kunne forbedre kurset,
+			men knytter de ikke til brukerkonto, IP-adresse eller noe annet
+			som kan identifisere deg.<!-- For mer informasjon, se <a href="/personvern">personvern</a>.-->
+		</p>
+		@endif
 
-	<div id="footer">
-		<div class="container-fluid" style="background-image:url(resources/{{ $course->footer }})"></div>
 	</div>
 
+  <footer class="page-footer font-small blue pt-4 pb-3">
+    <div class="container-fluid text-center text-md-left">
+
+      <!-- Column -->
+      <div class="logo" ></div>
+
+      <!-- Column -->
+      <div>
+        <h5>{{ $course->domain ?? strip_tags($course->header->text) }}</h5>
+        <ul class="list-unstyled">
+          <li>
+            Et minikurs fra {!! $publishers !!}
+          </li>
+          <li>
+            Sist oppdatert {{ $course->updated_at->formatLocalized('%d. %B %Y') }}
+          </li>
+          <li>
+            Drevet av <a href="https://github.com/uio-library/scroll-app" title="Scroll">Scroll</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Column -->
+      <div>
+        <h5 class="d-none d-md-block">&nbsp;</h5>
+        <ul class="list-unstyled">
+          @foreach(($course->footer->credits ?? []) as $agent)
+          <li>
+            {{ $agent->role }}:
+            <a href="{{ $agent->link }}" title="{{ $agent->label }}">{{ $agent->label }}</a>
+          </li>
+          @endforeach
+        </ul>
+      </div>
+
+      <!-- Column -->
+      <div class="ft-col-3">
+        <h5 class="d-none d-md-block">&nbsp;</h5>
+        <ul class="list-unstyled">
+          <li>
+            Ansvarlig for nettstedet:<br>
+            <a href="{{ $course->footer->editor->link }}" title="{{ $course->footer->editor->label }}">{{ $course->footer->editor->label }}</a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </footer>
 	<script src="{{ mix('js/manifest.js') }}"></script>
 	<script src="{{ mix('js/vendor.js') }}"></script>
 	<script src="{{ mix('js/app.js') }}"></script>

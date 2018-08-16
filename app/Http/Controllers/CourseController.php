@@ -10,6 +10,18 @@ use Psy\Exception\ErrorException;
 
 class CourseController extends Controller
 {
+    /**
+     * Utility method to join a string with a natural language conjunction at the end.
+     * https://gist.github.com/angry-dan/e01b8712d6538510dd9c
+     */
+    protected function naturalLanguageJoin(array $list, $conjunction = 'og')
+    {
+        $last = array_pop($list);
+        if ($list) {
+            return implode(', ', $list) . ' ' . $conjunction . ' ' . $last;
+        }
+        return $last;
+    }
 
     /**
      * Display a list of courses.
@@ -24,8 +36,15 @@ class CourseController extends Controller
      */
     public function show(Request $request, Course $course)
     {
+        $publishers = array_map(function ($item) {
+            return sprintf('<a href="%s">%s</a>', $item->link, $item->label);
+        }, $course->footer->publishers);
+
         $response = response()
-            ->view('courses.show', ['course' => $course])
+            ->view('courses.show', [
+                'course' => $course,
+                'publishers' => $this->naturalLanguageJoin($publishers),
+            ])
             ->setLastModified($course->updated_at)
             ->setPublic()
             ->setExpires(Carbon::now()->addDay());

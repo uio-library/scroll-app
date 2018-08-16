@@ -1,0 +1,132 @@
+{
+    "type": "object",
+    "properties": {
+        "version": {
+            "type": "integer"
+        },
+        "repo": {
+            "type": "string"
+        },
+        "domain": {
+            "type": "string"
+        },
+        "options": {
+            "type": "object",
+            "properties": {
+                "show_privacy_statement": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "header": {
+            "type": "object",
+            "properties": {
+                "background": {
+                    "type": "string"
+                },
+                "text": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "background",
+                "text"
+            ]
+        },
+        "modules": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/module"
+            }
+        },
+        "footer": {
+            "type": "object",
+            "properties": {
+                "publishers": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/entity"
+                    }
+                },
+                "credits": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/agent"
+                    }
+                },
+                "editor": {
+                    "$ref": "#/definitions/entity"
+                }
+            },
+            "required": [
+                "publishers",
+                "editor"
+            ]
+        }
+    },
+    "required": [
+        "version",
+        "repo",
+        "header",
+        "modules",
+        "footer"
+    ],
+    "definitions": {
+        "module": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "image": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "imageaspectratio": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "id",
+                "image",
+                "name"
+            ]
+        },
+        "entity": {
+            "type": "object",
+            "properties": {
+                "label": {
+                    "type": "string"
+                },
+                "link": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "label",
+                "link"
+            ]
+        },
+        "agent": {
+            "type": "object",
+            "properties": {
+                "label": {
+                    "type": "string"
+                },
+                "link": {
+                    "type": "string"
+                },
+                "role": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "label",
+                "link",
+                "role"
+            ]
+        }
+    }
+}
