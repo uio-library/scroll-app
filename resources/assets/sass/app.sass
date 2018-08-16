@@ -16,7 +16,7 @@ $break-md: 1200px
  * Improve collapse animation
  *******************************************************************/
 
-.module div
+.module *
 	-webkit-transform: translateZ(0)
 	transform: translateZ(0)
 	-webkit-backface-visibility: hidden
@@ -51,9 +51,9 @@ body
 	padding-color: black
 
 #app
-	padding-top: 0.5em
+	padding: 0.5em 0 0 0
 	@media (min-width: $break-sm)
-	    padding-top: 1.5em
+		padding: 1.5em 0 1.5em 0
 
 .container-fluid
 	max-width: 960px
@@ -194,23 +194,17 @@ footer
 		display: block
 		width: 100%
 		border: none
-		border-radius: 3px 3px 0 0
 		background-size: 100%
 		background-color: transparent
 		background-repeat: no-repeat
 		background-position: center center
-		transition: filter 0.3s, opacity 0.3s, border-radius 0.8s
 		opacity: 1
 		cursor: pointer
 		position: relative
 
-		&.collapsed
-			border-radius: 3px 3px 0 0
-
 		&:hover
 			opacity: 0.8
 			filter: grayscale(50%)
-			transition: filter 0.3s, opacity 0.3s
 
 		h2
 			max-width: 960px

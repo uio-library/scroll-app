@@ -5,7 +5,7 @@
                 <h2 style="user-select: none;">{{ name }}</h2>
         </a>
 
-        <b-collapse :id="'collapse-' + moduleId" v-model="showCollapse" @show="onShow" @hide="onHide" accordion="my-acc">
+        <b-collapse :id="'collapse-' + moduleId" v-model="showCollapse" @show="onShow" @shown="onShown" @hide="onHide" accordion="my-acc">
             <render-template :template="content" v-once></render-template>
         </b-collapse>
     </div>
@@ -26,6 +26,8 @@
             return {
                 showCollapse: false,
                 headerHeight: 220,
+                targetY: Number,
+                cancelScroll: null,
             }
         },
         computed: {
@@ -47,26 +49,44 @@
             onClick: function(ev) {
                 //
             },
+            onShown: function(ev) {
+                // console.log('onShown: ' + this.moduleId + ', scrollY is ' + window.scrollY + ', target was ' + this.targetY);
+               // this.cancelScroll();
+               // window.requestAnimationFrame(() => {
+               //      console.log('scroll to: ' + this.targetY);
+               //      document.documentElement.scrollTop = this.targetY;
+               // });
+            },
+            tick: function() {
+
+            },
             onShow: function() {
+                //console.log('onShow: ' + this.moduleId);
                 persistentState.put(this.uid, true);
 
 
                 let thisModuleEl = this.$refs.h2button.parentElement;
+                let moduleContainerEl = thisModuleEl.parentElement;
+                let offset = Math.ceil(moduleContainerEl.getBoundingClientRect().top - document.documentElement.getBoundingClientRect().top);
                 let modules = Array.from(document.querySelectorAll('.module'));
                 let thisModuleIdx = modules.indexOf(thisModuleEl);
-
-                let offset = 0;
                 for (var i = 0; i < thisModuleIdx; i++) {
                     offset += modules[i].firstChild.getBoundingClientRect().height;
                 }
 
+                window.requestAnimationFrame(() => this.tick());
 
-                let cancelScroll = this.$scrollTo(
-                    thisModuleEl.parentElement,
-                    450, // The collapse animation is 350 ms. By using a slightly longer duration,
+                this.targetY = offset;
+                //console.log('Offset: ' + offset);
+
+               // window.scrollTo(0, this.targetY);
+
+                this.cancelScroll = this.$scrollTo(
+                    document.documentElement,
+                    350, // The collapse animation is 350 ms. By using a slightly longer duration,
                          // the animation will make a small bump, but feel less shaky?
                     {
-                        offset: offset,
+                        offset: this.targetY,
                         easing: 'ease',
                         cancelable: false,
                     }

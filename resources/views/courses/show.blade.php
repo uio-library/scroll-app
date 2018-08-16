@@ -23,7 +23,7 @@
 <body>
 	<!--<div class="corner-ribbon top-left sticky red shadow">Sniktitt</div>-->
 
-	<div id="app" class="container-fluid" style="padding: 0" data-courseid="{{ $course->id }}">
+	<div id="app" class="container-fluid" data-courseid="{{ $course->id }}">
 
 		<header class="padded" style="background-image:url(resources/{{ $course->header->background }})">
 			<h1><a href="./" id="top">{!! $course->header->text !!}</a></h1>
