@@ -8,6 +8,7 @@ require 'vendor/deployer/recipes/recipe/slack.php';
 task('npm:install', 'npm install');
 task('npm:build', 'npm run production');
 task('self-diagnosis', 'php artisan self-diagnosis');
+task('varnish:purge', 'php artisan varnish:purge');
 
 // Hosts
 inventory('hosts.yml');
@@ -48,5 +49,6 @@ after('deploy:symlink', 'self-diagnosis');
 
 after('deploy:failed', 'slack:notify:failure');
 after('success', 'slack:notify:success');
+after('success', 'varnish:purge');
 
 // Note to self: We don't make any attempt of clearing opcache since we assume that opcache.revalidate_path=1 is set.
