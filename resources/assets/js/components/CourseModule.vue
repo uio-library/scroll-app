@@ -50,20 +50,23 @@
             onShow: function() {
                 persistentState.put(this.uid, true);
 
-                let previousModule = this.$refs.h2button.parentElement.previousSibling;
-                while (previousModule.nodeType !== Node.ELEMENT_NODE) {
-                    previousModule = previousModule.previousSibling;
+
+                let thisModuleEl = this.$refs.h2button.parentElement;
+                let modules = Array.from(document.querySelectorAll('.module'));
+                let thisModuleIdx = modules.indexOf(thisModuleEl);
+
+                let offset = 0;
+                for (var i = 0; i < thisModuleIdx; i++) {
+                    offset += modules[i].firstChild.getBoundingClientRect().height;
                 }
-                if (!previousModule.classList.contains('module')) {
-                    // First module
-                    return;
-                }
+
+
                 let cancelScroll = this.$scrollTo(
-                    previousModule,
+                    thisModuleEl.parentElement,
                     450, // The collapse animation is 350 ms. By using a slightly longer duration,
-                         // the animation will make a small bump, but it feels less shaky.
+                         // the animation will make a small bump, but feel less shaky?
                     {
-                        offset: previousModule.firstChild.getBoundingClientRect().height,
+                        offset: offset,
                         easing: 'ease',
                         cancelable: false,
                     }
