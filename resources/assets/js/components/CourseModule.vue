@@ -65,6 +65,7 @@
                     {
                         offset: previousModule.firstChild.getBoundingClientRect().height,
                         easing: 'ease',
+                        cancelable: false,
                     }
                 );
             },
