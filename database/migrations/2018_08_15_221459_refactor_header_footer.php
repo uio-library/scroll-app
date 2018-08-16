@@ -16,7 +16,11 @@ class RefactorHeaderFooter extends Migration
     {
         Schema::table('courses', function (Blueprint $table) {
             $table->dropColumn('header');
+        });
+        Schema::table('courses', function (Blueprint $table) {
             $table->dropColumn('headertext');
+        });
+        Schema::table('courses', function (Blueprint $table) {
             $table->dropColumn('footer');
         });
 
@@ -37,15 +41,18 @@ class RefactorHeaderFooter extends Migration
     {
         Schema::table('courses', function (Blueprint $table) {
             $table->dropColumn('domain');
-
+        });
+        Schema::table('courses', function (Blueprint $table) {
             $table->dropColumn('header');
+        });
+        Schema::table('courses', function (Blueprint $table) {
             $table->dropColumn('footer');
         });
 
         Schema::table('courses', function (Blueprint $table) {
-            $table->string('header');
-            $table->text('headertext');
-            $table->string('footer');
+            $table->string('header')->nullable();
+            $table->text('headertext')->nullable();
+            $table->string('footer')->nullable();
         });
     }
 }
