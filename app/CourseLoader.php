@@ -102,7 +102,20 @@ class CourseLoader
                 mkdir(dirname($dstPath), 0775, true);
             }
 
-            copy($srcPath, $dstPath);
+            list($width, $height) = getimagesize($srcPath);
+            $maxWidth = 1920;
+            if ($width > $maxWidth) {
+                $newWidth = $maxWidth;
+                $newHeight = $height * $newWidth / $width;
+                $img = \Image::make($srcPath)
+                    ->resize($newWidth, $newHeight)
+                    ->save($dstPath);
+
+                $this->log(" - {$relPath}: scaled from {$width}x{$height}px to {$newWidth}x{$newHeight}px");
+            } else {
+                copy($srcPath, $dstPath);
+            }
+
             $this->purifier->purify($dstPath);
 
             $srcSize = round(filesize($srcPath) / 1024);
