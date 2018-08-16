@@ -4,20 +4,20 @@
     border: 0
     margin: 1em 0
 
+    .card-body
+        margin-top: -3px
+
     .card-body, .card-header
         padding: 0
 
     .card-header button
         cursor: pointer
         text-align: left
-
-        &::before
-            display: inline-block
-            content: "-"
-            width: .7em
-
-    &.video-collapsed .card-header button::before
-        content: "+"
+        background-image: url(/images/youtube-brands.svg)
+        background-repeat: no-repeat
+        background-position: 8px center
+        background-size: 30px
+        padding-left: 48px
 
     .wrapper
         max-width: 960px
@@ -77,7 +77,7 @@
 
         <b-card-header>
             <b-button block variant="outline-secondary" @click="showCollapse = !showCollapse">
-                Video
+                Se video
             </b-button>
         </b-card-header>
 
@@ -153,7 +153,11 @@
             },
             onShow: function() {
                 persistentState.put(this.uid, true);
-                this.initVideo();
+                if (!this.videoInitialized) {
+                    this.initVideo();
+                } else {
+                    this.player.playVideo();
+                }
             },
             onHide: function() {
                 persistentState.put(this.uid, false);
