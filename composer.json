@@ -9,6 +9,7 @@
     "require": {
         "php": ">=7.0.0",
         "aacotroneo/laravel-saml2": "dev-remove_mcrypt",
+        "beyondcode/laravel-self-diagnosis": "^1.0",
         "despark/image-purify": "0.1.5",
         "doctrine/dbal": "^2.5",
         "fideloper/proxy": "^4.0",
