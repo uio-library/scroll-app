@@ -14,7 +14,7 @@
         @foreach($courses as $course)
             <li class="list-group-item list-group-item-action flex-column align-items-start">
                 <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1"><a href="{{ route('courses.show', $course->name) }}">{{ strip_tags($course->headertext) }}</a></h5>
+                    <h5 class="mb-1"><a href="{{ route('courses.show', $course->name) }}">{{ strip_tags($course->header->text) }}</a></h5>
                     <small>Updated {{ $course->updated_at->diffForHumans() }}</small>
                 </div>
                 <div class="d-flex justify-content-between align-items-center">
