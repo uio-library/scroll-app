@@ -50,7 +50,7 @@ body
 	position: relative  // for scroll-spy
 	padding-color: black
 
-#app
+#app > div
 	padding: 0.5em 0 0 0
 	@media (min-width: $break-sm)
 		padding: 1.5em 0 1.5em 0
@@ -58,6 +58,22 @@ body
 .container-fluid
 	max-width: 960px
 
+
+.uio-header
+    background: black
+    img
+        @media (max-width: 600px)
+            margin: 0 0 1px 0
+            height: 10.8px
+        @media (min-width: 600px) and (max-width: 900px)
+            margin: 0 0 2px 0
+            height: 1.8vw
+        @media (min-width: 900px)
+            margin: 0 0 4px 0
+            height: 16.2px
+
+.uio-header.hidden
+    display: none
 
 header
 	background-size: 100%

@@ -33,3 +33,18 @@ Vue.component('quiz-with-navigation', require('./components/QuizWithNavigation.v
 const app = new Vue({
     el: '#app'
 });
+
+(function () {
+    let buffer = ['','',''];
+    document.body.addEventListener('keyup', function (event) {
+        if (event.defaultPrevented) return;
+        if (event.target != document.body) return;
+
+        var key = event.key || event.keyCode;
+        buffer.push(key);
+        buffer.shift();
+        if (buffer.join('') == 'uio') {
+            document.querySelector('.uio-header').classList.add('hidden');
+        }
+    });
+})();

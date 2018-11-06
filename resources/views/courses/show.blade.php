@@ -23,7 +23,15 @@
 <body>
 	<!--<div class="corner-ribbon top-left sticky red shadow">Sniktitt</div>-->
 
-	<div id="app" class="container-fluid" data-courseid="{{ $course->id }}">
+    <div class="uio-header">
+        <div class="container-fluid">
+            <a href="https://www.uio.no/" title="Universitetet i Oslo"><img src="/images/yndlingsuniversitetet-ditt.svg" alt="Universitetet i Oslo"></a>
+            <!-- Dette ser kanskje litt teit ut, men vi er pålagt å ha det her -->
+        </div>
+    </div>
+
+	<div id="app" data-courseid="{{ $course->id }}">
+        <div class="container-fluid">
 
 		<header class="padded" style="background-image:url(resources/{{ $course->header->background }})">
 			<h1><a href="./" id="top">{!! $course->header->text !!}</a></h1>
@@ -89,6 +97,7 @@
 
     </div>
   </footer>
+  </div>
 
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
