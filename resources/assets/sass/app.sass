@@ -58,22 +58,21 @@ body
 .container-fluid
 	max-width: 960px
 
-
 .uio-header
-    background: black
-    img
-        @media (max-width: 600px)
-            margin: 0 0 1px 0
-            height: 10.8px
-        @media (min-width: 600px) and (max-width: 900px)
-            margin: 0 0 2px 0
-            height: 1.8vw
-        @media (min-width: 900px)
-            margin: 0 0 4px 0
-            height: 16.2px
+	background: black
+	img
+		@media (max-width: 600px)
+			margin: 0 0 1px 0
+			height: 10.8px
+		@media (min-width: 600px) and (max-width: 900px)
+			margin: 0 0 2px 0
+			height: 1.8vw
+		@media (min-width: 900px)
+			margin: 0 0 4px 0
+			height: 16.2px
 
 .uio-header.hidden
-    display: none
+	display: none
 
 header
 	background-size: 100%
@@ -237,7 +236,7 @@ footer
  * Corner ribbons. Source: https://codepen.io/eode9/pen/twkKm
  *******************************************************************/
 
-@import url('https://fonts.googleapis.com/css?family=Noto+Sans:400,700');
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans:400,700')
 
 /* The ribbons */
 
@@ -245,66 +244,66 @@ $ribbonsize: 28vw
 $ribbonsize_f: 252px
 
 @media (max-width: 900px)
-  .corner-ribbon
-    width: $ribbonsize
-    background: #e43;
-    position: absolute;
-    top: $ribbonsize * 0.125
-    left: - $ribbonsize * 0.25
-    text-align: center;
-    line-height: $ribbonsize * 0.2
-    letter-spacing: 1px;
-    color: #f0f0f0;
-    font-size: $ribbonsize * 0.08
-    font-family: "Noto Sans"
-    transform: rotate(-45deg);
-    -webkit-transform: rotate(-45deg);
+	.corner-ribbon
+		width: $ribbonsize
+		background: #e43;
+		position: absolute;
+		top: $ribbonsize * 0.125
+		left: - $ribbonsize * 0.25
+		text-align: center;
+		line-height: $ribbonsize * 0.2
+		letter-spacing: 1px;
+		color: #f0f0f0;
+		font-size: $ribbonsize * 0.08
+		font-family: "Noto Sans"
+		transform: rotate(-45deg)
+		-webkit-transform: rotate(-45deg)
 
 @media (min-width: 900px)
-  .corner-ribbon
-    width: $ribbonsize_f
-    background: #e43;
-    position: absolute;
-    top: $ribbonsize_f * 0.125
-    left: - $ribbonsize_f * 0.25
-    text-align: center;
-    line-height: $ribbonsize_f * 0.2
-    letter-spacing: 1px;
-    color: #f0f0f0;
-    font-size: $ribbonsize_f * 0.08
-    font-family: "Noto Sans"
-    transform: rotate(-45deg);
-    -webkit-transform: rotate(-45deg);
+	.corner-ribbon
+		width: $ribbonsize_f
+		background: #e43;
+		position: absolute;
+		top: $ribbonsize_f * 0.125
+		left: - $ribbonsize_f * 0.25
+		text-align: center;
+		line-height: $ribbonsize_f * 0.2
+		letter-spacing: 1px;
+		color: #f0f0f0;
+		font-size: $ribbonsize_f * 0.08
+		font-family: "Noto Sans"
+		transform: rotate(-45deg)
+		-webkit-transform: rotate(-45deg)
 
 /* Custom styles */
 
 .corner-ribbon.sticky
-  position: fixed
-  z-index: 10
+	position: fixed
+	z-index: 10
 
 .corner-ribbon.shadow
-  box-shadow: 0 0 3px rgba(0,0,0,.3);
+  	box-shadow: 0 0 3px rgba(0,0,0,.3);
 
 
 /* Colors */
 
 .corner-ribbon.white
-  background: #f0f0f0; color: #555;
+  	background: #f0f0f0; color: #555;
 .corner-ribbon.black
-  background: #333;
+  	background: #333;
 .corner-ribbon.grey
-  background: #999;
+  	background: #999;
 .corner-ribbon.blue
-  background: #39d;
+  	background: #39d;
 .corner-ribbon.green
-  background: #2c7;
+  	background: #2c7;
 .corner-ribbon.turquoise
-  background: #1b9;
+  	background: #1b9;
 .corner-ribbon.purple
-  background: #95b;
+  	background: #95b;
 .corner-ribbon.red
-  background: #e43;
+  	background: #e43;
 .corner-ribbon.orange
-  background: #e82;
+ 	background: #e82;
 .corner-ribbon.yellow
-  background: #ec0;
+  	background: #ec0;
