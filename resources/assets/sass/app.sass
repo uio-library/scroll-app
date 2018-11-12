@@ -17,219 +17,195 @@ $break-md: 1200px
  *******************************************************************/
 
 .module *
-	-webkit-transform: translateZ(0)
-	transform: translateZ(0)
-	-webkit-backface-visibility: hidden
-	-webkit-perspective: 1000
-	backface-visibility: hidden
-	perspective: 1000
+    -webkit-transform: translateZ(0)
+    transform: translateZ(0)
+    -webkit-backface-visibility: hidden
+    -webkit-perspective: 1000
+    backface-visibility: hidden
+    perspective: 1000
 
 /*******************************************************************
  * Quiz
  *******************************************************************/
 
 .quiz h4
-	font-size: 18px
+    font-size: 18px
 
 
 /*******************************************************************
- * Overall page layout
+ * Generel page layout
  *******************************************************************/
 
 .padded
-	padding-right: 15px
-	padding-left: 15px
+    padding-right: 15px
+    padding-left: 15px
 
 .module .padded
-	padding-top: 15px
-	padding-bottom: 20px
+    padding-top: 15px
+    padding-bottom: 20px
 
 body
-	padding-bottom: 0cm
-	overflow-y: scroll  // to avoid center-column from jumping when scrollbar appears
-	position: relative  // for scroll-spy
-	padding-color: black
+    padding-bottom: 0cm
+    overflow-y: scroll  // to avoid center-column from jumping when scrollbar appears
+    position: relative  // for scroll-spy
+    padding-color: black
 
 #app > div
-	padding: 0.5em 0 0 0
-	@media (min-width: $break-sm)
-		padding: 1.5em 0 1.5em 0
+    padding: 0.5em 0 0 0
+    @media (min-width: $break-sm)
+        padding: 1.5em 0 1.5em 0
 
 .container-fluid
-	max-width: 960px
+    max-width: 960px
+
+    @media (max-width: 1200px)
+        margin-left: auto
+
+    @media (min-width: 1200px)
+        margin-left: 10vw
+
+/*******************************************************************
+ * UiO header
+ *******************************************************************/
 
 .uio-header
-	background: black
-	img
-		@media (max-width: 600px)
-			margin: 0 0 1px 0
-			height: 10.8px
-		@media (min-width: 600px) and (max-width: 900px)
-			margin: 0 0 2px 0
-			height: 1.8vw
-		@media (min-width: 900px)
-			margin: 0 0 4px 0
-			height: 16.2px
+    background: black
+    img
+        @media (max-width: $break-sm)
+            margin: 7px 0 9px 0
+            height: 10px
+        @media (min-width: $break-sm)
+            margin: 8px 0 10px 0
+            height: 12.4px
 
-.uio-header.hidden
-	display: none
+    &.hidden
+        display: none
+
+/*******************************************************************
+ * Main course header
+ *******************************************************************/
 
 header
-	background-size: 100%
-	background-position: center center;
-	background-margin: 0 auto
-	background-repeat: no-repeat
-	opacity: 1
-	position: relative
+    background-size: 100%
+    background-position: center center;
+    background-margin: 0 auto
+    background-repeat: no-repeat
+    opacity: 1
 
-	h1
-		bottom: 6px
-		position: absolute
-		font-weight: 200
+    @media (max-width: 900px)
+        margin-top: 5vw
+        margin-bottom: 2vw
 
-		small
-			font-size: 70%
-			font-weight: 200
+    @media (min-width: 900px)
+        margin-top: 45px
+        margin-bottom: 18px
 
-		a
-			color: black
-			&:hover
-				text-decoration: none
-				color: black
+    h1
+        font-weight: 200
+
+        small
+            font-size: 70%
+            font-weight: 200
+
+        a
+            color: black
+            &:hover
+                text-decoration: none
+                color: black
+
+        @media (max-width: 900px)
+            font-size: 8vw
+
+        @media (min-width: 900px)
+            font-size: 72px
+
+/*******************************************************************
+ * Course modules
+ *******************************************************************/
 
 .module
-	h3
-		font-size: 1.6rem
+
+    > .header
+        display: block
+        width: 100%
+        border: none
+        background-size: 100%
+        background-color: transparent
+        background-repeat: no-repeat
+        background-position: center center
+        opacity: 1
+        cursor: pointer
+        position: relative
+
+        @media (max-width: 900px)
+            height: 20vw
+
+        @media (min-width: 900px)
+            height: 220px
+
+        &:hover
+            opacity: 0.8
+            filter: grayscale(50%)
+
+        h2
+            max-width: 960px
+            position: absolute
+            color: white
+            text-shadow: 0 0 10px #000
+            margin: 0 auto
+            padding: 0 .5em
+            cursor: pointer
+
+            @media (max-width: 900px)
+                font-size: 7vw
+                bottom: 4vw
+
+            @media (min-width: 900px)
+                font-size: 63px
+                bottom: 36px
+
+    h3
+        font-size: 1.6rem
+
+
+/*******************************************************************
+ * Footer
+ *******************************************************************/
 
 footer
-	background-color: black
-	color: white
-	font-size: 80%
-	font-family: arial, sans-serif
+    background-color: black
+    color: white
+    font-size: 80%
+    font-family: arial, sans-serif
 
-	a:link, a:visited
-		color: #bbb
+    a:link, a:visited
+        color: #bbb
 
-	.container-fluid
-		display: flex
-		align-items: center
+    .container-fluid
+        display: flex
+        align-items: center
 
-		@media (max-width: $break-sm)
-			flex-direction: column
+        @media (max-width: $break-sm)
+            flex-direction: column
 
-		.logo
-			background-image: url(/images/uio-segl.png)
-			background-repeat: no-repeat
-			background-position: center
-			flex: 0 0 auto
-			width: 130px
-			height: 130px
-			background-size: 110px 110px
+        .logo
+            background-image: url(/images/uio-segl.png)
+            background-repeat: no-repeat
+            background-position: center
+            flex: 0 0 auto
+            width: 130px
+            height: 130px
+            background-size: 110px 110px
 
-			@media (max-width: $break-sm)
-				width: 100px
-				height: 100px
-				background-size: 90px 90px
+            @media (max-width: $break-sm)
+                width: 100px
+                height: 100px
+                background-size: 90px 90px
 
-
-		> div
-			flex: 1 0 auto
-			margin-left: 10px
-			margin-right: 10px
-
-
-#footer
-	background-color: black
-
-	> div
-		background-size: 90%
-		background-position: center center
-		background-repeat: no-repeat
-
-.header-text
-	background-color: black
-	color: white
-	font-family: helvetica
-
-
-@media (max-width: 1200px)
-	.container-fluid
-		margin-left: auto
-
-@media (min-width: 1200px)
-	.container-fluid
-		margin-left: 10vw
-
-
-@media (max-width: 900px)
-	header
-		height: 22vw
-
-		h1
-			font-size: 7vw
-
-	.module
-		.header
-			height: 20vw
-		h2
-			font-size: 7vw
-			bottom: 4vw
-
-	#footer
-		margin-top: 0
-
-		> div
-			height: 26vw
-			opacity: 1
-
-
-@media (min-width: 900px)
-	header
-		height: 198px
-
-		h1
-			font-size: 72px
-
-	.module
-		> .header
-			height: 220px
-		h2
-			font-size: 63px
-			bottom: 36px
-
-	#footer
-		margin-top: 3em
-
-		> div
-			height: 234px
-			opacity: 1
-
-
-.module
-	> .header
-		display: block
-		width: 100%
-		border: none
-		background-size: 100%
-		background-color: transparent
-		background-repeat: no-repeat
-		background-position: center center
-		opacity: 1
-		cursor: pointer
-		position: relative
-
-		&:hover
-			opacity: 0.8
-			filter: grayscale(50%)
-
-		h2
-			max-width: 960px
-			position: absolute
-			color: white
-			text-shadow: 0 0 10px #000
-			margin: 0 auto
-			padding: 0 .5em
-			cursor: pointer
+        > div
+            flex: 1 0 auto
+            margin-left: 10px
+            margin-right: 10px
 
 
 /*******************************************************************
@@ -244,66 +220,66 @@ $ribbonsize: 28vw
 $ribbonsize_f: 252px
 
 @media (max-width: 900px)
-	.corner-ribbon
-		width: $ribbonsize
-		background: #e43;
-		position: absolute;
-		top: $ribbonsize * 0.125
-		left: - $ribbonsize * 0.25
-		text-align: center;
-		line-height: $ribbonsize * 0.2
-		letter-spacing: 1px;
-		color: #f0f0f0;
-		font-size: $ribbonsize * 0.08
-		font-family: "Noto Sans"
-		transform: rotate(-45deg)
-		-webkit-transform: rotate(-45deg)
+    .corner-ribbon
+        width: $ribbonsize
+        background: #e43;
+        position: absolute;
+        top: $ribbonsize * 0.125
+        left: - $ribbonsize * 0.25
+        text-align: center;
+        line-height: $ribbonsize * 0.2
+        letter-spacing: 1px;
+        color: #f0f0f0;
+        font-size: $ribbonsize * 0.08
+        font-family: "Noto Sans"
+        transform: rotate(-45deg)
+        -webkit-transform: rotate(-45deg)
 
 @media (min-width: 900px)
-	.corner-ribbon
-		width: $ribbonsize_f
-		background: #e43;
-		position: absolute;
-		top: $ribbonsize_f * 0.125
-		left: - $ribbonsize_f * 0.25
-		text-align: center;
-		line-height: $ribbonsize_f * 0.2
-		letter-spacing: 1px;
-		color: #f0f0f0;
-		font-size: $ribbonsize_f * 0.08
-		font-family: "Noto Sans"
-		transform: rotate(-45deg)
-		-webkit-transform: rotate(-45deg)
+    .corner-ribbon
+        width: $ribbonsize_f
+        background: #e43;
+        position: absolute;
+        top: $ribbonsize_f * 0.125
+        left: - $ribbonsize_f * 0.25
+        text-align: center;
+        line-height: $ribbonsize_f * 0.2
+        letter-spacing: 1px;
+        color: #f0f0f0;
+        font-size: $ribbonsize_f * 0.08
+        font-family: "Noto Sans"
+        transform: rotate(-45deg)
+        -webkit-transform: rotate(-45deg)
 
 /* Custom styles */
 
 .corner-ribbon.sticky
-	position: fixed
-	z-index: 10
+    position: fixed
+    z-index: 10
 
 .corner-ribbon.shadow
-  	box-shadow: 0 0 3px rgba(0,0,0,.3);
+    box-shadow: 0 0 3px rgba(0,0,0,.3);
 
 
 /* Colors */
 
 .corner-ribbon.white
-  	background: #f0f0f0; color: #555;
+    background: #f0f0f0; color: #555;
 .corner-ribbon.black
-  	background: #333;
+    background: #333;
 .corner-ribbon.grey
-  	background: #999;
+    background: #999;
 .corner-ribbon.blue
-  	background: #39d;
+    background: #39d;
 .corner-ribbon.green
-  	background: #2c7;
+    background: #2c7;
 .corner-ribbon.turquoise
-  	background: #1b9;
+    background: #1b9;
 .corner-ribbon.purple
-  	background: #95b;
+    background: #95b;
 .corner-ribbon.red
-  	background: #e43;
+    background: #e43;
 .corner-ribbon.orange
- 	background: #e82;
+    background: #e82;
 .corner-ribbon.yellow
-  	background: #ec0;
+    background: #ec0;
