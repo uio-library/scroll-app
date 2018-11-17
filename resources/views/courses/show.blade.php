@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html{{ $course->lang ? " lang=\"{$course->lang}\"" : "" }}>
 
 <head>
 	<meta charset="utf-8">

@@ -185,6 +185,7 @@ class CourseLoader
 
         $optionalProps = [
             'options',
+            'lang',
         ];
 
         $course = Course::firstOrNew(['name' => $courseName]);

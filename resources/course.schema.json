@@ -4,6 +4,9 @@
         "version": {
             "type": "integer"
         },
+        "lang": {
+            "type": "string"
+        },
         "repo": {
             "type": "string"
         },
