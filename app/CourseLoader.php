@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Exceptions\ImportError;
+use Carbon\Carbon;
 use Despark\ImagePurify\Interfaces\ImagePurifierInterface;
 use Illuminate\Console\Command;
 use Michelf\MarkdownExtra;
@@ -58,7 +59,9 @@ class CourseLoader
         $resourcesPath = "$dirname/resources/*";
         $exercisesPath = "$dirname/exercises/*.json";
 
-        $commit = trim($this->runCommand('git rev-parse HEAD', $dirname));
+        $commitHash = trim($this->runCommand('git rev-parse HEAD', $dirname));
+        $commitDate = trim($this->runCommand('git log -1 --format=%cd --date=iso', $dirname));
+        $commitDate = new Carbon($commitDate);
 
         $courseName = basename($dirname);
         $courseData = json_decode(file_get_contents($jsonPath));
@@ -83,7 +86,8 @@ class CourseLoader
         }
 
         $course = $this->courseFromJson($courseName, $courseData);
-        $course->commit = $commit;
+        $course->last_commit = $commitHash;
+        $course->last_commit_at = $commitDate;
         $this->addModuleTexts($course, $moduleBlobs);
         $course->save();
 
@@ -127,7 +131,7 @@ class CourseLoader
 
         $this->log("Total size of resources: {$filesizeSum} kB");
 
-        $this->log("Imported course '{$course->name}'@{$commit}");
+        $this->log("Imported course '{$course->name}'@{$commitHash}");
 
         return $course;
     }

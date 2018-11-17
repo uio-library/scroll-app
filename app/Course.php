@@ -13,6 +13,7 @@ class Course extends Model
      */
     protected $dates = [
         'last_event_at',
+        'last_commit_at',
     ];
 
     /**

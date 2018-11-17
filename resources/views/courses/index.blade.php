@@ -20,8 +20,8 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
                         <a href="https://github.com/{{ $course->repo }}">{{ $course->repo }}</a>
-                        @if ($course->commit)
-                            @ <a href="https://github.com/{{ $course->repo }}/commit/{{ $course->commit }}">{{ substr($course->commit, 0, 8) }}</a>
+                        @if ($course->last_commit)
+                            @ <a href="https://github.com/{{ $course->repo }}/commit/{{ $course->last_commit }}">{{ substr($course->last_commit, 0, 8) }}</a>
                         @endif
                     </div>
                     <span>

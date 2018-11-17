@@ -63,7 +63,8 @@
             Et minikurs fra {!! $publishers !!}
           </li>
           <li>
-            Sist oppdatert {{ $course->updated_at->formatLocalized('%d. %B %Y') }}
+            Sist oppdatert
+            <a href="https://www.github.com/{{ $course->repo }}/commit/{{ $course->last_commit }}">{{ $course->last_commit_at->formatLocalized('%d. %B %Y') }}</a>
           </li>
           <li>
             Drevet av <a href="https://github.com/uio-library/scroll-app" title="Scroll">Scroll</a>
